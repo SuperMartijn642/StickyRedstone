@@ -1,0 +1,8 @@
+{
+  "stickyredstone.item_group": "Sticky Redstone",
+  "stickyredstone.block.sticky_redstone_torch": "Sticky Redstone Torch",
+  "stickyredstone.block.single_sticky_redstone_dust": "Sticky Redstone Dust",
+  "stickyredstone.block.sticky_repeater": "Sticky Repeater",
+  "stickyredstone.block.sticky_comparator": "Sticky Comparator",
+  "stickyredstone.item_hint": "Can be placed on any face"
+}

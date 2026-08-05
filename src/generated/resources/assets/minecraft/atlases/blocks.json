@@ -1,0 +1,92 @@
+{
+  "sources": [
+    {
+      "type": "minecraft:single",
+      "resource": "minecraft:block/redstone_dust_line1"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "stickyredstone:block/sticky_redstone_dust_base_dot"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "minecraft:block/comparator_on"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "minecraft:block/redstone_dust_overlay"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "minecraft:block/redstone_dust_line0"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "minecraft:block/redstone_torch"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "minecraft:block/repeater"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "stickyredstone:item/sticky_repeater"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "stickyredstone:item/sticky_comparator"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "minecraft:block/repeater_on"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "stickyredstone:block/sticky_repeater_base"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "stickyredstone:block/sticky_redstone_dust_invalid"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "stickyredstone:block/sticky_redstone_dust_base_line1"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "minecraft:block/redstone_dust_dot"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "minecraft:block/bedrock"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "stickyredstone:item/sticky_redstone_torch"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "minecraft:block/comparator"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "minecraft:block/redstone_torch_off"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "stickyredstone:block/sticky_redstone_dust_base_line0"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "stickyredstone:item/sticky_redstone_dust"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "minecraft:block/smooth_stone"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "stickyredstone:block/sticky_redstone_torch_base"
+    }
+  ]
+}

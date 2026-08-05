@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "stickyredstone:block/sticky_redstone_dust_invalid"
+    }
+  }
+}

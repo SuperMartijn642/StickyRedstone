@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "minecraft:redstone_torch",
+    "#c:slime_balls"
+  ],
+  "result": {
+    "id": "stickyredstone:sticky_redstone_torch"
+  }
+}

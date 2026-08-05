@@ -1,0 +1,28 @@
+{
+  "type": "stickyredstone:dust_count",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "functions": [
+        {
+          "count": {
+            "type": "stickyredstone:dust_count"
+          },
+          "add": false,
+          "function": "minecraft:set_count"
+        }
+      ],
+      "entries": [
+        {
+          "name": "stickyredstone:sticky_redstone_dust",
+          "type": "minecraft:item"
+        }
+      ]
+    }
+  ]
+}

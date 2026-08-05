@@ -1,0 +1,7 @@
+{
+  "parent": "stickyredstone:block/sticky_redstone_dust_side",
+  "textures": {
+    "dust": "minecraft:block/redstone_dust_line0",
+    "slime": "stickyredstone:block/sticky_redstone_dust_base_line0"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " Y ",
+    "TQT",
+    "SSS"
+  ],
+  "key": {
+    "Q": "#c:gems/quartz",
+    "S": "#c:stones",
+    "T": [
+      "minecraft:redstone_torch",
+      "stickyredstone:sticky_redstone_torch"
+    ],
+    "Y": "stickyredstone:sticky_redstone_torch"
+  },
+  "result": {
+    "id": "stickyredstone:sticky_comparator"
+  }
+}

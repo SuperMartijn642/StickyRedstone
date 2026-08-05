@@ -1,0 +1,1796 @@
+{
+  "variants": {
+    "delay=1,facing=down,locked=false,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off"
+    },
+    "delay=1,facing=down,locked=false,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on"
+    },
+    "delay=1,facing=down,locked=false,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off",
+      "y": 90
+    },
+    "delay=1,facing=down,locked=false,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on",
+      "y": 90
+    },
+    "delay=1,facing=down,locked=false,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off",
+      "y": 180
+    },
+    "delay=1,facing=down,locked=false,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on",
+      "y": 180
+    },
+    "delay=1,facing=down,locked=false,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off",
+      "y": 270
+    },
+    "delay=1,facing=down,locked=false,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on",
+      "y": 270
+    },
+    "delay=1,facing=down,locked=true,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off_locked"
+    },
+    "delay=1,facing=down,locked=true,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on_locked"
+    },
+    "delay=1,facing=down,locked=true,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off_locked",
+      "y": 90
+    },
+    "delay=1,facing=down,locked=true,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on_locked",
+      "y": 90
+    },
+    "delay=1,facing=down,locked=true,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off_locked",
+      "y": 180
+    },
+    "delay=1,facing=down,locked=true,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on_locked",
+      "y": 180
+    },
+    "delay=1,facing=down,locked=true,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off_locked",
+      "y": 270
+    },
+    "delay=1,facing=down,locked=true,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on_locked",
+      "y": 270
+    },
+    "delay=1,facing=east,locked=false,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off",
+      "y": 90,
+      "z": -90
+    },
+    "delay=1,facing=east,locked=false,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on",
+      "y": 90,
+      "z": -90
+    },
+    "delay=1,facing=east,locked=false,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off",
+      "y": 180,
+      "z": -90
+    },
+    "delay=1,facing=east,locked=false,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on",
+      "y": 180,
+      "z": -90
+    },
+    "delay=1,facing=east,locked=false,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off",
+      "y": 270,
+      "z": -90
+    },
+    "delay=1,facing=east,locked=false,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on",
+      "y": 270,
+      "z": -90
+    },
+    "delay=1,facing=east,locked=false,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off",
+      "y": 360,
+      "z": -90
+    },
+    "delay=1,facing=east,locked=false,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on",
+      "y": 360,
+      "z": -90
+    },
+    "delay=1,facing=east,locked=true,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off_locked",
+      "y": 90,
+      "z": -90
+    },
+    "delay=1,facing=east,locked=true,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on_locked",
+      "y": 90,
+      "z": -90
+    },
+    "delay=1,facing=east,locked=true,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off_locked",
+      "y": 180,
+      "z": -90
+    },
+    "delay=1,facing=east,locked=true,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on_locked",
+      "y": 180,
+      "z": -90
+    },
+    "delay=1,facing=east,locked=true,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off_locked",
+      "y": 270,
+      "z": -90
+    },
+    "delay=1,facing=east,locked=true,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on_locked",
+      "y": 270,
+      "z": -90
+    },
+    "delay=1,facing=east,locked=true,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off_locked",
+      "y": 360,
+      "z": -90
+    },
+    "delay=1,facing=east,locked=true,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on_locked",
+      "y": 360,
+      "z": -90
+    },
+    "delay=1,facing=north,locked=false,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off",
+      "x": -90
+    },
+    "delay=1,facing=north,locked=false,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on",
+      "x": -90
+    },
+    "delay=1,facing=north,locked=false,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off",
+      "x": -90,
+      "z": 90
+    },
+    "delay=1,facing=north,locked=false,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on",
+      "x": -90,
+      "z": 90
+    },
+    "delay=1,facing=north,locked=false,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off",
+      "x": -90,
+      "z": 180
+    },
+    "delay=1,facing=north,locked=false,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on",
+      "x": -90,
+      "z": 180
+    },
+    "delay=1,facing=north,locked=false,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off",
+      "x": -90,
+      "z": 270
+    },
+    "delay=1,facing=north,locked=false,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on",
+      "x": -90,
+      "z": 270
+    },
+    "delay=1,facing=north,locked=true,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off_locked",
+      "x": -90
+    },
+    "delay=1,facing=north,locked=true,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on_locked",
+      "x": -90
+    },
+    "delay=1,facing=north,locked=true,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off_locked",
+      "x": -90,
+      "z": 90
+    },
+    "delay=1,facing=north,locked=true,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on_locked",
+      "x": -90,
+      "z": 90
+    },
+    "delay=1,facing=north,locked=true,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off_locked",
+      "x": -90,
+      "z": 180
+    },
+    "delay=1,facing=north,locked=true,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on_locked",
+      "x": -90,
+      "z": 180
+    },
+    "delay=1,facing=north,locked=true,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off_locked",
+      "x": -90,
+      "z": 270
+    },
+    "delay=1,facing=north,locked=true,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on_locked",
+      "x": -90,
+      "z": 270
+    },
+    "delay=1,facing=south,locked=false,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off",
+      "x": 90,
+      "z": 180
+    },
+    "delay=1,facing=south,locked=false,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on",
+      "x": 90,
+      "z": 180
+    },
+    "delay=1,facing=south,locked=false,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off",
+      "x": 90,
+      "z": 90
+    },
+    "delay=1,facing=south,locked=false,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on",
+      "x": 90,
+      "z": 90
+    },
+    "delay=1,facing=south,locked=false,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off",
+      "x": 90
+    },
+    "delay=1,facing=south,locked=false,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on",
+      "x": 90
+    },
+    "delay=1,facing=south,locked=false,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off",
+      "x": 90,
+      "z": -90
+    },
+    "delay=1,facing=south,locked=false,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on",
+      "x": 90,
+      "z": -90
+    },
+    "delay=1,facing=south,locked=true,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off_locked",
+      "x": 90,
+      "z": 180
+    },
+    "delay=1,facing=south,locked=true,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on_locked",
+      "x": 90,
+      "z": 180
+    },
+    "delay=1,facing=south,locked=true,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off_locked",
+      "x": 90,
+      "z": 90
+    },
+    "delay=1,facing=south,locked=true,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on_locked",
+      "x": 90,
+      "z": 90
+    },
+    "delay=1,facing=south,locked=true,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off_locked",
+      "x": 90
+    },
+    "delay=1,facing=south,locked=true,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on_locked",
+      "x": 90
+    },
+    "delay=1,facing=south,locked=true,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off_locked",
+      "x": 90,
+      "z": -90
+    },
+    "delay=1,facing=south,locked=true,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on_locked",
+      "x": 90,
+      "z": -90
+    },
+    "delay=1,facing=up,locked=false,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off",
+      "x": 180,
+      "y": 180
+    },
+    "delay=1,facing=up,locked=false,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on",
+      "x": 180,
+      "y": 180
+    },
+    "delay=1,facing=up,locked=false,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off",
+      "x": 180,
+      "y": 270
+    },
+    "delay=1,facing=up,locked=false,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on",
+      "x": 180,
+      "y": 270
+    },
+    "delay=1,facing=up,locked=false,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off",
+      "x": 180,
+      "y": 360
+    },
+    "delay=1,facing=up,locked=false,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on",
+      "x": 180,
+      "y": 360
+    },
+    "delay=1,facing=up,locked=false,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off",
+      "x": 180,
+      "y": 450
+    },
+    "delay=1,facing=up,locked=false,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on",
+      "x": 180,
+      "y": 450
+    },
+    "delay=1,facing=up,locked=true,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off_locked",
+      "x": 180,
+      "y": 180
+    },
+    "delay=1,facing=up,locked=true,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on_locked",
+      "x": 180,
+      "y": 180
+    },
+    "delay=1,facing=up,locked=true,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off_locked",
+      "x": 180,
+      "y": 270
+    },
+    "delay=1,facing=up,locked=true,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on_locked",
+      "x": 180,
+      "y": 270
+    },
+    "delay=1,facing=up,locked=true,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off_locked",
+      "x": 180,
+      "y": 360
+    },
+    "delay=1,facing=up,locked=true,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on_locked",
+      "x": 180,
+      "y": 360
+    },
+    "delay=1,facing=up,locked=true,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off_locked",
+      "x": 180,
+      "y": 450
+    },
+    "delay=1,facing=up,locked=true,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on_locked",
+      "x": 180,
+      "y": 450
+    },
+    "delay=1,facing=west,locked=false,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off",
+      "y": -90,
+      "z": 90
+    },
+    "delay=1,facing=west,locked=false,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on",
+      "y": -90,
+      "z": 90
+    },
+    "delay=1,facing=west,locked=false,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off",
+      "z": 90
+    },
+    "delay=1,facing=west,locked=false,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on",
+      "z": 90
+    },
+    "delay=1,facing=west,locked=false,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off",
+      "y": 90,
+      "z": 90
+    },
+    "delay=1,facing=west,locked=false,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on",
+      "y": 90,
+      "z": 90
+    },
+    "delay=1,facing=west,locked=false,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off",
+      "y": 180,
+      "z": 90
+    },
+    "delay=1,facing=west,locked=false,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on",
+      "y": 180,
+      "z": 90
+    },
+    "delay=1,facing=west,locked=true,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off_locked",
+      "y": -90,
+      "z": 90
+    },
+    "delay=1,facing=west,locked=true,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on_locked",
+      "y": -90,
+      "z": 90
+    },
+    "delay=1,facing=west,locked=true,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off_locked",
+      "z": 90
+    },
+    "delay=1,facing=west,locked=true,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on_locked",
+      "z": 90
+    },
+    "delay=1,facing=west,locked=true,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off_locked",
+      "y": 90,
+      "z": 90
+    },
+    "delay=1,facing=west,locked=true,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on_locked",
+      "y": 90,
+      "z": 90
+    },
+    "delay=1,facing=west,locked=true,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater1_off_locked",
+      "y": 180,
+      "z": 90
+    },
+    "delay=1,facing=west,locked=true,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater1_on_locked",
+      "y": 180,
+      "z": 90
+    },
+    "delay=2,facing=down,locked=false,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off"
+    },
+    "delay=2,facing=down,locked=false,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on"
+    },
+    "delay=2,facing=down,locked=false,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off",
+      "y": 90
+    },
+    "delay=2,facing=down,locked=false,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on",
+      "y": 90
+    },
+    "delay=2,facing=down,locked=false,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off",
+      "y": 180
+    },
+    "delay=2,facing=down,locked=false,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on",
+      "y": 180
+    },
+    "delay=2,facing=down,locked=false,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off",
+      "y": 270
+    },
+    "delay=2,facing=down,locked=false,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on",
+      "y": 270
+    },
+    "delay=2,facing=down,locked=true,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off_locked"
+    },
+    "delay=2,facing=down,locked=true,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on_locked"
+    },
+    "delay=2,facing=down,locked=true,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off_locked",
+      "y": 90
+    },
+    "delay=2,facing=down,locked=true,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on_locked",
+      "y": 90
+    },
+    "delay=2,facing=down,locked=true,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off_locked",
+      "y": 180
+    },
+    "delay=2,facing=down,locked=true,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on_locked",
+      "y": 180
+    },
+    "delay=2,facing=down,locked=true,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off_locked",
+      "y": 270
+    },
+    "delay=2,facing=down,locked=true,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on_locked",
+      "y": 270
+    },
+    "delay=2,facing=east,locked=false,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off",
+      "y": 90,
+      "z": -90
+    },
+    "delay=2,facing=east,locked=false,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on",
+      "y": 90,
+      "z": -90
+    },
+    "delay=2,facing=east,locked=false,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off",
+      "y": 180,
+      "z": -90
+    },
+    "delay=2,facing=east,locked=false,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on",
+      "y": 180,
+      "z": -90
+    },
+    "delay=2,facing=east,locked=false,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off",
+      "y": 270,
+      "z": -90
+    },
+    "delay=2,facing=east,locked=false,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on",
+      "y": 270,
+      "z": -90
+    },
+    "delay=2,facing=east,locked=false,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off",
+      "y": 360,
+      "z": -90
+    },
+    "delay=2,facing=east,locked=false,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on",
+      "y": 360,
+      "z": -90
+    },
+    "delay=2,facing=east,locked=true,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off_locked",
+      "y": 90,
+      "z": -90
+    },
+    "delay=2,facing=east,locked=true,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on_locked",
+      "y": 90,
+      "z": -90
+    },
+    "delay=2,facing=east,locked=true,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off_locked",
+      "y": 180,
+      "z": -90
+    },
+    "delay=2,facing=east,locked=true,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on_locked",
+      "y": 180,
+      "z": -90
+    },
+    "delay=2,facing=east,locked=true,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off_locked",
+      "y": 270,
+      "z": -90
+    },
+    "delay=2,facing=east,locked=true,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on_locked",
+      "y": 270,
+      "z": -90
+    },
+    "delay=2,facing=east,locked=true,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off_locked",
+      "y": 360,
+      "z": -90
+    },
+    "delay=2,facing=east,locked=true,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on_locked",
+      "y": 360,
+      "z": -90
+    },
+    "delay=2,facing=north,locked=false,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off",
+      "x": -90
+    },
+    "delay=2,facing=north,locked=false,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on",
+      "x": -90
+    },
+    "delay=2,facing=north,locked=false,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off",
+      "x": -90,
+      "z": 90
+    },
+    "delay=2,facing=north,locked=false,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on",
+      "x": -90,
+      "z": 90
+    },
+    "delay=2,facing=north,locked=false,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off",
+      "x": -90,
+      "z": 180
+    },
+    "delay=2,facing=north,locked=false,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on",
+      "x": -90,
+      "z": 180
+    },
+    "delay=2,facing=north,locked=false,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off",
+      "x": -90,
+      "z": 270
+    },
+    "delay=2,facing=north,locked=false,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on",
+      "x": -90,
+      "z": 270
+    },
+    "delay=2,facing=north,locked=true,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off_locked",
+      "x": -90
+    },
+    "delay=2,facing=north,locked=true,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on_locked",
+      "x": -90
+    },
+    "delay=2,facing=north,locked=true,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off_locked",
+      "x": -90,
+      "z": 90
+    },
+    "delay=2,facing=north,locked=true,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on_locked",
+      "x": -90,
+      "z": 90
+    },
+    "delay=2,facing=north,locked=true,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off_locked",
+      "x": -90,
+      "z": 180
+    },
+    "delay=2,facing=north,locked=true,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on_locked",
+      "x": -90,
+      "z": 180
+    },
+    "delay=2,facing=north,locked=true,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off_locked",
+      "x": -90,
+      "z": 270
+    },
+    "delay=2,facing=north,locked=true,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on_locked",
+      "x": -90,
+      "z": 270
+    },
+    "delay=2,facing=south,locked=false,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off",
+      "x": 90,
+      "z": 180
+    },
+    "delay=2,facing=south,locked=false,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on",
+      "x": 90,
+      "z": 180
+    },
+    "delay=2,facing=south,locked=false,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off",
+      "x": 90,
+      "z": 90
+    },
+    "delay=2,facing=south,locked=false,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on",
+      "x": 90,
+      "z": 90
+    },
+    "delay=2,facing=south,locked=false,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off",
+      "x": 90
+    },
+    "delay=2,facing=south,locked=false,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on",
+      "x": 90
+    },
+    "delay=2,facing=south,locked=false,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off",
+      "x": 90,
+      "z": -90
+    },
+    "delay=2,facing=south,locked=false,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on",
+      "x": 90,
+      "z": -90
+    },
+    "delay=2,facing=south,locked=true,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off_locked",
+      "x": 90,
+      "z": 180
+    },
+    "delay=2,facing=south,locked=true,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on_locked",
+      "x": 90,
+      "z": 180
+    },
+    "delay=2,facing=south,locked=true,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off_locked",
+      "x": 90,
+      "z": 90
+    },
+    "delay=2,facing=south,locked=true,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on_locked",
+      "x": 90,
+      "z": 90
+    },
+    "delay=2,facing=south,locked=true,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off_locked",
+      "x": 90
+    },
+    "delay=2,facing=south,locked=true,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on_locked",
+      "x": 90
+    },
+    "delay=2,facing=south,locked=true,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off_locked",
+      "x": 90,
+      "z": -90
+    },
+    "delay=2,facing=south,locked=true,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on_locked",
+      "x": 90,
+      "z": -90
+    },
+    "delay=2,facing=up,locked=false,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off",
+      "x": 180,
+      "y": 180
+    },
+    "delay=2,facing=up,locked=false,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on",
+      "x": 180,
+      "y": 180
+    },
+    "delay=2,facing=up,locked=false,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off",
+      "x": 180,
+      "y": 270
+    },
+    "delay=2,facing=up,locked=false,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on",
+      "x": 180,
+      "y": 270
+    },
+    "delay=2,facing=up,locked=false,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off",
+      "x": 180,
+      "y": 360
+    },
+    "delay=2,facing=up,locked=false,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on",
+      "x": 180,
+      "y": 360
+    },
+    "delay=2,facing=up,locked=false,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off",
+      "x": 180,
+      "y": 450
+    },
+    "delay=2,facing=up,locked=false,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on",
+      "x": 180,
+      "y": 450
+    },
+    "delay=2,facing=up,locked=true,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off_locked",
+      "x": 180,
+      "y": 180
+    },
+    "delay=2,facing=up,locked=true,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on_locked",
+      "x": 180,
+      "y": 180
+    },
+    "delay=2,facing=up,locked=true,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off_locked",
+      "x": 180,
+      "y": 270
+    },
+    "delay=2,facing=up,locked=true,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on_locked",
+      "x": 180,
+      "y": 270
+    },
+    "delay=2,facing=up,locked=true,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off_locked",
+      "x": 180,
+      "y": 360
+    },
+    "delay=2,facing=up,locked=true,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on_locked",
+      "x": 180,
+      "y": 360
+    },
+    "delay=2,facing=up,locked=true,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off_locked",
+      "x": 180,
+      "y": 450
+    },
+    "delay=2,facing=up,locked=true,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on_locked",
+      "x": 180,
+      "y": 450
+    },
+    "delay=2,facing=west,locked=false,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off",
+      "y": -90,
+      "z": 90
+    },
+    "delay=2,facing=west,locked=false,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on",
+      "y": -90,
+      "z": 90
+    },
+    "delay=2,facing=west,locked=false,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off",
+      "z": 90
+    },
+    "delay=2,facing=west,locked=false,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on",
+      "z": 90
+    },
+    "delay=2,facing=west,locked=false,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off",
+      "y": 90,
+      "z": 90
+    },
+    "delay=2,facing=west,locked=false,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on",
+      "y": 90,
+      "z": 90
+    },
+    "delay=2,facing=west,locked=false,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off",
+      "y": 180,
+      "z": 90
+    },
+    "delay=2,facing=west,locked=false,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on",
+      "y": 180,
+      "z": 90
+    },
+    "delay=2,facing=west,locked=true,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off_locked",
+      "y": -90,
+      "z": 90
+    },
+    "delay=2,facing=west,locked=true,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on_locked",
+      "y": -90,
+      "z": 90
+    },
+    "delay=2,facing=west,locked=true,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off_locked",
+      "z": 90
+    },
+    "delay=2,facing=west,locked=true,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on_locked",
+      "z": 90
+    },
+    "delay=2,facing=west,locked=true,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off_locked",
+      "y": 90,
+      "z": 90
+    },
+    "delay=2,facing=west,locked=true,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on_locked",
+      "y": 90,
+      "z": 90
+    },
+    "delay=2,facing=west,locked=true,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater2_off_locked",
+      "y": 180,
+      "z": 90
+    },
+    "delay=2,facing=west,locked=true,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater2_on_locked",
+      "y": 180,
+      "z": 90
+    },
+    "delay=3,facing=down,locked=false,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off"
+    },
+    "delay=3,facing=down,locked=false,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on"
+    },
+    "delay=3,facing=down,locked=false,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off",
+      "y": 90
+    },
+    "delay=3,facing=down,locked=false,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on",
+      "y": 90
+    },
+    "delay=3,facing=down,locked=false,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off",
+      "y": 180
+    },
+    "delay=3,facing=down,locked=false,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on",
+      "y": 180
+    },
+    "delay=3,facing=down,locked=false,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off",
+      "y": 270
+    },
+    "delay=3,facing=down,locked=false,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on",
+      "y": 270
+    },
+    "delay=3,facing=down,locked=true,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off_locked"
+    },
+    "delay=3,facing=down,locked=true,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on_locked"
+    },
+    "delay=3,facing=down,locked=true,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off_locked",
+      "y": 90
+    },
+    "delay=3,facing=down,locked=true,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on_locked",
+      "y": 90
+    },
+    "delay=3,facing=down,locked=true,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off_locked",
+      "y": 180
+    },
+    "delay=3,facing=down,locked=true,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on_locked",
+      "y": 180
+    },
+    "delay=3,facing=down,locked=true,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off_locked",
+      "y": 270
+    },
+    "delay=3,facing=down,locked=true,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on_locked",
+      "y": 270
+    },
+    "delay=3,facing=east,locked=false,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off",
+      "y": 90,
+      "z": -90
+    },
+    "delay=3,facing=east,locked=false,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on",
+      "y": 90,
+      "z": -90
+    },
+    "delay=3,facing=east,locked=false,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off",
+      "y": 180,
+      "z": -90
+    },
+    "delay=3,facing=east,locked=false,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on",
+      "y": 180,
+      "z": -90
+    },
+    "delay=3,facing=east,locked=false,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off",
+      "y": 270,
+      "z": -90
+    },
+    "delay=3,facing=east,locked=false,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on",
+      "y": 270,
+      "z": -90
+    },
+    "delay=3,facing=east,locked=false,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off",
+      "y": 360,
+      "z": -90
+    },
+    "delay=3,facing=east,locked=false,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on",
+      "y": 360,
+      "z": -90
+    },
+    "delay=3,facing=east,locked=true,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off_locked",
+      "y": 90,
+      "z": -90
+    },
+    "delay=3,facing=east,locked=true,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on_locked",
+      "y": 90,
+      "z": -90
+    },
+    "delay=3,facing=east,locked=true,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off_locked",
+      "y": 180,
+      "z": -90
+    },
+    "delay=3,facing=east,locked=true,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on_locked",
+      "y": 180,
+      "z": -90
+    },
+    "delay=3,facing=east,locked=true,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off_locked",
+      "y": 270,
+      "z": -90
+    },
+    "delay=3,facing=east,locked=true,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on_locked",
+      "y": 270,
+      "z": -90
+    },
+    "delay=3,facing=east,locked=true,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off_locked",
+      "y": 360,
+      "z": -90
+    },
+    "delay=3,facing=east,locked=true,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on_locked",
+      "y": 360,
+      "z": -90
+    },
+    "delay=3,facing=north,locked=false,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off",
+      "x": -90
+    },
+    "delay=3,facing=north,locked=false,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on",
+      "x": -90
+    },
+    "delay=3,facing=north,locked=false,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off",
+      "x": -90,
+      "z": 90
+    },
+    "delay=3,facing=north,locked=false,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on",
+      "x": -90,
+      "z": 90
+    },
+    "delay=3,facing=north,locked=false,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off",
+      "x": -90,
+      "z": 180
+    },
+    "delay=3,facing=north,locked=false,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on",
+      "x": -90,
+      "z": 180
+    },
+    "delay=3,facing=north,locked=false,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off",
+      "x": -90,
+      "z": 270
+    },
+    "delay=3,facing=north,locked=false,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on",
+      "x": -90,
+      "z": 270
+    },
+    "delay=3,facing=north,locked=true,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off_locked",
+      "x": -90
+    },
+    "delay=3,facing=north,locked=true,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on_locked",
+      "x": -90
+    },
+    "delay=3,facing=north,locked=true,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off_locked",
+      "x": -90,
+      "z": 90
+    },
+    "delay=3,facing=north,locked=true,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on_locked",
+      "x": -90,
+      "z": 90
+    },
+    "delay=3,facing=north,locked=true,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off_locked",
+      "x": -90,
+      "z": 180
+    },
+    "delay=3,facing=north,locked=true,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on_locked",
+      "x": -90,
+      "z": 180
+    },
+    "delay=3,facing=north,locked=true,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off_locked",
+      "x": -90,
+      "z": 270
+    },
+    "delay=3,facing=north,locked=true,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on_locked",
+      "x": -90,
+      "z": 270
+    },
+    "delay=3,facing=south,locked=false,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off",
+      "x": 90,
+      "z": 180
+    },
+    "delay=3,facing=south,locked=false,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on",
+      "x": 90,
+      "z": 180
+    },
+    "delay=3,facing=south,locked=false,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off",
+      "x": 90,
+      "z": 90
+    },
+    "delay=3,facing=south,locked=false,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on",
+      "x": 90,
+      "z": 90
+    },
+    "delay=3,facing=south,locked=false,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off",
+      "x": 90
+    },
+    "delay=3,facing=south,locked=false,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on",
+      "x": 90
+    },
+    "delay=3,facing=south,locked=false,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off",
+      "x": 90,
+      "z": -90
+    },
+    "delay=3,facing=south,locked=false,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on",
+      "x": 90,
+      "z": -90
+    },
+    "delay=3,facing=south,locked=true,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off_locked",
+      "x": 90,
+      "z": 180
+    },
+    "delay=3,facing=south,locked=true,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on_locked",
+      "x": 90,
+      "z": 180
+    },
+    "delay=3,facing=south,locked=true,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off_locked",
+      "x": 90,
+      "z": 90
+    },
+    "delay=3,facing=south,locked=true,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on_locked",
+      "x": 90,
+      "z": 90
+    },
+    "delay=3,facing=south,locked=true,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off_locked",
+      "x": 90
+    },
+    "delay=3,facing=south,locked=true,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on_locked",
+      "x": 90
+    },
+    "delay=3,facing=south,locked=true,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off_locked",
+      "x": 90,
+      "z": -90
+    },
+    "delay=3,facing=south,locked=true,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on_locked",
+      "x": 90,
+      "z": -90
+    },
+    "delay=3,facing=up,locked=false,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off",
+      "x": 180,
+      "y": 180
+    },
+    "delay=3,facing=up,locked=false,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on",
+      "x": 180,
+      "y": 180
+    },
+    "delay=3,facing=up,locked=false,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off",
+      "x": 180,
+      "y": 270
+    },
+    "delay=3,facing=up,locked=false,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on",
+      "x": 180,
+      "y": 270
+    },
+    "delay=3,facing=up,locked=false,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off",
+      "x": 180,
+      "y": 360
+    },
+    "delay=3,facing=up,locked=false,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on",
+      "x": 180,
+      "y": 360
+    },
+    "delay=3,facing=up,locked=false,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off",
+      "x": 180,
+      "y": 450
+    },
+    "delay=3,facing=up,locked=false,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on",
+      "x": 180,
+      "y": 450
+    },
+    "delay=3,facing=up,locked=true,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off_locked",
+      "x": 180,
+      "y": 180
+    },
+    "delay=3,facing=up,locked=true,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on_locked",
+      "x": 180,
+      "y": 180
+    },
+    "delay=3,facing=up,locked=true,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off_locked",
+      "x": 180,
+      "y": 270
+    },
+    "delay=3,facing=up,locked=true,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on_locked",
+      "x": 180,
+      "y": 270
+    },
+    "delay=3,facing=up,locked=true,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off_locked",
+      "x": 180,
+      "y": 360
+    },
+    "delay=3,facing=up,locked=true,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on_locked",
+      "x": 180,
+      "y": 360
+    },
+    "delay=3,facing=up,locked=true,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off_locked",
+      "x": 180,
+      "y": 450
+    },
+    "delay=3,facing=up,locked=true,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on_locked",
+      "x": 180,
+      "y": 450
+    },
+    "delay=3,facing=west,locked=false,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off",
+      "y": -90,
+      "z": 90
+    },
+    "delay=3,facing=west,locked=false,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on",
+      "y": -90,
+      "z": 90
+    },
+    "delay=3,facing=west,locked=false,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off",
+      "z": 90
+    },
+    "delay=3,facing=west,locked=false,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on",
+      "z": 90
+    },
+    "delay=3,facing=west,locked=false,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off",
+      "y": 90,
+      "z": 90
+    },
+    "delay=3,facing=west,locked=false,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on",
+      "y": 90,
+      "z": 90
+    },
+    "delay=3,facing=west,locked=false,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off",
+      "y": 180,
+      "z": 90
+    },
+    "delay=3,facing=west,locked=false,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on",
+      "y": 180,
+      "z": 90
+    },
+    "delay=3,facing=west,locked=true,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off_locked",
+      "y": -90,
+      "z": 90
+    },
+    "delay=3,facing=west,locked=true,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on_locked",
+      "y": -90,
+      "z": 90
+    },
+    "delay=3,facing=west,locked=true,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off_locked",
+      "z": 90
+    },
+    "delay=3,facing=west,locked=true,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on_locked",
+      "z": 90
+    },
+    "delay=3,facing=west,locked=true,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off_locked",
+      "y": 90,
+      "z": 90
+    },
+    "delay=3,facing=west,locked=true,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on_locked",
+      "y": 90,
+      "z": 90
+    },
+    "delay=3,facing=west,locked=true,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater3_off_locked",
+      "y": 180,
+      "z": 90
+    },
+    "delay=3,facing=west,locked=true,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater3_on_locked",
+      "y": 180,
+      "z": 90
+    },
+    "delay=4,facing=down,locked=false,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off"
+    },
+    "delay=4,facing=down,locked=false,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on"
+    },
+    "delay=4,facing=down,locked=false,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off",
+      "y": 90
+    },
+    "delay=4,facing=down,locked=false,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on",
+      "y": 90
+    },
+    "delay=4,facing=down,locked=false,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off",
+      "y": 180
+    },
+    "delay=4,facing=down,locked=false,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on",
+      "y": 180
+    },
+    "delay=4,facing=down,locked=false,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off",
+      "y": 270
+    },
+    "delay=4,facing=down,locked=false,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on",
+      "y": 270
+    },
+    "delay=4,facing=down,locked=true,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off_locked"
+    },
+    "delay=4,facing=down,locked=true,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on_locked"
+    },
+    "delay=4,facing=down,locked=true,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off_locked",
+      "y": 90
+    },
+    "delay=4,facing=down,locked=true,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on_locked",
+      "y": 90
+    },
+    "delay=4,facing=down,locked=true,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off_locked",
+      "y": 180
+    },
+    "delay=4,facing=down,locked=true,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on_locked",
+      "y": 180
+    },
+    "delay=4,facing=down,locked=true,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off_locked",
+      "y": 270
+    },
+    "delay=4,facing=down,locked=true,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on_locked",
+      "y": 270
+    },
+    "delay=4,facing=east,locked=false,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off",
+      "y": 90,
+      "z": -90
+    },
+    "delay=4,facing=east,locked=false,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on",
+      "y": 90,
+      "z": -90
+    },
+    "delay=4,facing=east,locked=false,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off",
+      "y": 180,
+      "z": -90
+    },
+    "delay=4,facing=east,locked=false,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on",
+      "y": 180,
+      "z": -90
+    },
+    "delay=4,facing=east,locked=false,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off",
+      "y": 270,
+      "z": -90
+    },
+    "delay=4,facing=east,locked=false,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on",
+      "y": 270,
+      "z": -90
+    },
+    "delay=4,facing=east,locked=false,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off",
+      "y": 360,
+      "z": -90
+    },
+    "delay=4,facing=east,locked=false,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on",
+      "y": 360,
+      "z": -90
+    },
+    "delay=4,facing=east,locked=true,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off_locked",
+      "y": 90,
+      "z": -90
+    },
+    "delay=4,facing=east,locked=true,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on_locked",
+      "y": 90,
+      "z": -90
+    },
+    "delay=4,facing=east,locked=true,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off_locked",
+      "y": 180,
+      "z": -90
+    },
+    "delay=4,facing=east,locked=true,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on_locked",
+      "y": 180,
+      "z": -90
+    },
+    "delay=4,facing=east,locked=true,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off_locked",
+      "y": 270,
+      "z": -90
+    },
+    "delay=4,facing=east,locked=true,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on_locked",
+      "y": 270,
+      "z": -90
+    },
+    "delay=4,facing=east,locked=true,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off_locked",
+      "y": 360,
+      "z": -90
+    },
+    "delay=4,facing=east,locked=true,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on_locked",
+      "y": 360,
+      "z": -90
+    },
+    "delay=4,facing=north,locked=false,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off",
+      "x": -90
+    },
+    "delay=4,facing=north,locked=false,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on",
+      "x": -90
+    },
+    "delay=4,facing=north,locked=false,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off",
+      "x": -90,
+      "z": 90
+    },
+    "delay=4,facing=north,locked=false,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on",
+      "x": -90,
+      "z": 90
+    },
+    "delay=4,facing=north,locked=false,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off",
+      "x": -90,
+      "z": 180
+    },
+    "delay=4,facing=north,locked=false,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on",
+      "x": -90,
+      "z": 180
+    },
+    "delay=4,facing=north,locked=false,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off",
+      "x": -90,
+      "z": 270
+    },
+    "delay=4,facing=north,locked=false,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on",
+      "x": -90,
+      "z": 270
+    },
+    "delay=4,facing=north,locked=true,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off_locked",
+      "x": -90
+    },
+    "delay=4,facing=north,locked=true,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on_locked",
+      "x": -90
+    },
+    "delay=4,facing=north,locked=true,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off_locked",
+      "x": -90,
+      "z": 90
+    },
+    "delay=4,facing=north,locked=true,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on_locked",
+      "x": -90,
+      "z": 90
+    },
+    "delay=4,facing=north,locked=true,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off_locked",
+      "x": -90,
+      "z": 180
+    },
+    "delay=4,facing=north,locked=true,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on_locked",
+      "x": -90,
+      "z": 180
+    },
+    "delay=4,facing=north,locked=true,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off_locked",
+      "x": -90,
+      "z": 270
+    },
+    "delay=4,facing=north,locked=true,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on_locked",
+      "x": -90,
+      "z": 270
+    },
+    "delay=4,facing=south,locked=false,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off",
+      "x": 90,
+      "z": 180
+    },
+    "delay=4,facing=south,locked=false,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on",
+      "x": 90,
+      "z": 180
+    },
+    "delay=4,facing=south,locked=false,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off",
+      "x": 90,
+      "z": 90
+    },
+    "delay=4,facing=south,locked=false,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on",
+      "x": 90,
+      "z": 90
+    },
+    "delay=4,facing=south,locked=false,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off",
+      "x": 90
+    },
+    "delay=4,facing=south,locked=false,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on",
+      "x": 90
+    },
+    "delay=4,facing=south,locked=false,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off",
+      "x": 90,
+      "z": -90
+    },
+    "delay=4,facing=south,locked=false,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on",
+      "x": 90,
+      "z": -90
+    },
+    "delay=4,facing=south,locked=true,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off_locked",
+      "x": 90,
+      "z": 180
+    },
+    "delay=4,facing=south,locked=true,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on_locked",
+      "x": 90,
+      "z": 180
+    },
+    "delay=4,facing=south,locked=true,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off_locked",
+      "x": 90,
+      "z": 90
+    },
+    "delay=4,facing=south,locked=true,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on_locked",
+      "x": 90,
+      "z": 90
+    },
+    "delay=4,facing=south,locked=true,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off_locked",
+      "x": 90
+    },
+    "delay=4,facing=south,locked=true,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on_locked",
+      "x": 90
+    },
+    "delay=4,facing=south,locked=true,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off_locked",
+      "x": 90,
+      "z": -90
+    },
+    "delay=4,facing=south,locked=true,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on_locked",
+      "x": 90,
+      "z": -90
+    },
+    "delay=4,facing=up,locked=false,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off",
+      "x": 180,
+      "y": 180
+    },
+    "delay=4,facing=up,locked=false,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on",
+      "x": 180,
+      "y": 180
+    },
+    "delay=4,facing=up,locked=false,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off",
+      "x": 180,
+      "y": 270
+    },
+    "delay=4,facing=up,locked=false,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on",
+      "x": 180,
+      "y": 270
+    },
+    "delay=4,facing=up,locked=false,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off",
+      "x": 180,
+      "y": 360
+    },
+    "delay=4,facing=up,locked=false,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on",
+      "x": 180,
+      "y": 360
+    },
+    "delay=4,facing=up,locked=false,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off",
+      "x": 180,
+      "y": 450
+    },
+    "delay=4,facing=up,locked=false,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on",
+      "x": 180,
+      "y": 450
+    },
+    "delay=4,facing=up,locked=true,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off_locked",
+      "x": 180,
+      "y": 180
+    },
+    "delay=4,facing=up,locked=true,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on_locked",
+      "x": 180,
+      "y": 180
+    },
+    "delay=4,facing=up,locked=true,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off_locked",
+      "x": 180,
+      "y": 270
+    },
+    "delay=4,facing=up,locked=true,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on_locked",
+      "x": 180,
+      "y": 270
+    },
+    "delay=4,facing=up,locked=true,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off_locked",
+      "x": 180,
+      "y": 360
+    },
+    "delay=4,facing=up,locked=true,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on_locked",
+      "x": 180,
+      "y": 360
+    },
+    "delay=4,facing=up,locked=true,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off_locked",
+      "x": 180,
+      "y": 450
+    },
+    "delay=4,facing=up,locked=true,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on_locked",
+      "x": 180,
+      "y": 450
+    },
+    "delay=4,facing=west,locked=false,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off",
+      "y": -90,
+      "z": 90
+    },
+    "delay=4,facing=west,locked=false,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on",
+      "y": -90,
+      "z": 90
+    },
+    "delay=4,facing=west,locked=false,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off",
+      "z": 90
+    },
+    "delay=4,facing=west,locked=false,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on",
+      "z": 90
+    },
+    "delay=4,facing=west,locked=false,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off",
+      "y": 90,
+      "z": 90
+    },
+    "delay=4,facing=west,locked=false,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on",
+      "y": 90,
+      "z": 90
+    },
+    "delay=4,facing=west,locked=false,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off",
+      "y": 180,
+      "z": 90
+    },
+    "delay=4,facing=west,locked=false,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on",
+      "y": 180,
+      "z": 90
+    },
+    "delay=4,facing=west,locked=true,orientation=0,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off_locked",
+      "y": -90,
+      "z": 90
+    },
+    "delay=4,facing=west,locked=true,orientation=0,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on_locked",
+      "y": -90,
+      "z": 90
+    },
+    "delay=4,facing=west,locked=true,orientation=1,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off_locked",
+      "z": 90
+    },
+    "delay=4,facing=west,locked=true,orientation=1,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on_locked",
+      "z": 90
+    },
+    "delay=4,facing=west,locked=true,orientation=2,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off_locked",
+      "y": 90,
+      "z": 90
+    },
+    "delay=4,facing=west,locked=true,orientation=2,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on_locked",
+      "y": 90,
+      "z": 90
+    },
+    "delay=4,facing=west,locked=true,orientation=3,powered=false": {
+      "model": "stickyredstone:block/sticky_repeater4_off_locked",
+      "y": 180,
+      "z": 90
+    },
+    "delay=4,facing=west,locked=true,orientation=3,powered=true": {
+      "model": "stickyredstone:block/sticky_repeater4_on_locked",
+      "y": 180,
+      "z": 90
+    }
+  }
+}

@@ -1,0 +1,220 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "torch": "minecraft:block/redstone_torch",
+    "slime": "stickyredstone:block/sticky_redstone_torch_base",
+    "particle": "#torch"
+  },
+  "elements": [
+    {
+      "from": [
+        5.0,
+        -0.1,
+        5.0
+      ],
+      "to": [
+        11.0,
+        0.25,
+        11.0
+      ],
+      "faces": {
+        "up": {
+          "texture": "#slime"
+        },
+        "down": {
+          "texture": "#slime",
+          "cullface": "down"
+        }
+      }
+    },
+    {
+      "from": [
+        7.0,
+        0.0,
+        7.0
+      ],
+      "to": [
+        9.0,
+        10.0,
+        9.0
+      ],
+      "faces": {
+        "down": {
+          "texture": "#torch",
+          "uv": [
+            7.0,
+            13.0,
+            9.0,
+            15.0
+          ],
+          "cullface": "down"
+        },
+        "up": {
+          "texture": "#torch",
+          "uv": [
+            7.0,
+            6.0,
+            9.0,
+            8.0
+          ]
+        },
+        "north": {
+          "texture": "#torch"
+        },
+        "south": {
+          "texture": "#torch"
+        },
+        "west": {
+          "texture": "#torch"
+        },
+        "east": {
+          "texture": "#torch"
+        }
+      }
+    },
+    {
+      "from": [
+        6.5,
+        7.5,
+        6.5
+      ],
+      "to": [
+        9.5,
+        7.5,
+        9.5
+      ],
+      "shade": false,
+      "faces": {
+        "up": {
+          "texture": "#torch",
+          "uv": [
+            8.0,
+            5.0,
+            9.0,
+            6.0
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        6.5,
+        10.5,
+        6.5
+      ],
+      "to": [
+        9.5,
+        10.5,
+        9.5
+      ],
+      "shade": false,
+      "faces": {
+        "down": {
+          "texture": "#torch",
+          "uv": [
+            7.0,
+            5.0,
+            8.0,
+            6.0
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        6.5,
+        7.5,
+        6.5
+      ],
+      "to": [
+        9.5,
+        10.5,
+        6.5
+      ],
+      "shade": false,
+      "faces": {
+        "south": {
+          "texture": "#torch",
+          "uv": [
+            9.0,
+            6.0,
+            10.0,
+            7.0
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        9.5,
+        7.5,
+        6.5
+      ],
+      "to": [
+        9.5,
+        10.5,
+        9.5
+      ],
+      "shade": false,
+      "faces": {
+        "west": {
+          "texture": "#torch",
+          "uv": [
+            6.0,
+            7.0,
+            7.0,
+            8.0
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        6.5,
+        7.5,
+        9.5
+      ],
+      "to": [
+        9.5,
+        10.5,
+        9.5
+      ],
+      "shade": false,
+      "faces": {
+        "north": {
+          "texture": "#torch",
+          "uv": [
+            6.0,
+            6.0,
+            7.0,
+            7.0
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        6.5,
+        7.5,
+        6.5
+      ],
+      "to": [
+        6.5,
+        10.5,
+        9.5
+      ],
+      "shade": false,
+      "faces": {
+        "east": {
+          "texture": "#torch",
+          "uv": [
+            9.0,
+            7.0,
+            10.0,
+            8.0
+          ]
+        }
+      }
+    }
+  ]
+}

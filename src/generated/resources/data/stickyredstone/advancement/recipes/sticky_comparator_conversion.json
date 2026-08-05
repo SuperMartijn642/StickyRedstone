@@ -1,0 +1,47 @@
+{
+  "parent": "minecraft:recipes/root",
+  "display": {
+    "icon": {
+      "id": "stickyredstone:sticky_comparator"
+    },
+    "title": {
+      "translate": "stickyredstone.advancement.recipes/sticky_comparator_conversion.title"
+    },
+    "description": {
+      "translate": "stickyredstone.advancement.recipes/sticky_comparator_conversion.description"
+    },
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "stickyredstone:sticky_comparator_conversion"
+      }
+    },
+    "recipe_condition": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:slime_balls"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "recipe_condition"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "stickyredstone:sticky_comparator_conversion"
+    ]
+  }
+}

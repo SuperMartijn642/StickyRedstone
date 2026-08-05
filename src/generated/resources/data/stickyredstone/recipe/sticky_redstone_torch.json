@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "D",
+    "S"
+  ],
+  "key": {
+    "S": "#c:rods/wooden",
+    "D": "stickyredstone:sticky_redstone_dust"
+  },
+  "result": {
+    "id": "stickyredstone:sticky_redstone_torch"
+  }
+}

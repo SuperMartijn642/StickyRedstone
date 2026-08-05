@@ -1,0 +1,482 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "stickyredstone:block/sticky_redstone_dust_dot"
+      },
+      "when": {
+        "OR": [
+          {
+            "facing": "down",
+            "side1": "true",
+            "side2": "true"
+          },
+          {
+            "facing": "down",
+            "side1": "true",
+            "side4": "true"
+          },
+          {
+            "facing": "down",
+            "side2": "true",
+            "side3": "true"
+          },
+          {
+            "facing": "down",
+            "side3": "true",
+            "side4": "true"
+          },
+          {
+            "facing": "down",
+            "side1": "false",
+            "side2": "false",
+            "side3": "false",
+            "side4": "false"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "stickyredstone:block/sticky_redstone_dust_side0"
+      },
+      "when": {
+        "facing": "down",
+        "side1": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "stickyredstone:block/sticky_redstone_dust_side_alt0"
+      },
+      "when": {
+        "facing": "down",
+        "side3": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "stickyredstone:block/sticky_redstone_dust_side1",
+        "y": -90
+      },
+      "when": {
+        "facing": "down",
+        "side2": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "stickyredstone:block/sticky_redstone_dust_side_alt1",
+        "y": -90
+      },
+      "when": {
+        "facing": "down",
+        "side4": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "stickyredstone:block/sticky_redstone_dust_dot",
+        "x": 180
+      },
+      "when": {
+        "OR": [
+          {
+            "facing": "up",
+            "side1": "true",
+            "side2": "true"
+          },
+          {
+            "facing": "up",
+            "side1": "true",
+            "side4": "true"
+          },
+          {
+            "facing": "up",
+            "side2": "true",
+            "side3": "true"
+          },
+          {
+            "facing": "up",
+            "side3": "true",
+            "side4": "true"
+          },
+          {
+            "facing": "up",
+            "side1": "false",
+            "side2": "false",
+            "side3": "false",
+            "side4": "false"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "stickyredstone:block/sticky_redstone_dust_side0",
+        "x": 180
+      },
+      "when": {
+        "facing": "up",
+        "side1": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "stickyredstone:block/sticky_redstone_dust_side_alt0",
+        "x": 180
+      },
+      "when": {
+        "facing": "up",
+        "side3": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "stickyredstone:block/sticky_redstone_dust_side1",
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "facing": "up",
+        "side2": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "stickyredstone:block/sticky_redstone_dust_side_alt1",
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "facing": "up",
+        "side4": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "stickyredstone:block/sticky_redstone_dust_dot",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "OR": [
+          {
+            "facing": "north",
+            "side1": "true",
+            "side2": "true"
+          },
+          {
+            "facing": "north",
+            "side1": "true",
+            "side4": "true"
+          },
+          {
+            "facing": "north",
+            "side2": "true",
+            "side3": "true"
+          },
+          {
+            "facing": "north",
+            "side3": "true",
+            "side4": "true"
+          },
+          {
+            "facing": "north",
+            "side1": "false",
+            "side2": "false",
+            "side3": "false",
+            "side4": "false"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "stickyredstone:block/sticky_redstone_dust_side0",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "facing": "north",
+        "side1": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "stickyredstone:block/sticky_redstone_dust_side_alt0",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "facing": "north",
+        "side3": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "stickyredstone:block/sticky_redstone_dust_side1",
+        "x": 90,
+        "y": 180,
+        "z": -90
+      },
+      "when": {
+        "facing": "north",
+        "side2": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "stickyredstone:block/sticky_redstone_dust_side_alt1",
+        "x": 90,
+        "y": 180,
+        "z": -90
+      },
+      "when": {
+        "facing": "north",
+        "side4": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "stickyredstone:block/sticky_redstone_dust_dot",
+        "x": 90
+      },
+      "when": {
+        "OR": [
+          {
+            "facing": "south",
+            "side1": "true",
+            "side2": "true"
+          },
+          {
+            "facing": "south",
+            "side1": "true",
+            "side4": "true"
+          },
+          {
+            "facing": "south",
+            "side2": "true",
+            "side3": "true"
+          },
+          {
+            "facing": "south",
+            "side3": "true",
+            "side4": "true"
+          },
+          {
+            "facing": "south",
+            "side1": "false",
+            "side2": "false",
+            "side3": "false",
+            "side4": "false"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "stickyredstone:block/sticky_redstone_dust_side0",
+        "x": 90
+      },
+      "when": {
+        "facing": "south",
+        "side1": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "stickyredstone:block/sticky_redstone_dust_side_alt0",
+        "x": 90
+      },
+      "when": {
+        "facing": "south",
+        "side3": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "stickyredstone:block/sticky_redstone_dust_side1",
+        "x": 90,
+        "z": 90
+      },
+      "when": {
+        "facing": "south",
+        "side2": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "stickyredstone:block/sticky_redstone_dust_side_alt1",
+        "x": 90,
+        "z": 90
+      },
+      "when": {
+        "facing": "south",
+        "side4": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "stickyredstone:block/sticky_redstone_dust_dot",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "OR": [
+          {
+            "facing": "west",
+            "side1": "true",
+            "side2": "true"
+          },
+          {
+            "facing": "west",
+            "side1": "true",
+            "side4": "true"
+          },
+          {
+            "facing": "west",
+            "side2": "true",
+            "side3": "true"
+          },
+          {
+            "facing": "west",
+            "side3": "true",
+            "side4": "true"
+          },
+          {
+            "facing": "west",
+            "side1": "false",
+            "side2": "false",
+            "side3": "false",
+            "side4": "false"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "stickyredstone:block/sticky_redstone_dust_side0",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "facing": "west",
+        "side1": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "stickyredstone:block/sticky_redstone_dust_side_alt0",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "facing": "west",
+        "side3": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "stickyredstone:block/sticky_redstone_dust_side1",
+        "z": 90
+      },
+      "when": {
+        "facing": "west",
+        "side2": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "stickyredstone:block/sticky_redstone_dust_side_alt1",
+        "z": 90
+      },
+      "when": {
+        "facing": "west",
+        "side4": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "stickyredstone:block/sticky_redstone_dust_dot",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "OR": [
+          {
+            "facing": "east",
+            "side1": "true",
+            "side2": "true"
+          },
+          {
+            "facing": "east",
+            "side1": "true",
+            "side4": "true"
+          },
+          {
+            "facing": "east",
+            "side2": "true",
+            "side3": "true"
+          },
+          {
+            "facing": "east",
+            "side3": "true",
+            "side4": "true"
+          },
+          {
+            "facing": "east",
+            "side1": "false",
+            "side2": "false",
+            "side3": "false",
+            "side4": "false"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "stickyredstone:block/sticky_redstone_dust_side0",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "facing": "east",
+        "side1": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "stickyredstone:block/sticky_redstone_dust_side_alt0",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "facing": "east",
+        "side3": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "stickyredstone:block/sticky_redstone_dust_side1",
+        "y": 180,
+        "z": -90
+      },
+      "when": {
+        "facing": "east",
+        "side2": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "stickyredstone:block/sticky_redstone_dust_side_alt1",
+        "y": 180,
+        "z": -90
+      },
+      "when": {
+        "facing": "east",
+        "side4": "true"
+      }
+    }
+  ]
+}

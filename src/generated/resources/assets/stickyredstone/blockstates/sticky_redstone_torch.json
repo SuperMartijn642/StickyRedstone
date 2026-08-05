@@ -1,0 +1,56 @@
+{
+  "variants": {
+    "facing=down,lit=false": {
+      "model": "stickyredstone:block/sticky_redstone_torch_off"
+    },
+    "facing=down,lit=true": {
+      "model": "stickyredstone:block/sticky_redstone_torch"
+    },
+    "facing=east,lit=false": {
+      "model": "stickyredstone:block/sticky_redstone_torch_off",
+      "x": 90,
+      "y": 270
+    },
+    "facing=east,lit=true": {
+      "model": "stickyredstone:block/sticky_redstone_torch",
+      "x": 90,
+      "y": 270
+    },
+    "facing=north,lit=false": {
+      "model": "stickyredstone:block/sticky_redstone_torch_off",
+      "x": 90,
+      "y": 180
+    },
+    "facing=north,lit=true": {
+      "model": "stickyredstone:block/sticky_redstone_torch",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,lit=false": {
+      "model": "stickyredstone:block/sticky_redstone_torch_off",
+      "x": 90
+    },
+    "facing=south,lit=true": {
+      "model": "stickyredstone:block/sticky_redstone_torch",
+      "x": 90
+    },
+    "facing=up,lit=false": {
+      "model": "stickyredstone:block/sticky_redstone_torch_off",
+      "x": 180
+    },
+    "facing=up,lit=true": {
+      "model": "stickyredstone:block/sticky_redstone_torch",
+      "x": 180
+    },
+    "facing=west,lit=false": {
+      "model": "stickyredstone:block/sticky_redstone_torch_off",
+      "x": 90,
+      "y": 90
+    },
+    "facing=west,lit=true": {
+      "model": "stickyredstone:block/sticky_redstone_torch",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

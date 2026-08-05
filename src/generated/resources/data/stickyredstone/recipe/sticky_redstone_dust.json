@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DDD",
+    "DSD",
+    "DDD"
+  ],
+  "key": {
+    "S": "#c:slime_balls",
+    "D": "#c:dusts/redstone"
+  },
+  "result": {
+    "id": "stickyredstone:sticky_redstone_dust",
+    "count": 8
+  }
+}
