@@ -5,7 +5,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.supermartijn642.stickyredstone.content.wire.StickyRedstoneDust;
 import com.supermartijn642.stickyredstone.content.wire.StickyRedstoneWireEvaluator;
-import net.minecraft.client.renderer.LevelRenderer;
+import net.minecraft.client.renderer.extract.LevelExtractor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.state.BlockState;
@@ -18,8 +18,8 @@ import org.spongepowered.asm.mixin.injection.At;
 /**
  * Created 04/08/2026 by SuperMartijn642
  */
-@Mixin(LevelRenderer.class)
-public class LevelRendererMixin {
+@Mixin(LevelExtractor.class)
+public class LevelExtractorMixin {
 
     @WrapOperation(
         method = "extractBlockOutline",
