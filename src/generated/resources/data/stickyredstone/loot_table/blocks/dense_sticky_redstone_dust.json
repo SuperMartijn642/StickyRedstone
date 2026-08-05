@@ -13,7 +13,6 @@
           "count": {
             "type": "stickyredstone:dust_count"
           },
-          "add": false,
           "function": "minecraft:set_count"
         }
       ],
