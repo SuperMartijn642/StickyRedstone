@@ -2,7 +2,6 @@ package com.supermartijn642.stickyredstone.content.wire;
 
 import com.supermartijn642.core.ClientUtils;
 import com.supermartijn642.stickyredstone.StickyRedstone;
-import net.fabricmc.fabric.api.client.renderer.v1.mesh.QuadEmitter;
 import net.minecraft.client.renderer.block.BlockAndTintGetter;
 import net.minecraft.client.renderer.block.BlockStateModelSet;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
@@ -81,9 +80,9 @@ public class DenseStickyRedstoneDustBlockStateModel implements BlockStateModel {
     }
 
     @Override
-    public void emitQuads(QuadEmitter emitter, BlockAndTintGetter level, BlockPos pos, BlockState state, RandomSource random, Predicate<@Nullable Direction> cullTest){
+    public void collectParts(BlockAndTintGetter level, BlockPos pos, BlockState state, RandomSource random, List<BlockStateModelPart> parts){
         for(BlockStateModel model : this.models(level, pos, state))
-            model.emitQuads(emitter, level, pos, state, random, cullTest);
+            model.collectParts(level, pos, state, random, parts);
     }
 
     @Override
@@ -107,17 +106,17 @@ public class DenseStickyRedstoneDustBlockStateModel implements BlockStateModel {
     }
 
     @Override
-    public @BakedQuad.MaterialFlags int materialFlags(BlockAndTintGetter level, BlockPos pos, BlockState state, RandomSource random){
+    public @BakedQuad.MaterialFlags int materialFlags(BlockAndTintGetter level, BlockPos pos, BlockState state){
         int flags = 0;
         for(BlockStateModel model : this.models(level, pos, state))
-            flags |= model.materialFlags(level, pos, state, random);
+            flags |= model.materialFlags(level, pos, state);
         return flags;
     }
 
     @Override
-    public boolean hasMaterialFlag(BlockAndTintGetter level, BlockPos pos, BlockState state, RandomSource random, @BakedQuad.MaterialFlags int flag){
+    public boolean hasMaterialFlag(BlockAndTintGetter level, BlockPos pos, BlockState state, @BakedQuad.MaterialFlags int flag){
         for(BlockStateModel model : this.models(level, pos, state)){
-            if(model.hasMaterialFlag(level, pos, state, random, flag))
+            if(model.hasMaterialFlag(level, pos, state, flag))
                 return true;
         }
         return false;

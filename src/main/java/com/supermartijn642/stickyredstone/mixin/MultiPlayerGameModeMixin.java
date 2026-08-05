@@ -11,9 +11,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.MultiPlayerGameMode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Final;
@@ -41,7 +44,7 @@ public class MultiPlayerGameModeMixin {
             shift = At.Shift.BEFORE
         )
     )
-    private void destroyBlock(BlockPos pos, CallbackInfoReturnable<Boolean> ci, @Local Level level, @Local BlockState oldState, @Share("face") LocalRef<Direction> sharedFace) {
+    private void destroyBlock(BlockPos pos, CallbackInfoReturnable<Boolean> ci, @Local Level level, @Local(ordinal = 0) BlockState oldState, @Share("face") LocalRef<Direction> sharedFace) {
         if(!StickyRedstoneWireEvaluator.isStickyRedstoneWire(oldState.getBlock()))
             return;
         if(!(this.minecraft.hitResult instanceof BlockHitResult hitResult))
@@ -86,13 +89,13 @@ public class MultiPlayerGameModeMixin {
         method = "destroyBlock",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/world/level/Level;setBlock(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;I)Z"
+            target = "Lnet/minecraft/world/level/block/state/BlockState;onDestroyedByPlayer(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/item/ItemStack;ZLnet/minecraft/world/level/material/FluidState;)Z"
         )
     )
-    private boolean destroyBlock(Level level, BlockPos pos, BlockState air, int flags, Operation<Boolean> operation, @Local BlockState oldState, @Share("face") LocalRef<Direction> sharedFace) {
+    private boolean destroyBlock(BlockState oldState, Level level, BlockPos pos, Player player, ItemStack tool, boolean willHarvest, FluidState fluid, Operation<Boolean> operation, @Share("face") LocalRef<Direction> sharedFace) {
         Direction hitFace = sharedFace.get();
         if(hitFace == null)
-            return operation.call(level, pos, air, flags);
+            return operation.call(oldState, level, pos, player, tool, willHarvest, fluid);
         // Check if there are other faces besides the clicked one
         int otherFaces = 0;
         Direction otherFace = null;
@@ -113,7 +116,7 @@ public class MultiPlayerGameModeMixin {
             BlockState newBlockState = StickyRedstone.singleStickyRedstoneDust.getBlockStateForConnections(otherFace, otherFaceConnections);
             BlockPos supportPos = pos.relative(hitFace);
             newBlockState = newBlockState.updateShape(level, level, pos, hitFace, supportPos, level.getBlockState(supportPos), level.getRandom());
-            return operation.call(level, pos, newBlockState, flags);
+            return level.setBlock(pos, newBlockState, Block.UPDATE_ALL | Block.UPDATE_IMMEDIATE);
         }else{
             DustState state = block.getState(level, pos, oldState);
             BlockPos supportPos = pos.relative(hitFace);

@@ -38,17 +38,18 @@ public class ServerPlayerGameModeMixin {
         method = "destroyBlock",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/server/level/ServerLevel;removeBlock(Lnet/minecraft/core/BlockPos;Z)Z"
-        )
+            target = "Lnet/minecraft/server/level/ServerPlayerGameMode;removeBlock(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;ZLnet/minecraft/world/item/ItemStack;)Z"
+        ),
+        expect = 2
     )
-    private boolean destroyBlock(ServerLevel level, BlockPos pos, boolean movedByPiston, Operation<Boolean> operation, @Local(ordinal = 0) BlockState oldState) {
+    private boolean destroyBlock(ServerPlayerGameMode gameMode, BlockPos pos, BlockState oldState, boolean canHarvest, ItemStack tool, Operation<Boolean> operation) {
         if(!StickyRedstoneWireEvaluator.isStickyRedstoneWire(oldState.getBlock()))
-            return operation.call(level, pos, movedByPiston);
+            return operation.call(gameMode, pos, oldState, canHarvest, tool);
         Direction hitFace = StickyRedstoneDust.DESTROY_FACE_OVERRIDE.get();
         if(hitFace == null)
-            return operation.call(level, pos, movedByPiston);
-        if(!StickyRedstoneWireEvaluator.getConnections(level, pos, oldState, hitFace).isPresent())
-            return operation.call(level, pos, movedByPiston);
+            return operation.call(gameMode, pos, oldState, canHarvest, tool);
+        if(!StickyRedstoneWireEvaluator.getConnections(this.level, pos, oldState, hitFace).isPresent())
+            return operation.call(gameMode, pos, oldState, canHarvest, tool);
         // Check if there are other faces besides the clicked one
         int otherFaces = 0;
         Direction otherFace = null;
@@ -61,25 +62,25 @@ public class ServerPlayerGameModeMixin {
             }
         }
         if(otherFaces == 0)
-            return operation.call(level, pos, movedByPiston);
+            return operation.call(gameMode, pos, oldState, canHarvest, tool);
         // Remove just the clicked face and keep the others
         StickyRedstoneDust block = (StickyRedstoneDust)oldState.getBlock();
         if(otherFaces == 1){
-            FaceState otherFaceConnections = StickyRedstoneWireEvaluator.getConnections(level, pos, oldState, otherFace);
+            FaceState otherFaceConnections = StickyRedstoneWireEvaluator.getConnections(this.level, pos, oldState, otherFace);
             BlockState newBlockState = StickyRedstone.singleStickyRedstoneDust.getBlockStateForConnections(otherFace, otherFaceConnections);
             BlockPos supportPos = pos.relative(hitFace);
-            newBlockState = newBlockState.updateShape(level, level, pos, hitFace, supportPos, level.getBlockState(supportPos), level.getRandom());
-            return level.setBlock(pos, newBlockState, Block.UPDATE_ALL | Block.UPDATE_IMMEDIATE);
+            newBlockState = newBlockState.updateShape(this.level, this.level, pos, hitFace, supportPos, this.level.getBlockState(supportPos), this.level.getRandom());
+            return this.level.setBlock(pos, newBlockState, Block.UPDATE_ALL | Block.UPDATE_IMMEDIATE);
         }else{
-            DustState state = block.getState(level, pos, oldState);
+            DustState state = block.getState(this.level, pos, oldState);
             BlockPos supportPos = pos.relative(hitFace);
             BlockState newBlockState = block.defaultBlockState().setValue(DenseStickyRedstoneDust.INITIALIZED, false); // Need this dumb property just for the game to let me update everything
-            if(!level.setBlock(pos, newBlockState, 0))
+            if(!this.level.setBlock(pos, newBlockState, 0))
                 return false;
-            newBlockState = block.updateState(level, pos, oldState, state.setFace(hitFace, FaceState.ABSENT));
-            newBlockState = block.updateShape(newBlockState, level, level, pos, hitFace, supportPos, level.getBlockState(supportPos), level.getRandom());
+            newBlockState = block.updateState(this.level, pos, oldState, state.setFace(hitFace, FaceState.ABSENT));
+            newBlockState = block.updateShape(newBlockState, this.level, this.level, pos, hitFace, supportPos, this.level.getBlockState(supportPos), this.level.getRandom());
             newBlockState = newBlockState.setValue(DenseStickyRedstoneDust.INITIALIZED, true);
-            return level.setBlock(pos, newBlockState, Block.UPDATE_ALL | Block.UPDATE_IMMEDIATE);
+            return this.level.setBlock(pos, newBlockState, Block.UPDATE_ALL | Block.UPDATE_IMMEDIATE);
         }
     }
 

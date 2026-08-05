@@ -2,8 +2,6 @@ package com.supermartijn642.stickyredstone.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
-import com.supermartijn642.stickyredstone.StickyRedstone;
-import com.supermartijn642.stickyredstone.content.StickyRepeater;
 import com.supermartijn642.stickyredstone.content.wire.StickyRedstoneWireEvaluator;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -56,11 +54,11 @@ public class RedstoneWireBlockMixin {
         method = "getConnectingSide(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;Z)Lnet/minecraft/world/level/block/state/properties/RedstoneSide;",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/world/level/block/RedStoneWireBlock;shouldConnectTo(Lnet/minecraft/world/level/block/state/BlockState;)Z",
+            target = "Lnet/minecraft/world/level/block/state/BlockState;canRedstoneConnectTo(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;)Z",
             ordinal = 0
         )
     )
-    private boolean checkConnectionUp(boolean original, @Local BlockGetter level, @Local(ordinal = 1) BlockPos relativePos, @Local Direction direction){
+    private boolean checkConnectionUp(boolean original, @Local BlockGetter level, @Local(ordinal = 1) BlockPos relativePos){
         if(original)
             return true;
         BlockPos neighborPos = relativePos.above();
@@ -74,7 +72,7 @@ public class RedstoneWireBlockMixin {
         method = "getConnectingSide(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;Z)Lnet/minecraft/world/level/block/state/properties/RedstoneSide;",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/world/level/block/RedStoneWireBlock;shouldConnectTo(Lnet/minecraft/world/level/block/state/BlockState;)Z",
+            target = "Lnet/minecraft/world/level/block/state/BlockState;canRedstoneConnectTo(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;)Z",
             ordinal = 1
         )
     )
@@ -92,7 +90,7 @@ public class RedstoneWireBlockMixin {
         method = "getConnectingSide(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;Z)Lnet/minecraft/world/level/block/state/properties/RedstoneSide;",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/world/level/block/RedStoneWireBlock;shouldConnectTo(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/Direction;)Z"
+            target = "Lnet/minecraft/world/level/block/state/BlockState;canRedstoneConnectTo(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;)Z"
         )
     )
     private boolean checkConnectionSide(boolean original, @Local BlockGetter level, @Local(ordinal = 1) BlockPos neighborPos, @Local BlockState neighborState){
@@ -101,21 +99,5 @@ public class RedstoneWireBlockMixin {
         if(!StickyRedstoneWireEvaluator.isStickyRedstoneWire(neighborState.getBlock()))
             return false;
         return StickyRedstoneWireEvaluator.getConnections(level, neighborPos, neighborState, Direction.DOWN).isPresent();
-    }
-
-    @Inject(
-        method = "shouldConnectTo(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/Direction;)Z",
-        at = @At("HEAD"),
-        cancellable = true
-    )
-    private static void checkDiodeFace(BlockState state, @Nullable Direction direction, CallbackInfoReturnable<Boolean> ci){
-        if(!StickyRepeater.isStickyDiode(state))
-            return;
-        if(StickyRepeater.getDiodeFace(state) != Direction.DOWN){
-            ci.setReturnValue(false);
-            return;
-        }
-        if(state.is(StickyRedstone.stickyRepeater))
-            ci.setReturnValue(direction != null && StickyRepeater.getDiodeFront(state).getAxis() == direction.getAxis());
     }
 }
