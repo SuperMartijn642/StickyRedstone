@@ -14,7 +14,7 @@
   ],
   "client": [
     "ClientLevelMixin",
-    "LevelRendererMixin",
+    "LevelExtractorMixin",
     "MinecraftMixin",
     "MultiPlayerGameModeMixin"
   ],
