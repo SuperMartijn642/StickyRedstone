@@ -275,7 +275,7 @@ public abstract class StickyRedstoneDust extends BaseBlock {
         }
         if(state.is(Blocks.OBSERVER))
             return side == state.getValue(ObserverBlock.FACING);
-        return state.isSignalSource();
+        return state.canRedstoneConnectTo(level, pos, side.getOpposite());
     }
 
     @Override
@@ -451,6 +451,11 @@ public abstract class StickyRedstoneDust extends BaseBlock {
                 continue;
             level.updateNeighborsAtExceptFromFacing(sidePos, this, side.getOpposite(), ExperimentalRedstoneUtils.withFront(orientation, side));
         }
+    }
+
+    @Override
+    public boolean canConnectRedstone(BlockState state, BlockGetter level, BlockPos pos, @Nullable Direction oppositeOfSideOfBlock){
+        return oppositeOfSideOfBlock != null && this.getConnections(level, pos, state, Direction.DOWN).isPresent();
     }
 
     @Override

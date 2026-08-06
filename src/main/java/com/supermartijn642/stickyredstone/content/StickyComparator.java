@@ -323,6 +323,11 @@ public class StickyComparator extends BaseBlock {
     }
 
     @Override
+    public boolean canConnectRedstone(BlockState state, BlockGetter level, BlockPos pos, @Nullable Direction oppositeOfSideOfBlock){
+        return state.getValue(FACE) == Direction.DOWN;
+    }
+
+    @Override
     protected BlockState mirror(BlockState state, Mirror mirror){
         Direction oldFace = state.getValue(FACE);
         Direction newFace = mirror.mirror(oldFace);

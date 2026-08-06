@@ -11,9 +11,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.MultiPlayerGameMode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Final;
@@ -33,19 +36,18 @@ public class MultiPlayerGameModeMixin {
     @Shadow
     private Minecraft minecraft;
 
-    @Inject(
+    @WrapOperation(
         method = "destroyBlock",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/world/level/block/Block;playerWillDestroy(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/entity/player/Player;)Lnet/minecraft/world/level/block/state/BlockState;",
-            shift = At.Shift.BEFORE
+            target = "Lnet/minecraft/world/level/block/state/BlockState;onDestroyedByPlayer(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/player/Player;ZLnet/minecraft/world/level/material/FluidState;)Z"
         )
     )
-    private void destroyBlock(BlockPos pos, CallbackInfoReturnable<Boolean> ci, @Local Level level, @Local BlockState oldState, @Share("face") LocalRef<Direction> sharedFace) {
+    private boolean destroyBlock(BlockState oldState, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid, Operation<Boolean> operation) {
         if(!StickyRedstoneWireEvaluator.isStickyRedstoneWire(oldState.getBlock()))
-            return;
+            return operation.call(oldState, level, pos, player, willHarvest, fluid);
         if(!(this.minecraft.hitResult instanceof BlockHitResult hitResult))
-            return;
+            return operation.call(oldState, level, pos, player, willHarvest, fluid);
         // Find the face that was clicked
         Vec3 location = hitResult.getLocation();
         Direction hitFace;
@@ -63,36 +65,8 @@ public class MultiPlayerGameModeMixin {
                 hitFace.getAxis() == Direction.Axis.Z ? 0.5 : location.z
             );
             if(location.x == 0.5 && location.y == 0.5 && location.z == 0.5)
-                return;
+                return operation.call(oldState, level, pos, player, willHarvest, fluid);
         }while(true);
-        // Check if there are other faces besides the clicked one
-        boolean hasOtherFaces = false;
-        for(Direction face : Direction.values()){
-            if(face == hitFace)
-                continue;
-            if(StickyRedstoneWireEvaluator.getConnections(level, pos, oldState, face).isPresent()){
-                hasOtherFaces = true;
-                break;
-            }
-        }
-        if(!hasOtherFaces)
-            return;
-        // Set the face
-        sharedFace.set(hitFace);
-        StickyRedstoneDust.DESTROY_FACE_OVERRIDE.set(hitFace);
-    }
-
-    @WrapOperation(
-        method = "destroyBlock",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/world/level/Level;setBlock(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;I)Z"
-        )
-    )
-    private boolean destroyBlock(Level level, BlockPos pos, BlockState air, int flags, Operation<Boolean> operation, @Local BlockState oldState, @Share("face") LocalRef<Direction> sharedFace) {
-        Direction hitFace = sharedFace.get();
-        if(hitFace == null)
-            return operation.call(level, pos, air, flags);
         // Check if there are other faces besides the clicked one
         int otherFaces = 0;
         Direction otherFace = null;
@@ -105,7 +79,8 @@ public class MultiPlayerGameModeMixin {
             }
         }
         if(otherFaces == 0)
-            throw new AssertionError();
+            return operation.call(oldState, level, pos, player, willHarvest, fluid);
+        StickyRedstoneDust.DESTROY_FACE_OVERRIDE.set(hitFace);
         // Remove just the clicked face and keep the others
         StickyRedstoneDust block = (StickyRedstoneDust)oldState.getBlock();
         if(otherFaces == 1){
@@ -113,7 +88,7 @@ public class MultiPlayerGameModeMixin {
             BlockState newBlockState = StickyRedstone.singleStickyRedstoneDust.getBlockStateForConnections(otherFace, otherFaceConnections);
             BlockPos supportPos = pos.relative(hitFace);
             newBlockState = newBlockState.updateShape(level, level, pos, hitFace, supportPos, level.getBlockState(supportPos), level.getRandom());
-            return operation.call(level, pos, newBlockState, flags);
+            return level.setBlock(pos, newBlockState, Block.UPDATE_ALL | Block.UPDATE_IMMEDIATE);
         }else{
             DustState state = block.getState(level, pos, oldState);
             BlockPos supportPos = pos.relative(hitFace);

@@ -26,7 +26,7 @@ public class MinecraftMixin {
         method = "continueAttack",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/world/level/block/state/BlockState;isAir()Z"
+            target = "Lnet/minecraft/client/multiplayer/ClientLevel;isEmptyBlock(Lnet/minecraft/core/BlockPos;)Z"
         )
     )
     private boolean continueAttack(boolean original) {

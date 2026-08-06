@@ -409,6 +409,12 @@ public class StickyRepeater extends BaseBlock {
     }
 
     @Override
+    public boolean canConnectRedstone(BlockState state, BlockGetter level, BlockPos pos, @Nullable Direction oppositeOfSideOfBlock){
+        Direction face = state.getValue(FACE);
+        return face == Direction.DOWN && oppositeOfSideOfBlock != null && fromOrientation(face, state.getValue(ORIENTATION)).getAxis() == oppositeOfSideOfBlock.getAxis();
+    }
+
+    @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random){
         if(!state.getValue(POWERED))
             return;

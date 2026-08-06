@@ -49,7 +49,7 @@ public class StickyRedstoneDustItem extends StickBlockItem {
         boolean wasSingleDust = block == StickyRedstone.singleStickyRedstoneDust;
         block = StickyRedstone.denseStickyRedstoneDust;
         blockState = block.defaultBlockState().setValue(DenseStickyRedstoneDust.INITIALIZED, false);
-        if(!level.setBlock(pos, blockState, wasSingleDust ? 0 : Block.UPDATE_KNOWN_SHAPE))
+        if(!level.setBlock(pos, blockState, Block.UPDATE_CLIENTS | (wasSingleDust ? 0 : Block.UPDATE_KNOWN_SHAPE)))
             return InteractionResult.FAIL;
         FaceState connections = block.getProperConnections(state, level, pos, face);
         BlockState newBlockState = block.updateState(level, pos, blockState, state.setFace(face, connections));
