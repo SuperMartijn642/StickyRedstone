@@ -1,5 +1,6 @@
 package com.supermartijn642.stickyredstone.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
@@ -11,6 +12,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.MultiPlayerGameMode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ServerboundPlayerActionPacket;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -44,7 +47,7 @@ public class MultiPlayerGameModeMixin {
             shift = At.Shift.BEFORE
         )
     )
-    private void destroyBlock(BlockPos pos, CallbackInfoReturnable<Boolean> ci, @Local Level level, @Local(ordinal = 0) BlockState oldState, @Share("face") LocalRef<Direction> sharedFace) {
+    private void destroyBlock(BlockPos pos, CallbackInfoReturnable<Boolean> ci, @Local Level level, @Local(ordinal = 0) BlockState oldState, @Share("face") LocalRef<Direction> sharedFace){
         if(!StickyRedstoneWireEvaluator.isStickyRedstoneWire(oldState.getBlock()))
             return;
         if(!(this.minecraft.hitResult instanceof BlockHitResult hitResult))
@@ -92,7 +95,7 @@ public class MultiPlayerGameModeMixin {
             target = "Lnet/minecraft/world/level/block/state/BlockState;onDestroyedByPlayer(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/item/ItemStack;ZLnet/minecraft/world/level/material/FluidState;)Z"
         )
     )
-    private boolean destroyBlock(BlockState oldState, Level level, BlockPos pos, Player player, ItemStack tool, boolean willHarvest, FluidState fluid, Operation<Boolean> operation, @Share("face") LocalRef<Direction> sharedFace) {
+    private boolean destroyBlock(BlockState oldState, Level level, BlockPos pos, Player player, ItemStack tool, boolean willHarvest, FluidState fluid, Operation<Boolean> operation, @Share("face") LocalRef<Direction> sharedFace){
         Direction hitFace = sharedFace.get();
         if(hitFace == null)
             return operation.call(oldState, level, pos, player, tool, willHarvest, fluid);
@@ -137,7 +140,21 @@ public class MultiPlayerGameModeMixin {
             @At("RETURN")
         }
     )
-    private void continueDestroyBlock(BlockPos pos, Direction direction, CallbackInfoReturnable<Boolean> ci) {
+    private void continueDestroyBlock(BlockPos pos, Direction direction, CallbackInfoReturnable<Boolean> ci){
         StickyRedstoneDust.DESTROY_FACE_OVERRIDE.remove();
+    }
+
+    @ModifyReturnValue(
+        method = "lambda$startDestroyBlock$1(Lnet/minecraft/world/level/block/state/BlockState;Lnet/neoforged/neoforge/event/entity/player/PlayerInteractEvent$LeftClickBlock;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;I)Lnet/minecraft/network/protocol/Packet;",
+        at = @At("RETURN")
+    )
+    private Packet<?> modifyPacketHitFace(Packet<?> packet){
+        // NeoForge moves the packet creation to before the #destroyBlock call, hence we need to overwrite the direction after
+        if(packet instanceof ServerboundPlayerActionPacket p){
+            Direction hitFace = StickyRedstoneDust.DESTROY_FACE_OVERRIDE.get();
+            if(hitFace != null)
+                p.direction = hitFace;
+        }
+        return packet;
     }
 }
