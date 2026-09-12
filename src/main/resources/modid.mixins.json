@@ -4,9 +4,11 @@
   "package": "${mod_package}.${mixin_package}",
   "compatibilityLevel": "${mixin_compatibility_level}",
   "mixins": [
+    "BlockMixin",
     "CollectingNeighborUpdaterMultiNeighborUpdateMixin",
     "DiodeBlockMixin",
     "ExperimentalRedstoneUtilsMixin",
+    "NeighborUpdaterMixin",
     "RedstoneWireBlockMixin",
     "RedstoneWireEvaluatorMixin",
     "ServerboundPlayerActionPacketMixin",
