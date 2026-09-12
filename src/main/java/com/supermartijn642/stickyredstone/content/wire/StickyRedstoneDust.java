@@ -12,7 +12,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -367,24 +366,15 @@ public abstract class StickyRedstoneDust extends BaseBlock {
     protected void neighborChanged(BlockState blockState, Level level, BlockPos pos, Block block, @Nullable Orientation orientation, boolean movedByPiston){
         if(level.isClientSide())
             return;
-        boolean hasASurvivingFace = false;
-        int drops = 0;
         BlockPos.MutableBlockPos sidePos = new BlockPos.MutableBlockPos();
         for(Direction face : Direction.values()){
             FaceState connections = this.getConnections(level, pos, blockState, face);
             if(!connections.isPresent())
                 continue;
             sidePos.setWithOffset(pos, face);
-            if(canSurviveOn(level, sidePos, level.getBlockState(sidePos), face.getOpposite())){
+            if(canSurviveOn(level, sidePos, level.getBlockState(sidePos), face.getOpposite()))
                 this.updatePowerStrength(level, pos, blockState, face, orientation, false);
-                hasASurvivingFace = true;
-            }else
-                drops++;
         }
-        if(drops > 0)
-            popResource(level, pos, new ItemStack(StickyRedstone.singleStickyRedstoneDust, drops));
-        if(!hasASurvivingFace)
-            level.removeBlock(pos, false);
     }
 
     @Override

@@ -56,6 +56,15 @@ public class DustState {
         return state;
     }
 
+    public int countPresentFaces(){
+        int count = 0;
+        for(FaceState face : this.faceConnections){
+            if(face.isPresent())
+                count++;
+        }
+        return count;
+    }
+
     @Override
     public boolean equals(Object o){
         if(o == null || this.getClass() != o.getClass()) return false;
