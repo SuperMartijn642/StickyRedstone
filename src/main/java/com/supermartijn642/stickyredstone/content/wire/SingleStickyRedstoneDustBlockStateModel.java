@@ -72,8 +72,10 @@ public class SingleStickyRedstoneDustBlockStateModel extends DelegateBlockStateM
                 materialInfo.sprite(),
                 materialInfo.layer(),
                 materialInfo.itemRenderType(),
+                materialInfo.itemGlintRenderType(),
+                materialInfo.itemGlintSpecialRenderType(),
                 newTintIndex,
-                materialInfo.shade(),
+                materialInfo.shadeDirectionOverride(),
                 materialInfo.lightEmission(),
                 materialInfo.ambientOcclusion()
             ),

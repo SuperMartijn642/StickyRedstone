@@ -166,7 +166,7 @@ public class StickyRepeater extends BaseBlock {
     }
 
     public StickyRepeater(){
-        super(false, BlockProperties.create().strength(0).sound(SoundType.STONE).pushReaction(PushReaction.DESTROY));
+        super(false, BlockProperties.create().strength(0).sound(SoundType.STONE).pushReaction(PushReaction.POPPED));
         this.registerDefaultState(
             this.defaultBlockState()
                 .setValue(FACE, Direction.DOWN)
@@ -270,7 +270,7 @@ public class StickyRepeater extends BaseBlock {
 
     @Override
     protected int getSignal(BlockState state, BlockGetter level, BlockPos pos, Direction oppositeOfSideOfBlock){
-        if(!((RedStoneWireBlock)Blocks.REDSTONE_WIRE).shouldSignal && state.getValue(FACE) != Direction.DOWN)
+        if(!((RedstoneWireBlock)Blocks.REDSTONE_WIRE).shouldSignal && state.getValue(FACE) != Direction.DOWN)
             return 0;
         return getSignal(state, oppositeOfSideOfBlock.getOpposite());
     }
@@ -409,7 +409,7 @@ public class StickyRepeater extends BaseBlock {
     }
 
     @Override
-    public boolean canConnectRedstone(BlockState state, BlockGetter level, BlockPos pos, @Nullable Direction oppositeOfSideOfBlock){
+    protected boolean shouldRedstoneWireConnectTo(BlockState state, BlockGetter level, BlockPos pos, @Nullable Direction oppositeOfSideOfBlock){
         Direction face = state.getValue(FACE);
         return face == Direction.DOWN && oppositeOfSideOfBlock != null && fromOrientation(face, state.getValue(ORIENTATION)).getAxis() == oppositeOfSideOfBlock.getAxis();
     }

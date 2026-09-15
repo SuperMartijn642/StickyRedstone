@@ -41,7 +41,7 @@ public class StickyRedstoneTorchBlock extends BaseBlock {
     private static final Map<BlockGetter,List<Toggle>> RECENT_TOGGLES = new WeakHashMap<>();
     private static final BlockShape[] SHAPES = new BlockShape[6];
 
-    static {
+    static{
         BlockShape shape = BlockShape.createBlockShape(6, 0, 6, 10, 10, 10);
         for(Direction face : Direction.values()){
             BlockShape faceShape = shape;
@@ -57,7 +57,7 @@ public class StickyRedstoneTorchBlock extends BaseBlock {
     }
 
     public StickyRedstoneTorchBlock(){
-        super(false, BlockProperties.create().noCollision().strength(0).lightLevel(Blocks.litBlockEmission(7)).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY));
+        super(false, BlockProperties.create().noCollision().strength(0).lightLevel(Blocks.litBlockEmission(7)).sound(SoundType.WOOD).pushReaction(PushReaction.POPPED));
         this.registerDefaultState(this.defaultBlockState().setValue(FACE, Direction.DOWN).setValue(LIT, true));
     }
 

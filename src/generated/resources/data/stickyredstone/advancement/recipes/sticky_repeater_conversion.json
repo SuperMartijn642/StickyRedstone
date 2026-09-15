@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "stickyredstone:sticky_repeater_conversion"
+        "recipes": "stickyredstone:sticky_repeater_conversion"
       }
     },
     "recipe_condition": {

@@ -3,22 +3,19 @@ package com.supermartijn642.stickyredstone.mixin;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import com.llamalad7.mixinextras.sugar.Local;
 import com.supermartijn642.stickyredstone.StickyRedstone;
 import com.supermartijn642.stickyredstone.content.wire.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.protocol.game.ServerboundPlayerActionPacket;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerPlayerGameMode;
 import net.minecraft.stats.Stats;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.BlockHitResult;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -42,7 +39,7 @@ public class ServerPlayerGameModeMixin {
         ),
         expect = 2
     )
-    private boolean destroyBlock(ServerPlayerGameMode gameMode, BlockPos pos, BlockState oldState, boolean canHarvest, ItemStack tool, Operation<Boolean> operation) {
+    private boolean destroyBlock(ServerPlayerGameMode gameMode, BlockPos pos, BlockState oldState, boolean canHarvest, ItemStack tool, Operation<Boolean> operation){
         if(!StickyRedstoneWireEvaluator.isStickyRedstoneWire(oldState.getBlock()))
             return operation.call(gameMode, pos, oldState, canHarvest, tool);
         Direction hitFace = StickyRedstoneDust.DESTROY_FACE_OVERRIDE.get();
@@ -88,10 +85,10 @@ public class ServerPlayerGameModeMixin {
         method = "destroyBlock",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/world/level/block/Block;playerDestroy(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/block/entity/BlockEntity;Lnet/minecraft/world/item/ItemStack;)V"
+            target = "Lnet/minecraft/world/level/block/Block;playerDestroy(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/block/entity/BlockEntity;Lnet/minecraft/world/item/ItemStack;)V"
         )
     )
-    private boolean destroyBlock(Block block, Level level, Player player, BlockPos pos, BlockState state, BlockEntity entity, ItemStack stack) {
+    private boolean destroyBlock(Block block, ServerLevel level, ServerPlayer player, BlockPos pos, BlockState state, BlockEntity entity, ItemStack stack){
         if(!StickyRedstoneWireEvaluator.isStickyRedstoneWire(block))
             return true;
         player.awardStat(Stats.BLOCK_MINED.get(block));

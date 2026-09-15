@@ -8,7 +8,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.RedStoneWireBlock;
+import net.minecraft.world.level.block.RedstoneWireBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.RedstoneSide;
 import net.minecraft.world.level.redstone.Orientation;
@@ -36,17 +36,17 @@ public abstract class StickyRedstoneWireEvaluator {
     public static FaceState getConnections(BlockGetter level, BlockPos pos, BlockState state, Direction face){
         if(isVanillaRedstoneWire(state.getBlock())){
             if(face.getAxis().isHorizontal()){
-                return state.getValue(RedStoneWireBlock.PROPERTY_BY_DIRECTION.get(face)) == RedstoneSide.UP ?
-                    FaceState.get(false, false, false, false, state.getValue(RedStoneWireBlock.POWER)).set(face, Direction.DOWN, true).set(face, Direction.UP, true) :
+                return state.getValue(RedstoneWireBlock.PROPERTY_BY_DIRECTION.get(face)) == RedstoneSide.UP ?
+                    FaceState.get(false, false, false, false, state.getValue(RedstoneWireBlock.POWER)).set(face, Direction.DOWN, true).set(face, Direction.UP, true) :
                     FaceState.ABSENT;
             }
             if(face == Direction.UP)
                 return FaceState.ABSENT;
-            return FaceState.get(false, false, false, false, state.getValue(RedStoneWireBlock.POWER))
-                .set(face, Direction.NORTH, state.getValue(RedStoneWireBlock.PROPERTY_BY_DIRECTION.get(Direction.NORTH)) != RedstoneSide.NONE)
-                .set(face, Direction.EAST, state.getValue(RedStoneWireBlock.PROPERTY_BY_DIRECTION.get(Direction.EAST)) != RedstoneSide.NONE)
-                .set(face, Direction.SOUTH, state.getValue(RedStoneWireBlock.PROPERTY_BY_DIRECTION.get(Direction.SOUTH)) != RedstoneSide.NONE)
-                .set(face, Direction.WEST, state.getValue(RedStoneWireBlock.PROPERTY_BY_DIRECTION.get(Direction.WEST)) != RedstoneSide.NONE);
+            return FaceState.get(false, false, false, false, state.getValue(RedstoneWireBlock.POWER))
+                .set(face, Direction.NORTH, state.getValue(RedstoneWireBlock.PROPERTY_BY_DIRECTION.get(Direction.NORTH)) != RedstoneSide.NONE)
+                .set(face, Direction.EAST, state.getValue(RedstoneWireBlock.PROPERTY_BY_DIRECTION.get(Direction.EAST)) != RedstoneSide.NONE)
+                .set(face, Direction.SOUTH, state.getValue(RedstoneWireBlock.PROPERTY_BY_DIRECTION.get(Direction.SOUTH)) != RedstoneSide.NONE)
+                .set(face, Direction.WEST, state.getValue(RedstoneWireBlock.PROPERTY_BY_DIRECTION.get(Direction.WEST)) != RedstoneSide.NONE);
         }
         if(isStickyRedstoneWire(state.getBlock()))
             return ((StickyRedstoneDust)state.getBlock()).getConnections(level, pos, state, face);
@@ -57,7 +57,7 @@ public abstract class StickyRedstoneWireEvaluator {
 
     protected int getBlockSignal(Level level, BlockPos pos, Direction face){
         try{
-            ((RedStoneWireBlock)Blocks.REDSTONE_WIRE).shouldSignal = false;
+            ((RedstoneWireBlock)Blocks.REDSTONE_WIRE).shouldSignal = false;
             int best = 0;
             BlockPos.MutableBlockPos sidePos = new BlockPos.MutableBlockPos();
             for(Direction side : Direction.values()){
@@ -80,7 +80,7 @@ public abstract class StickyRedstoneWireEvaluator {
             }
             return best;
         }finally{
-            ((RedStoneWireBlock)Blocks.REDSTONE_WIRE).shouldSignal = true;
+            ((RedstoneWireBlock)Blocks.REDSTONE_WIRE).shouldSignal = true;
         }
     }
 
@@ -151,7 +151,7 @@ public abstract class StickyRedstoneWireEvaluator {
                         if(newBlockState != state)
                             level.setBlock(pos, newBlockState, Block.UPDATE_CLIENTS);
                     }else if(level.getBlockState(pos) == state)
-                        level.setBlock(pos, state.setValue(RedStoneWireBlock.POWER, targetStrength), 2);
+                        level.setBlock(pos, state.setValue(RedstoneWireBlock.POWER, targetStrength), 2);
                 }
 
                 BlockPos.MutableBlockPos neighborPos = new BlockPos.MutableBlockPos();

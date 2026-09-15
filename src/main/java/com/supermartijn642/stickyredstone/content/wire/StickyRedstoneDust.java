@@ -16,7 +16,7 @@ import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ObserverBlock;
-import net.minecraft.world.level.block.RedStoneWireBlock;
+import net.minecraft.world.level.block.RedstoneWireBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.redstone.ExperimentalRedstoneUtils;
@@ -86,7 +86,7 @@ public abstract class StickyRedstoneDust extends BaseBlock {
     }
 
     public StickyRedstoneDust(){
-        super(false, BlockProperties.create().noCollision().strength(0).pushReaction(PushReaction.DESTROY));
+        super(false, BlockProperties.create().noCollision().strength(0).pushReaction(PushReaction.POPPED));
     }
 
     protected abstract FaceState getConnections(BlockGetter level, BlockPos pos, BlockState state, Direction face);
@@ -274,7 +274,7 @@ public abstract class StickyRedstoneDust extends BaseBlock {
         }
         if(state.is(Blocks.OBSERVER))
             return side == state.getValue(ObserverBlock.FACING);
-        return state.canRedstoneConnectTo(level, pos, side.getOpposite());
+        return state.shouldRedstoneWireConnectTo(level, pos, side.getOpposite());
     }
 
     @Override
@@ -379,12 +379,12 @@ public abstract class StickyRedstoneDust extends BaseBlock {
 
     @Override
     protected int getDirectSignal(BlockState state, BlockGetter level, BlockPos pos, Direction oppositeOfSideOfBlock){
-        return !((RedStoneWireBlock)Blocks.REDSTONE_WIRE).shouldSignal ? 0 : state.getSignal(level, pos, oppositeOfSideOfBlock);
+        return !((RedstoneWireBlock)Blocks.REDSTONE_WIRE).shouldSignal ? 0 : state.getSignal(level, pos, oppositeOfSideOfBlock);
     }
 
     @Override
     protected int getSignal(BlockState blockState, BlockGetter level, BlockPos pos, Direction oppositeOfSideOfBlock){
-        if(!((RedStoneWireBlock)Blocks.REDSTONE_WIRE).shouldSignal)
+        if(!((RedstoneWireBlock)Blocks.REDSTONE_WIRE).shouldSignal)
             return 0;
 
         FaceState connections = this.getConnections(level, pos, blockState, oppositeOfSideOfBlock.getOpposite());
@@ -404,7 +404,7 @@ public abstract class StickyRedstoneDust extends BaseBlock {
 
     @Override
     protected boolean isSignalSource(BlockState state){
-        return ((RedStoneWireBlock)Blocks.REDSTONE_WIRE).shouldSignal;
+        return ((RedstoneWireBlock)Blocks.REDSTONE_WIRE).shouldSignal;
     }
 
     @Override
@@ -444,7 +444,7 @@ public abstract class StickyRedstoneDust extends BaseBlock {
     }
 
     @Override
-    public boolean canConnectRedstone(BlockState state, BlockGetter level, BlockPos pos, @Nullable Direction oppositeOfSideOfBlock){
+    protected boolean shouldRedstoneWireConnectTo(BlockState state, BlockGetter level, BlockPos pos, @Nullable Direction oppositeOfSideOfBlock){
         return oppositeOfSideOfBlock != null && this.getConnections(level, pos, state, Direction.DOWN).isPresent();
     }
 
@@ -466,7 +466,7 @@ public abstract class StickyRedstoneDust extends BaseBlock {
                 double y = 0.5 + 0.4375f * face.getStepY() + offset * side.getStepY();
                 double z = 0.5 + 0.4375f * face.getStepZ() + offset * side.getStepZ();
                 level.addParticle(
-                    new DustParticleOptions(RedStoneWireBlock.COLORS[power], 1),
+                    new DustParticleOptions(RedstoneWireBlock.COLORS[power], 1),
                     pos.getX() + x, pos.getY() + y, pos.getZ() + z,
                     0, 0, 0
                 );

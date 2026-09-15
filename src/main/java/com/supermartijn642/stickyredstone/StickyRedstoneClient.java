@@ -9,7 +9,7 @@ import net.minecraft.client.color.block.BlockTintSource;
 import net.minecraft.client.renderer.block.BlockAndTintGetter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.level.block.RedStoneWireBlock;
+import net.minecraft.world.level.block.RedstoneWireBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -38,12 +38,12 @@ public class StickyRedstoneClient {
                 int power = 0;
                 if(state.is(StickyRedstone.singleStickyRedstoneDust) && state.getValue(SingleStickyRedstoneDust.FACE) == this.face)
                     power = state.getValue(SingleStickyRedstoneDust.POWER);
-                return RedStoneWireBlock.getColorForPower(power);
+                return RedstoneWireBlock.getColorForPower(power);
             }
 
             @Override
             public int colorInWorld(BlockState state, BlockAndTintGetter level, BlockPos pos){
-                return RedStoneWireBlock.getColorForPower(StickyRedstoneWireEvaluator.getConnections(level, pos, state, this.face).power());
+                return RedstoneWireBlock.getColorForPower(StickyRedstoneWireEvaluator.getConnections(level, pos, state, this.face).power());
             }
         }).toList();
         eventBus.addListener((Consumer<RegisterColorHandlersEvent.BlockTintSources>)e ->

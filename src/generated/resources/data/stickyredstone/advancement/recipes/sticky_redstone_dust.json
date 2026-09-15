@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "stickyredstone:sticky_redstone_dust"
+        "recipes": "stickyredstone:sticky_redstone_dust"
       }
     },
     "recipe_condition": {

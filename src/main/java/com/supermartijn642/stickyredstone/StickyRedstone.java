@@ -15,7 +15,6 @@ import com.supermartijn642.stickyredstone.generators.*;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.registries.RegisterEvent;
@@ -69,10 +68,11 @@ public class StickyRedstone {
         handler.registerBlock("sticky_comparator", StickyComparator::new);
         handler.registerItem("sticky_comparator", () -> new StickBlockItem(stickyComparator, ItemProperties.create().group(CREATIVE_GROUP)));
         eventBus.addListener((Consumer<RegisterEvent>)e -> {
-            if(e.getRegistry() == BuiltInRegistries.LOOT_NUMBER_PROVIDER_TYPE)
-                Registry.register(BuiltInRegistries.LOOT_NUMBER_PROVIDER_TYPE, identifier("dust_count"), DustCountNumberProvider.CODEC);
+            if(e.getRegistry() == BuiltInRegistries.CONTEXT_INT_PROVIDER_TYPE)
+                Registry.register(BuiltInRegistries.CONTEXT_INT_PROVIDER_TYPE, identifier("dust_count"), DustCountNumberProvider.CODEC);
+            if(e.getRegistry() == BuiltInRegistries.CONTEXT_KEY_SET)
+                Registry.register(BuiltInRegistries.CONTEXT_KEY_SET, identifier("dust_count"), DenseStickyRedstoneDust.DUST_COUNT_PARAM_SET);
         });
-        LootContextParamSets.REGISTRY.put(identifier("dust_count"), DenseStickyRedstoneDust.DUST_COUNT_PARAM_SET);
     }
 
     public static void registerGenerators(){
