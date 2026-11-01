@@ -5,10 +5,10 @@
       "id": "stickyredstone:sticky_repeater"
     },
     "title": {
-      "translate": "stickyredstone.advancement.recipes/sticky_repeater_conversion.title"
+      "translate": "stickyredstone.advancement.recipes/misc/sticky_repeater.title"
     },
     "description": {
-      "translate": "stickyredstone.advancement.recipes/sticky_repeater_conversion.description"
+      "translate": "stickyredstone.advancement.recipes/misc/sticky_repeater.description"
     },
     "frame": "task",
     "show_toast": false,
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "stickyredstone:sticky_repeater_conversion"
+        "recipe": "stickyredstone:sticky_repeater"
       }
     },
     "recipe_condition": {
@@ -41,7 +41,7 @@
   ],
   "rewards": {
     "recipes": [
-      "stickyredstone:sticky_repeater_conversion"
+      "stickyredstone:sticky_repeater"
     ]
   }
 }

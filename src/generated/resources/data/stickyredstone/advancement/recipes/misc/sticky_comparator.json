@@ -2,13 +2,13 @@
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "id": "stickyredstone:sticky_redstone_torch"
+      "id": "stickyredstone:sticky_comparator"
     },
     "title": {
-      "translate": "stickyredstone.advancement.recipes/sticky_redstone_torch.title"
+      "translate": "stickyredstone.advancement.recipes/misc/sticky_comparator.title"
     },
     "description": {
-      "translate": "stickyredstone.advancement.recipes/sticky_redstone_torch.description"
+      "translate": "stickyredstone.advancement.recipes/misc/sticky_comparator.description"
     },
     "frame": "task",
     "show_toast": false,
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "stickyredstone:sticky_redstone_torch"
+        "recipe": "stickyredstone:sticky_comparator"
       }
     },
     "recipe_condition": {
@@ -41,7 +41,7 @@
   ],
   "rewards": {
     "recipes": [
-      "stickyredstone:sticky_redstone_torch"
+      "stickyredstone:sticky_comparator"
     ]
   }
 }
