@@ -50,7 +50,7 @@ public class SingleStickyRedstoneDustBlockStateModel implements BlockStateModel 
                 }
             }
             this.wrappedPart = new SimpleModelWrapper(
-                part.quads(),
+                newQuads.build(),
                 part.useAmbientOcclusion(),
                 part.particleIcon(),
                 part.layer(),
