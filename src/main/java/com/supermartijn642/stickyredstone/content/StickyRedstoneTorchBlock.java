@@ -182,7 +182,7 @@ public class StickyRedstoneTorchBlock extends BaseBlock {
     }
 
     private static boolean isToggledTooFrequently(Level level, BlockPos pos, boolean add){
-        List<Toggle> toggles = RECENT_TOGGLES.computeIfAbsent(level, _ -> new ArrayList<>());
+        List<Toggle> toggles = RECENT_TOGGLES.computeIfAbsent(level, o -> new ArrayList<>());
         if(add)
             toggles.add(new Toggle(pos.immutable(), level.getGameTime()));
         int count = 0;

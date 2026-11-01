@@ -1,9 +1,8 @@
 package com.supermartijn642.stickyredstone.content.wire;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.providers.number.LootNumberProviderType;
 import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
 
 /**
@@ -12,7 +11,8 @@ import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
 public class DustCountNumberProvider implements NumberProvider {
 
     public static final DustCountNumberProvider INSTANCE = new DustCountNumberProvider();
-    public static final MapCodec<DustCountNumberProvider> CODEC = MapCodec.unit(INSTANCE);
+    private static final MapCodec<DustCountNumberProvider> CODEC = MapCodec.unit(INSTANCE);
+    public static final LootNumberProviderType TYPE = new LootNumberProviderType(CODEC);
 
     private DustCountNumberProvider(){
     }
@@ -24,7 +24,7 @@ public class DustCountNumberProvider implements NumberProvider {
     }
 
     @Override
-    public MapCodec<? extends NumberProvider> codec(){
-        return CODEC;
+    public LootNumberProviderType getType(){
+        return TYPE;
     }
 }

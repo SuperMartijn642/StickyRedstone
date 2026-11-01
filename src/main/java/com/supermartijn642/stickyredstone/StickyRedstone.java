@@ -72,7 +72,7 @@ public class StickyRedstone {
         handler.registerItem("sticky_comparator", () -> new StickBlockItem(stickyComparator, ItemProperties.create().group(CREATIVE_GROUP)));
         RegisterEvent.getBus(context.getModBusGroup()).addListener(e -> {
             if(e.getRegistryKey() == Registries.LOOT_NUMBER_PROVIDER_TYPE)
-                Registry.register(BuiltInRegistries.LOOT_NUMBER_PROVIDER_TYPE, identifier("dust_count"), DustCountNumberProvider.CODEC);
+                Registry.register(BuiltInRegistries.LOOT_NUMBER_PROVIDER_TYPE, identifier("dust_count"), DustCountNumberProvider.TYPE);
         });
         LootContextParamSets.REGISTRY.put(identifier("dust_count"), DenseStickyRedstoneDust.DUST_COUNT_PARAM_SET);
     }

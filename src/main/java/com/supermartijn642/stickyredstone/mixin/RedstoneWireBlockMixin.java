@@ -10,7 +10,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.RedStoneWireBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -36,12 +35,12 @@ public class RedstoneWireBlockMixin {
         at = {
             @At(
                 value = "INVOKE",
-                target = "Lnet/minecraft/world/level/block/state/BlockState;is(Ljava/lang/Object;)Z",
+                target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z",
                 ordinal = 1
             ),
             @At(
                 value = "INVOKE",
-                target = "Lnet/minecraft/world/level/block/state/BlockState;is(Ljava/lang/Object;)Z",
+                target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z",
                 ordinal = 2
             )
         }

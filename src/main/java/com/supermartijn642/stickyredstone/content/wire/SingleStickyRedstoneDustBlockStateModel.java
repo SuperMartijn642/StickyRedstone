@@ -1,16 +1,13 @@
 package com.supermartijn642.stickyredstone.content.wire;
 
-import net.minecraft.client.renderer.block.BlockAndTintGetter;
-import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
-import net.minecraft.client.renderer.block.dispatch.BlockStateModelPart;
-import net.minecraft.client.renderer.block.dispatch.SingleVariant;
-import net.minecraft.client.resources.model.SimpleModelWrapper;
-import net.minecraft.client.resources.model.geometry.BakedQuad;
-import net.minecraft.client.resources.model.geometry.QuadCollection;
-import net.minecraft.client.resources.model.sprite.Material;
+import net.minecraft.client.renderer.block.model.*;
+import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.resources.model.QuadCollection;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.data.ModelData;
 import org.jetbrains.annotations.NotNull;
@@ -18,6 +15,7 @@ import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -36,7 +34,7 @@ public class SingleStickyRedstoneDustBlockStateModel implements BlockStateModel 
     };
 
     private final BlockStateModel original;
-    private final BlockStateModelPart wrappedPart;
+    private final BlockModelPart wrappedPart;
 
     public SingleStickyRedstoneDustBlockStateModel(BlockStateModel wrapped){
         this.original = wrapped;
@@ -54,29 +52,27 @@ public class SingleStickyRedstoneDustBlockStateModel implements BlockStateModel 
             this.wrappedPart = new SimpleModelWrapper(
                 part.quads(),
                 part.useAmbientOcclusion(),
-                part.particleMaterial()
+                part.particleIcon(),
+                part.layer(),
+                part.layerFast()
             );
         }else
             this.wrappedPart = null;
     }
 
     private static @NonNull BakedQuad wrapQuad(BakedQuad quad){
-        BakedQuad.MaterialInfo materialInfo = quad.materialInfo();
-        if(materialInfo.tintIndex() != 0 || quad.direction() == null)
+        if(quad.tintIndex() != 0 || quad.direction() == null)
             return quad;
         int newTintIndex = quad.direction().getOpposite().ordinal();
         return new BakedQuad(
             quad.position0(), quad.position1(), quad.position2(), quad.position3(),
             quad.packedUV0(), quad.packedUV1(), quad.packedUV2(), quad.packedUV3(),
+            newTintIndex,
             quad.direction(),
-            new BakedQuad.MaterialInfo(
-                materialInfo.sprite(),
-                materialInfo.layer(),
-                materialInfo.itemRenderType(),
-                newTintIndex,
-                materialInfo.shade(),
-                materialInfo.lightEmission()
-            )
+            quad.sprite(),
+            quad.shade(),
+            quad.lightEmission(),
+            quad.ambientOcclusion()
         );
     }
 
@@ -88,52 +84,49 @@ public class SingleStickyRedstoneDustBlockStateModel implements BlockStateModel 
     }
 
     @Override
-    public void collectParts(RandomSource random, List<BlockStateModelPart> parts, ModelData modelData){
-        if(this.wrappedPart != null){
-            parts.add(this.wrappedPart);
-            return;
-        }
-        List<BlockStateModelPart> dummyList = new ArrayList<>(1);
-        this.original.collectParts(random, dummyList, modelData);
-        for(BlockStateModelPart part : dummyList)
-            parts.add(new Part(part));
-    }
-
-    @Override
-    public void collectParts(RandomSource random, List<BlockStateModelPart> parts){
-        if(this.wrappedPart != null){
-            parts.add(this.wrappedPart);
-            return;
-        }
-        List<BlockStateModelPart> dummyList = new ArrayList<>(1);
-        this.original.collectParts(random, dummyList);
-        for(BlockStateModelPart part : dummyList)
-            parts.add(new Part(part));
-    }
-
-    @Override
-    public Material.Baked particleMaterial(@NotNull ModelData modelData){
+    public Collection<ChunkSectionLayer> getRenderTypes(@NotNull BlockState state, @NotNull RandomSource random, @NotNull ModelData modelData){
         if(this.wrappedPart != null)
-            return this.wrappedPart.particleMaterial();
-        return this.original.particleMaterial(modelData);
+            return this.wrappedPart.layer() == null ? BlockStateModel.super.getRenderTypes(state, random, modelData) : List.of(this.wrappedPart.layer());
+        return this.original.getRenderTypes(state, random, modelData);
     }
 
     @Override
-    public Material.Baked particleMaterial(){
-        return this.original.particleMaterial();
+    public void collectParts(RandomSource random, List<BlockModelPart> parts, ModelData modelData, @Nullable ChunkSectionLayer renderType){
+        if(this.wrappedPart != null){
+            parts.add(this.wrappedPart);
+            return;
+        }
+        List<BlockModelPart> dummyList = new ArrayList<>(1);
+        this.original.collectParts(random, dummyList, modelData, renderType);
+        for(BlockModelPart part : dummyList)
+            parts.add(new Part(part));
     }
 
     @Override
-    public @BakedQuad.MaterialFlags int materialFlags(){
-        return this.original.materialFlags();
+    public void collectParts(RandomSource random, List<BlockModelPart> parts){
+        if(this.wrappedPart != null){
+            parts.add(this.wrappedPart);
+            return;
+        }
+        List<BlockModelPart> dummyList = new ArrayList<>(1);
+        this.original.collectParts(random, dummyList);
+        for(BlockModelPart part : dummyList)
+            parts.add(new Part(part));
     }
 
     @Override
-    public boolean hasMaterialFlag(@BakedQuad.MaterialFlags int flag){
-        return this.original.hasMaterialFlag(flag);
+    public TextureAtlasSprite particleIcon(@NotNull ModelData modelData){
+        if(this.wrappedPart != null)
+            return this.wrappedPart.particleIcon();
+        return this.original.particleIcon(modelData);
     }
 
-    private record Part(BlockStateModelPart original) implements BlockStateModelPart {
+    @Override
+    public TextureAtlasSprite particleIcon(){
+        return this.original.particleIcon();
+    }
+
+    private record Part(BlockModelPart original) implements BlockModelPart {
         @Override
         public List<BakedQuad> getQuads(@Nullable Direction direction){
             List<BakedQuad> quads = this.original.getQuads(direction);
@@ -149,13 +142,18 @@ public class SingleStickyRedstoneDustBlockStateModel implements BlockStateModel 
         }
 
         @Override
-        public Material.Baked particleMaterial(){
-            return this.original.particleMaterial();
+        public TextureAtlasSprite particleIcon(){
+            return this.original.particleIcon();
         }
 
         @Override
-        public @BakedQuad.MaterialFlags int materialFlags(){
-            return this.original.materialFlags();
+        public ChunkSectionLayer layer(){
+            return this.original.layer();
+        }
+
+        @Override
+        public ChunkSectionLayer layerFast(){
+            return this.original.layerFast();
         }
     }
 }

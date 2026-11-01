@@ -34,7 +34,6 @@ repositories {
 dependencies {
     // Forge
     implementation minecraft.dependency("net.minecraftforge:forge:${minecraft_version}-${forge_version}")
-    annotationProcessor "net.minecraftforge:eventbus-validator:7.0.1"
     // Mixin Extras
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.4"))
 
@@ -77,8 +76,6 @@ minecraft {
     runs {
         configureEach {
             workingDir.convention layout.projectDirectory.dir("run")
-
-            systemProperty "eventbus.api.strictRuntimeChecks", "true"
 
             args "--mixin.config=${mod_id}.mixins.json"
         }
@@ -125,7 +122,7 @@ tasks.register('prepareDataResources', Sync) {
 
 // Run prepareDataResources before prepareRunData
 tasks.configureEach {
-    if (it.name == "prepareDataRun")
+    if (it.name == "runData")
         it.dependsOn "prepareDataResources"
 }
 
