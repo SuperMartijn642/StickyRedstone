@@ -51,7 +51,7 @@ public class SingleStickyRedstoneDustBlockStateModel extends DelegateBlockStateM
                 }
             }
             this.wrappedPart = new SimpleModelWrapper(
-                part.quads(),
+                newQuads.build(),
                 part.useAmbientOcclusion(),
                 part.particleMaterial()
             );
