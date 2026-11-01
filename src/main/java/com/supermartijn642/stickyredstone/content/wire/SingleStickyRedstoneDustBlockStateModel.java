@@ -1,12 +1,12 @@
 package com.supermartijn642.stickyredstone.content.wire;
 
 import net.fabricmc.fabric.api.client.model.loading.v1.wrapper.WrapperBlockStateModel;
-import net.fabricmc.fabric.api.client.renderer.v1.mesh.QuadEmitter;
-import net.minecraft.client.renderer.block.BlockAndTintGetter;
-import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
+import net.fabricmc.fabric.api.renderer.v1.mesh.QuadEmitter;
+import net.minecraft.client.renderer.block.model.BlockStateModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
@@ -17,7 +17,7 @@ import java.util.function.Predicate;
  */
 public class SingleStickyRedstoneDustBlockStateModel extends WrapperBlockStateModel {
 
-    public SingleStickyRedstoneDustBlockStateModel(BlockStateModel wrapped) {
+    public SingleStickyRedstoneDustBlockStateModel(BlockStateModel wrapped){
         super(wrapped);
     }
 

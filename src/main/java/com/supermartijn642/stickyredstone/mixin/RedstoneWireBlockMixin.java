@@ -38,12 +38,12 @@ public class RedstoneWireBlockMixin {
         at = {
             @At(
                 value = "INVOKE",
-                target = "Lnet/minecraft/world/level/block/state/BlockState;is(Ljava/lang/Object;)Z",
+                target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z",
                 ordinal = 1
             ),
             @At(
                 value = "INVOKE",
-                target = "Lnet/minecraft/world/level/block/state/BlockState;is(Ljava/lang/Object;)Z",
+                target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z",
                 ordinal = 2
             )
         }

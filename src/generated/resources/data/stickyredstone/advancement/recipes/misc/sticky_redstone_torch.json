@@ -2,13 +2,13 @@
   "parent": "minecraft:recipes/root",
   "display": {
     "icon": {
-      "id": "stickyredstone:sticky_repeater"
+      "id": "stickyredstone:sticky_redstone_torch"
     },
     "title": {
-      "translate": "stickyredstone.advancement.recipes/sticky_repeater.title"
+      "translate": "stickyredstone.advancement.recipes/misc/sticky_redstone_torch.title"
     },
     "description": {
-      "translate": "stickyredstone.advancement.recipes/sticky_repeater.description"
+      "translate": "stickyredstone.advancement.recipes/misc/sticky_redstone_torch.description"
     },
     "frame": "task",
     "show_toast": false,
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "stickyredstone:sticky_repeater"
+        "recipe": "stickyredstone:sticky_redstone_torch"
       }
     },
     "recipe_condition": {
@@ -41,7 +41,7 @@
   ],
   "rewards": {
     "recipes": [
-      "stickyredstone:sticky_repeater"
+      "stickyredstone:sticky_redstone_torch"
     ]
   }
 }

@@ -1,8 +1,6 @@
 package com.supermartijn642.stickyredstone;
 
 import com.supermartijn642.core.block.BaseBlockEntityType;
-import com.supermartijn642.core.block.BlockProperties;
-import com.supermartijn642.core.item.BaseBlockItem;
 import com.supermartijn642.core.item.CreativeItemGroup;
 import com.supermartijn642.core.item.ItemProperties;
 import com.supermartijn642.core.registry.GeneratorRegistrationHandler;
@@ -10,18 +8,14 @@ import com.supermartijn642.core.registry.RegistrationHandler;
 import com.supermartijn642.core.registry.RegistryEntryAcceptor;
 import com.supermartijn642.stickyredstone.content.StickBlockItem;
 import com.supermartijn642.stickyredstone.content.StickyComparator;
+import com.supermartijn642.stickyredstone.content.StickyRedstoneTorchBlock;
 import com.supermartijn642.stickyredstone.content.StickyRepeater;
 import com.supermartijn642.stickyredstone.content.wire.*;
-import com.supermartijn642.stickyredstone.content.StickyRedstoneTorchBlock;
 import com.supermartijn642.stickyredstone.generators.*;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 
 /**
@@ -70,7 +64,7 @@ public class StickyRedstone implements ModInitializer {
         handler.registerItem("sticky_repeater", () -> new StickBlockItem(stickyRepeater, ItemProperties.create().group(CREATIVE_GROUP)));
         handler.registerBlock("sticky_comparator", StickyComparator::new);
         handler.registerItem("sticky_comparator", () -> new StickBlockItem(stickyComparator, ItemProperties.create().group(CREATIVE_GROUP)));
-        Registry.register(BuiltInRegistries.LOOT_NUMBER_PROVIDER_TYPE, identifier("dust_count"), DustCountNumberProvider.CODEC);
+        Registry.register(BuiltInRegistries.LOOT_NUMBER_PROVIDER_TYPE, identifier("dust_count"), DustCountNumberProvider.TYPE);
         LootContextParamSets.REGISTRY.put(identifier("dust_count"), DenseStickyRedstoneDust.DUST_COUNT_PARAM_SET);
     }
 

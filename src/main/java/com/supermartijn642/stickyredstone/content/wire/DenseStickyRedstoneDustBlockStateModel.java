@@ -2,16 +2,15 @@ package com.supermartijn642.stickyredstone.content.wire;
 
 import com.supermartijn642.core.ClientUtils;
 import com.supermartijn642.stickyredstone.StickyRedstone;
-import net.fabricmc.fabric.api.client.renderer.v1.mesh.QuadEmitter;
-import net.minecraft.client.renderer.block.BlockAndTintGetter;
-import net.minecraft.client.renderer.block.BlockStateModelSet;
-import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
-import net.minecraft.client.renderer.block.dispatch.BlockStateModelPart;
-import net.minecraft.client.resources.model.geometry.BakedQuad;
-import net.minecraft.client.resources.model.sprite.Material;
+import net.fabricmc.fabric.api.renderer.v1.mesh.QuadEmitter;
+import net.minecraft.client.renderer.block.BlockModelShaper;
+import net.minecraft.client.renderer.block.model.BlockModelPart;
+import net.minecraft.client.renderer.block.model.BlockStateModel;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
@@ -39,7 +38,7 @@ public class DenseStickyRedstoneDustBlockStateModel implements BlockStateModel {
             return List.of(this.dummyModel);
         DustState connectionState = entity.getState();
         BlockState stateCopy = StickyRedstone.singleStickyRedstoneDust.defaultBlockState();
-        BlockStateModelSet models = ClientUtils.getMinecraft().getModelManager().getBlockStateModelSet();
+        BlockModelShaper models = ClientUtils.getMinecraft().getModelManager().getBlockModelShaper();
         return () -> new Iterator<>() {
             private int index = 0;
             private BlockStateModel next;
@@ -53,7 +52,7 @@ public class DenseStickyRedstoneDustBlockStateModel implements BlockStateModel {
                     BlockState correctState = stateCopy.setValue(SingleStickyRedstoneDust.FACE, face).setValue(SingleStickyRedstoneDust.POWER, connections.power());
                     for(int i = 0; i < 4; i++)
                         correctState = correctState.setValue(SingleStickyRedstoneDust.getSideProperty(i), connections.get(i));
-                    this.next = models.get(correctState);
+                    this.next = models.getBlockModel(correctState);
                     break;
                 }
             }
@@ -100,46 +99,19 @@ public class DenseStickyRedstoneDustBlockStateModel implements BlockStateModel {
     }
 
     @Override
-    public Material.Baked particleMaterial(BlockAndTintGetter level, BlockPos pos, BlockState state){
+    public TextureAtlasSprite particleSprite(BlockAndTintGetter level, BlockPos pos, BlockState state){
         for(BlockStateModel model : this.models(level, pos, state))
-            return model.particleMaterial(level, pos, state);
-        return this.dummyModel.particleMaterial(level, pos, state);
+            return model.particleSprite(level, pos, state);
+        return this.dummyModel.particleSprite(level, pos, state);
     }
 
     @Override
-    public @BakedQuad.MaterialFlags int materialFlags(BlockAndTintGetter level, BlockPos pos, BlockState state, RandomSource random){
-        int flags = 0;
-        for(BlockStateModel model : this.models(level, pos, state))
-            flags |= model.materialFlags(level, pos, state, random);
-        return flags;
-    }
-
-    @Override
-    public boolean hasMaterialFlag(BlockAndTintGetter level, BlockPos pos, BlockState state, RandomSource random, @BakedQuad.MaterialFlags int flag){
-        for(BlockStateModel model : this.models(level, pos, state)){
-            if(model.hasMaterialFlag(level, pos, state, random, flag))
-                return true;
-        }
-        return false;
-    }
-
-    @Override
-    public void collectParts(RandomSource random, List<BlockStateModelPart> output){
+    public void collectParts(RandomSource random, List<BlockModelPart> output){
         this.dummyModel.collectParts(random, output);
     }
 
     @Override
-    public Material.Baked particleMaterial(){
-        return this.dummyModel.particleMaterial();
-    }
-
-    @Override
-    public @BakedQuad.MaterialFlags int materialFlags(){
-        return this.dummyModel.materialFlags();
-    }
-
-    @Override
-    public boolean hasMaterialFlag(@BakedQuad.MaterialFlags int flag){
-        return this.dummyModel.hasMaterialFlag(flag);
+    public TextureAtlasSprite particleIcon(){
+        return this.dummyModel.particleIcon();
     }
 }
