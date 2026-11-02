@@ -120,6 +120,11 @@ public class DenseStickyRedstoneDustBlockStateModel implements BakedModel {
     }
 
     @Override
+    public boolean isCustomRenderer(){
+        return false;
+    }
+
+    @Override
     public ItemTransforms getTransforms(){
         return this.dummyModel.getTransforms();
     }

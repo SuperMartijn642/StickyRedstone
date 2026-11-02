@@ -161,6 +161,7 @@ public class StickyRedstoneModelGenerator extends ModelGenerator {
                     .allFaces(face -> face.texture("all"))
             );
         this.itemGenerated("item/sticky_redstone_dust", StickyRedstone.identifier("item/sticky_redstone_dust"));
+        this.model("item/single_sticky_redstone_dust").parent("item/sticky_redstone_dust");
 
         // Repeater
         for(int delay = 1; delay <= 4; delay++){
