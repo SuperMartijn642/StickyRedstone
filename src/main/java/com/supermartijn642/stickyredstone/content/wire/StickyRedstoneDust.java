@@ -271,6 +271,8 @@ public abstract class StickyRedstoneDust extends BaseBlock {
                 return false;
             if(state.is(StickyRedstone.stickyRepeater))
                 return StickyRepeater.getDiodeFront(state).getAxis() == side.getAxis();
+            else if(state.is(StickyRedstone.stickyComparator))
+                return true;
         }
         if(state.is(Blocks.OBSERVER))
             return side == state.getValue(ObserverBlock.FACING);
