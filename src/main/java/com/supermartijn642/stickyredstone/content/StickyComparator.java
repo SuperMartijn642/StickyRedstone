@@ -10,7 +10,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.decoration.ItemFrame;
 import net.minecraft.world.entity.player.Player;
@@ -19,7 +18,6 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.ComparatorBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
@@ -27,7 +25,6 @@ import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.redstone.ExperimentalRedstoneUtils;
 import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -197,7 +194,7 @@ public class StickyComparator extends BaseBlock {
         BlockPos.MutableBlockPos inputPos = new BlockPos.MutableBlockPos().setWithOffset(pos, front.getOpposite());
         BlockState inputState = level.getBlockState(inputPos);
         if(inputState.hasAnalogOutputSignal())
-            return inputState.getAnalogOutputSignal(level, inputPos, front);
+            return inputState.getAnalogOutputSignal(level, inputPos);
         int signal = level.getSignal(inputPos, front.getOpposite());
         if(StickyRedstoneWireEvaluator.isRedstoneWire(inputState.getBlock()))
             signal = StickyRedstoneWireEvaluator.getConnections(level, inputPos, inputState, face).power();
@@ -211,7 +208,7 @@ public class StickyComparator extends BaseBlock {
             ItemFrame itemFrame = this.getItemFrame(level, front.getOpposite(), inputPos);
             int itemFrameOrBlockSignal = Math.max(
                 itemFrame == null ? Integer.MIN_VALUE : itemFrame.getAnalogOutput(),
-                inputState.hasAnalogOutputSignal() ? inputState.getAnalogOutputSignal(level, inputPos, front) : Integer.MIN_VALUE
+                inputState.hasAnalogOutputSignal() ? inputState.getAnalogOutputSignal(level, inputPos) : Integer.MIN_VALUE
             );
             if(itemFrameOrBlockSignal != Integer.MIN_VALUE)
                 signal = itemFrameOrBlockSignal;
