@@ -99,7 +99,7 @@ public class StickyComparator extends BaseBlock {
 
     @Override
     protected InteractionFeedback interact(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, Direction hitSide, Vec3 hitLocation){
-        if (!player.getAbilities().mayBuild)
+        if(!player.getAbilities().mayBuild)
             return InteractionFeedback.PASS;
         state = state.cycle(MODE);
         float pitch = state.getValue(MODE) == ComparatorMode.SUBTRACT ? 0.55f : 0.5f;
@@ -216,7 +216,7 @@ public class StickyComparator extends BaseBlock {
         return signal;
     }
 
-    private @Nullable ItemFrame getItemFrame(Level level, Direction direction, BlockPos pos) {
+    private @Nullable ItemFrame getItemFrame(Level level, Direction direction, BlockPos pos){
         List<ItemFrame> itemFrames = level.getEntitiesOfClass(
             ItemFrame.class,
             new AABB(pos),
@@ -267,9 +267,11 @@ public class StickyComparator extends BaseBlock {
     }
 
     @Override
-    protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel level, BlockPos pos, boolean movedByPiston){
-        if(!movedByPiston)
-            this.updateNeighborsInFront(level, pos, state);
+    protected void onRemove(BlockState oldState, Level level, BlockPos pos, BlockState newState, boolean movedByPiston){
+        if(!movedByPiston && !oldState.is(newState.getBlock())){
+            super.onRemove(oldState, level, pos, newState, movedByPiston);
+            this.updateNeighborsInFront(level, pos, oldState);
+        }
     }
 
     private void updateNeighborsInFront(Level level, BlockPos pos, BlockState state){
@@ -306,9 +308,9 @@ public class StickyComparator extends BaseBlock {
         return state.getValue(MODE) == ComparatorMode.SUBTRACT ? inputSignal - alternateSignal : inputSignal;
     }
 
-    private void refreshOutputState(Level level, BlockPos pos, BlockState state) {
+    private void refreshOutputState(Level level, BlockPos pos, BlockState state){
         int signal = this.calculateOutputSignal(level, pos, state);
-        if (state.getValue(OUTPUT_SIGNAL) != signal || state.getValue(MODE) == ComparatorMode.COMPARE) {
+        if(state.getValue(OUTPUT_SIGNAL) != signal || state.getValue(MODE) == ComparatorMode.COMPARE){
             state = state.setValue(OUTPUT_SIGNAL, signal);
             boolean powered = this.shouldTurnOn(level, pos, state);
             if(state.getValue(POWERED) != powered)

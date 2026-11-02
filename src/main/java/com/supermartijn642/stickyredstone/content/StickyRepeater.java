@@ -376,9 +376,11 @@ public class StickyRepeater extends BaseBlock {
     }
 
     @Override
-    protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel level, BlockPos pos, boolean movedByPiston){
-        if(!movedByPiston)
-            this.updateNeighborsInFront(level, pos, state);
+    protected void onRemove(BlockState oldState, Level level, BlockPos pos, BlockState newState, boolean movedByPiston){
+        if(!movedByPiston && !oldState.is(newState.getBlock())){
+            super.onRemove(oldState, level, pos, newState, movedByPiston);
+            this.updateNeighborsInFront(level, pos, oldState);
+        }
     }
 
     private void updateNeighborsInFront(Level level, BlockPos pos, BlockState state){

@@ -4,9 +4,10 @@ import com.supermartijn642.core.ClientUtils;
 import com.supermartijn642.stickyredstone.StickyRedstone;
 import net.fabricmc.fabric.api.renderer.v1.mesh.QuadEmitter;
 import net.minecraft.client.renderer.block.BlockModelShaper;
-import net.minecraft.client.renderer.block.model.BlockModelPart;
-import net.minecraft.client.renderer.block.model.BlockStateModel;
+import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -15,33 +16,34 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 /**
  * Created 24/07/2026 by SuperMartijn642
  */
-public class DenseStickyRedstoneDustBlockStateModel implements BlockStateModel {
+public class DenseStickyRedstoneDustBlockStateModel implements BakedModel {
 
-    private final BlockStateModel dummyModel;
+    private final BakedModel dummyModel;
 
-    public DenseStickyRedstoneDustBlockStateModel(BlockStateModel original){
+    public DenseStickyRedstoneDustBlockStateModel(BakedModel original){
         this.dummyModel = original;
     }
 
-    private Iterable<BlockStateModel> models(BlockGetter level, BlockPos pos, BlockState state){
+    private Iterable<SubModel> models(BlockGetter level, BlockPos pos, BlockState state){
         DenseStickyRedstoneDustBlockEntity entity = DenseStickyRedstoneDust.getEntity(level, pos);
         if(entity == null)
-            return List.of(this.dummyModel);
+            return List.of(new SubModel(this.dummyModel, state));
         DustState connectionState = entity.getState();
         BlockState stateCopy = StickyRedstone.singleStickyRedstoneDust.defaultBlockState();
         BlockModelShaper models = ClientUtils.getMinecraft().getModelManager().getBlockModelShaper();
         return () -> new Iterator<>() {
             private int index = 0;
-            private BlockStateModel next;
+            private boolean hasNext;
+            private SubModel subModel = new SubModel();
 
             private void getNext(){
                 while(this.index < 6){
@@ -52,66 +54,90 @@ public class DenseStickyRedstoneDustBlockStateModel implements BlockStateModel {
                     BlockState correctState = stateCopy.setValue(SingleStickyRedstoneDust.FACE, face).setValue(SingleStickyRedstoneDust.POWER, connections.power());
                     for(int i = 0; i < 4; i++)
                         correctState = correctState.setValue(SingleStickyRedstoneDust.getSideProperty(i), connections.get(i));
-                    this.next = models.getBlockModel(correctState);
+                    this.subModel.state = correctState;
+                    this.subModel.model = models.getBlockModel(correctState);
+                    this.hasNext = true;
                     break;
                 }
             }
 
             @Override
             public boolean hasNext(){
-                if(this.next == null && this.index < 6)
+                if(!this.hasNext && this.index < 6)
                     this.getNext();
-                return this.next != null;
+                return this.hasNext;
             }
 
             @Override
-            public BlockStateModel next(){
-                if(this.next == null){
+            public SubModel next(){
+                if(!this.hasNext){
                     if(this.index < 6)
                         this.getNext();
-                    if(this.next == null)
+                    if(!this.hasNext)
                         throw new NoSuchElementException();
                 }
-                BlockStateModel next = this.next;
-                this.next = null;
-                return next;
+                this.hasNext = false;
+                return this.subModel;
             }
         };
     }
 
     @Override
-    public void emitQuads(QuadEmitter emitter, BlockAndTintGetter level, BlockPos pos, BlockState state, RandomSource random, Predicate<@Nullable Direction> cullTest){
-        for(BlockStateModel model : this.models(level, pos, state))
-            model.emitQuads(emitter, level, pos, state, random, cullTest);
+    public boolean isVanillaAdapter(){
+        return false;
     }
 
     @Override
-    public @Nullable Object createGeometryKey(BlockAndTintGetter level, BlockPos pos, BlockState state, RandomSource random){
-        List<Object> keys = new ArrayList<>();
-        keys.add(this);
-        for(BlockStateModel model : this.models(level, pos, state)){
-            Object key = model.createGeometryKey(level, pos, state, random);
-            if(key == null)
-                return null;
-            keys.add(key);
+    public void emitBlockQuads(QuadEmitter emitter, BlockAndTintGetter level, BlockState state, BlockPos pos, Supplier<RandomSource> randomSupplier, Predicate<@Nullable Direction> cullTest){
+        for(SubModel subModel : this.models(level, pos, state))
+            subModel.model.emitBlockQuads(emitter, level, subModel.state, pos, randomSupplier, cullTest);
+    }
+
+    @Override
+    public void emitItemQuads(QuadEmitter emitter, Supplier<RandomSource> randomSupplier){
+        this.dummyModel.emitItemQuads(emitter, randomSupplier); // This should never be relevant
+    }
+
+    @Override
+    public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction direction, RandomSource randomSource){
+        return this.dummyModel.getQuads(state, direction, randomSource);
+    }
+
+    @Override
+    public TextureAtlasSprite getParticleIcon(){
+        return this.dummyModel.getParticleIcon();
+    }
+
+    @Override
+    public boolean useAmbientOcclusion(){
+        return this.dummyModel.useAmbientOcclusion();
+    }
+
+    @Override
+    public boolean isGui3d(){
+        return this.dummyModel.isGui3d();
+    }
+
+    @Override
+    public boolean usesBlockLight(){
+        return this.dummyModel.usesBlockLight();
+    }
+
+    @Override
+    public ItemTransforms getTransforms(){
+        return this.dummyModel.getTransforms();
+    }
+
+    private static final class SubModel {
+        BakedModel model;
+        BlockState state;
+
+        SubModel(BakedModel model, BlockState state){
+            this.model = model;
+            this.state = state;
         }
-        return keys;
-    }
 
-    @Override
-    public TextureAtlasSprite particleSprite(BlockAndTintGetter level, BlockPos pos, BlockState state){
-        for(BlockStateModel model : this.models(level, pos, state))
-            return model.particleSprite(level, pos, state);
-        return this.dummyModel.particleSprite(level, pos, state);
-    }
-
-    @Override
-    public void collectParts(RandomSource random, List<BlockModelPart> output){
-        this.dummyModel.collectParts(random, output);
-    }
-
-    @Override
-    public TextureAtlasSprite particleIcon(){
-        return this.dummyModel.particleIcon();
+        SubModel(){
+        }
     }
 }

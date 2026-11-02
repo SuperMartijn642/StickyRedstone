@@ -41,7 +41,7 @@ public class StickyRedstoneTorchBlock extends BaseBlock {
     private static final Map<BlockGetter,List<Toggle>> RECENT_TOGGLES = new WeakHashMap<>();
     private static final BlockShape[] SHAPES = new BlockShape[6];
 
-    static {
+    static{
         BlockShape shape = BlockShape.createBlockShape(6, 0, 6, 10, 10, 10);
         for(Direction face : Direction.values()){
             BlockShape faceShape = shape;
@@ -128,9 +128,10 @@ public class StickyRedstoneTorchBlock extends BaseBlock {
     }
 
     @Override
-    protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel level, BlockPos pos, boolean movedByPiston){
+    protected void onRemove(BlockState oldState, Level level, BlockPos pos, BlockState newState, boolean movedByPiston){
         if(!movedByPiston)
-            this.notifyNeighbors(level, pos, state);
+            this.notifyNeighbors(level, pos, oldState);
+        super.onRemove(oldState, level, pos, newState, movedByPiston);
     }
 
     @Override
