@@ -50,12 +50,12 @@ public class DenseStickyRedstoneDustBlockEntity extends BaseBlockEntity {
 
     @Override
     protected void readData(CompoundTag data){
-        FaceState up = data.getInt("up").map(FaceState::byIndex).orElse(FaceState.ABSENT);
-        FaceState down = data.getInt("down").map(FaceState::byIndex).orElse(FaceState.ABSENT);
-        FaceState north = data.getInt("north").map(FaceState::byIndex).orElse(FaceState.ABSENT);
-        FaceState east = data.getInt("east").map(FaceState::byIndex).orElse(FaceState.ABSENT);
-        FaceState south = data.getInt("south").map(FaceState::byIndex).orElse(FaceState.ABSENT);
-        FaceState west = data.getInt("west").map(FaceState::byIndex).orElse(FaceState.ABSENT);
+        FaceState up = FaceState.byIndex(data.getInt("up"));
+        FaceState down = FaceState.byIndex(data.getInt("down"));
+        FaceState north = FaceState.byIndex(data.getInt("north"));
+        FaceState east = FaceState.byIndex(data.getInt("east"));
+        FaceState south = FaceState.byIndex(data.getInt("south"));
+        FaceState west = FaceState.byIndex(data.getInt("west"));
         this.state = DustState.of(up, down, north, east, south, west);
     }
 }

@@ -8,7 +8,6 @@ import com.supermartijn642.stickyredstone.content.StickyRepeater;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
@@ -353,8 +352,9 @@ public abstract class StickyRedstoneDust extends BaseBlock {
     }
 
     @Override
-    protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel level, BlockPos pos, boolean movedByPiston){
-        if(movedByPiston)
+    protected void onRemove(BlockState oldState, Level level, BlockPos pos, BlockState newState, boolean movedByPiston){
+        super.onRemove(oldState, level, pos, newState, movedByPiston);
+        if(level.isClientSide || movedByPiston || oldState.is(newState.getBlock()))
             return;
         BlockPos.MutableBlockPos sidePos = new BlockPos.MutableBlockPos();
         for(Direction side : Direction.values())

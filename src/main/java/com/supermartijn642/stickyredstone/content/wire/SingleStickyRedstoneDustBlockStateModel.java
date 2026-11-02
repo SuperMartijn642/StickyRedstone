@@ -1,129 +1,85 @@
 package com.supermartijn642.stickyredstone.content.wire;
 
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.block.model.*;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.model.QuadCollection;
+import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.DelegateBakedModel;
+import net.minecraft.client.resources.model.SimpleBakedModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
-import net.minecraft.util.TriState;
 import net.minecraft.world.level.BlockAndTintGetter;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.client.model.DelegateBlockStateModel;
+import net.neoforged.neoforge.client.model.data.ModelData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created 03/08/2026 by SuperMartijn642
  */
-public class SingleStickyRedstoneDustBlockStateModel extends DelegateBlockStateModel {
+public class SingleStickyRedstoneDustBlockStateModel extends DelegateBakedModel {
 
-    private static final Direction[] CULL_DIRECTIONS = {
-        null,
-        Direction.UP,
-        Direction.DOWN,
-        Direction.NORTH,
-        Direction.EAST,
-        Direction.SOUTH,
-        Direction.WEST
-    };
+    private final List<BakedQuad> unculledQuads;
+    private final Map<Direction,List<BakedQuad>> culledQuads;
 
-    private final BlockModelPart wrappedPart;
-
-    public SingleStickyRedstoneDustBlockStateModel(BlockStateModel wrapped){
+    public SingleStickyRedstoneDustBlockStateModel(BakedModel wrapped){
         super(wrapped);
-        if(wrapped.getClass() == SingleVariant.class && ((SingleVariant)wrapped).model instanceof SimpleModelWrapper part){
-            QuadCollection.Builder newQuads = new QuadCollection.Builder();
-            for(Direction cullDirection : CULL_DIRECTIONS){
-                for(BakedQuad quad : part.quads().getQuads(cullDirection)){
-                    BakedQuad newQuad = wrapQuad(quad);
-                    if(cullDirection == null)
-                        newQuads.addUnculledFace(newQuad);
-                    else
-                        newQuads.addCulledFace(cullDirection, newQuad);
-                }
+        if(wrapped.getClass() == SimpleBakedModel.class){
+            RandomSource random = RandomSource.create();
+            this.culledQuads = new EnumMap<>(Direction.class);
+            for(Direction cullDirection : Direction.values()){
+                List<BakedQuad> quads = new ArrayList<>();
+                for(BakedQuad quad : wrapped.getQuads(Blocks.AIR.defaultBlockState(), cullDirection, random))
+                    quads.add(wrapQuad(quad));
+                this.culledQuads.put(cullDirection, List.copyOf(quads));
             }
-            this.wrappedPart = new SimpleModelWrapper(
-                newQuads.build(),
-                part.useAmbientOcclusion(),
-                part.particleIcon(),
-                part.renderType()
-            );
-        }else
-            this.wrappedPart = null;
+            List<BakedQuad> unculledQuads = new ArrayList<>();
+            for(BakedQuad quad : wrapped.getQuads(Blocks.AIR.defaultBlockState(), null, random))
+                unculledQuads.add(wrapQuad(quad));
+            this.unculledQuads = List.copyOf(unculledQuads);
+        }else{
+            this.unculledQuads = null;
+            this.culledQuads = null;
+        }
     }
 
     private static @NotNull BakedQuad wrapQuad(BakedQuad quad){
-        if(quad.tintIndex() != 0 || quad.direction() == null)
+        if(quad.getTintIndex() != 0 || quad.getDirection() == null)
             return quad;
-        int newTintIndex = quad.direction().getOpposite().ordinal();
+        int newTintIndex = quad.getDirection().getOpposite().ordinal();
         return new BakedQuad(
-            quad.vertices(),
+            quad.getVertices(),
             newTintIndex,
-            quad.direction(),
-            quad.sprite(),
-            quad.shade(),
-            quad.lightEmission(),
+            quad.getDirection(),
+            quad.getSprite(),
+            quad.isShade(),
+            quad.getLightEmission(),
             quad.hasAmbientOcclusion()
         );
     }
 
     @Override
-    public void collectParts(BlockAndTintGetter level, BlockPos pos, BlockState state, RandomSource random, List<BlockModelPart> parts){
-        if(this.wrappedPart != null){
-            parts.add(this.wrappedPart);
-            return;
-        }
-        List<BlockModelPart> dummyList = new ArrayList<>(1);
-        super.collectParts(level, pos, state, random, dummyList);
-        for(BlockModelPart part : dummyList)
-            parts.add(new Part(part));
+    public ModelData getModelData(BlockAndTintGetter level, BlockPos pos, BlockState state, ModelData modelData){
+        if(this.unculledQuads != null)
+            return ModelData.EMPTY;
+        return super.getModelData(level, pos, state, modelData);
     }
 
     @Override
-    public void collectParts(RandomSource random, List<BlockModelPart> parts){
-        if(this.wrappedPart != null){
-            parts.add(this.wrappedPart);
-            return;
+    public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction cullDirection, RandomSource random, ModelData modelData, @Nullable RenderType renderType){
+        if(this.unculledQuads != null){
+            return cullDirection == null ?
+                this.unculledQuads :
+                this.culledQuads.get(cullDirection);
         }
-        List<BlockModelPart> dummyList = new ArrayList<>(1);
-        super.collectParts(random, dummyList);
-        for(BlockModelPart part : dummyList)
-            parts.add(new Part(part));
-    }
-
-    private record Part(BlockModelPart original) implements BlockModelPart {
-        @Override
-        public List<BakedQuad> getQuads(@Nullable Direction direction){
-            List<BakedQuad> quads = this.original.getQuads(direction);
-            List<BakedQuad> newQuads = new ArrayList<>(quads.size());
-            for(BakedQuad quad : quads)
-                newQuads.add(wrapQuad(quad));
-            return newQuads;
-        }
-
-        @Override
-        public boolean useAmbientOcclusion(){
-            return this.original.useAmbientOcclusion();
-        }
-
-        @Override
-        public TextureAtlasSprite particleIcon(){
-            return this.original.particleIcon();
-        }
-
-        @Override
-        public RenderType getRenderType(BlockState state){
-            return this.original.getRenderType(state);
-        }
-
-        @Override
-        public TriState ambientOcclusion(){
-            return this.original.ambientOcclusion();
-        }
+        List<BakedQuad> quads = new ArrayList<>(super.getQuads(state, cullDirection, random, modelData, renderType));
+        quads.replaceAll(SingleStickyRedstoneDustBlockStateModel::wrapQuad);
+        return quads;
     }
 }
