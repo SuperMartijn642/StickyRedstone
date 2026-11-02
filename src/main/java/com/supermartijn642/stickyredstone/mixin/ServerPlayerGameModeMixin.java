@@ -3,7 +3,6 @@ package com.supermartijn642.stickyredstone.mixin;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import com.llamalad7.mixinextras.sugar.Local;
 import com.supermartijn642.stickyredstone.StickyRedstone;
 import com.supermartijn642.stickyredstone.content.wire.*;
 import net.minecraft.core.BlockPos;
@@ -18,7 +17,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.BlockHitResult;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -38,18 +36,18 @@ public class ServerPlayerGameModeMixin {
         method = "destroyBlock",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/server/level/ServerPlayerGameMode;removeBlock(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;ZLnet/minecraft/world/item/ItemStack;)Z"
+            target = "Lnet/minecraft/server/level/ServerPlayerGameMode;removeBlock(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Z)Z"
         ),
         expect = 2
     )
-    private boolean destroyBlock(ServerPlayerGameMode gameMode, BlockPos pos, BlockState oldState, boolean canHarvest, ItemStack tool, Operation<Boolean> operation) {
+    private boolean destroyBlock(ServerPlayerGameMode gameMode, BlockPos pos, BlockState oldState, boolean canHarvest, Operation<Boolean> operation){
         if(!StickyRedstoneWireEvaluator.isStickyRedstoneWire(oldState.getBlock()))
-            return operation.call(gameMode, pos, oldState, canHarvest, tool);
+            return operation.call(gameMode, pos, oldState, canHarvest);
         Direction hitFace = StickyRedstoneDust.DESTROY_FACE_OVERRIDE.get();
         if(hitFace == null)
-            return operation.call(gameMode, pos, oldState, canHarvest, tool);
+            return operation.call(gameMode, pos, oldState, canHarvest);
         if(!StickyRedstoneWireEvaluator.getConnections(this.level, pos, oldState, hitFace).isPresent())
-            return operation.call(gameMode, pos, oldState, canHarvest, tool);
+            return operation.call(gameMode, pos, oldState, canHarvest);
         // Check if there are other faces besides the clicked one
         int otherFaces = 0;
         Direction otherFace = null;
@@ -62,7 +60,7 @@ public class ServerPlayerGameModeMixin {
             }
         }
         if(otherFaces == 0)
-            return operation.call(gameMode, pos, oldState, canHarvest, tool);
+            return operation.call(gameMode, pos, oldState, canHarvest);
         // Remove just the clicked face and keep the others
         StickyRedstoneDust block = (StickyRedstoneDust)oldState.getBlock();
         if(otherFaces == 1){
@@ -91,7 +89,7 @@ public class ServerPlayerGameModeMixin {
             target = "Lnet/minecraft/world/level/block/Block;playerDestroy(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/block/entity/BlockEntity;Lnet/minecraft/world/item/ItemStack;)V"
         )
     )
-    private boolean destroyBlock(Block block, Level level, Player player, BlockPos pos, BlockState state, BlockEntity entity, ItemStack stack) {
+    private boolean destroyBlock(Block block, Level level, Player player, BlockPos pos, BlockState state, BlockEntity entity, ItemStack stack){
         if(!StickyRedstoneWireEvaluator.isStickyRedstoneWire(block))
             return true;
         player.awardStat(Stats.BLOCK_MINED.get(block));

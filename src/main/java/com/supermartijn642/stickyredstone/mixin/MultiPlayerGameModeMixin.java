@@ -15,7 +15,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ServerboundPlayerActionPacket;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -92,13 +91,13 @@ public class MultiPlayerGameModeMixin {
         method = "destroyBlock",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/world/level/block/state/BlockState;onDestroyedByPlayer(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/item/ItemStack;ZLnet/minecraft/world/level/material/FluidState;)Z"
+            target = "Lnet/minecraft/world/level/block/state/BlockState;onDestroyedByPlayer(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/player/Player;ZLnet/minecraft/world/level/material/FluidState;)Z"
         )
     )
-    private boolean destroyBlock(BlockState oldState, Level level, BlockPos pos, Player player, ItemStack tool, boolean willHarvest, FluidState fluid, Operation<Boolean> operation, @Share("face") LocalRef<Direction> sharedFace){
+    private boolean destroyBlock(BlockState oldState, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid, Operation<Boolean> operation, @Share("face") LocalRef<Direction> sharedFace){
         Direction hitFace = sharedFace.get();
         if(hitFace == null)
-            return operation.call(oldState, level, pos, player, tool, willHarvest, fluid);
+            return operation.call(oldState, level, pos, player, willHarvest, fluid);
         // Check if there are other faces besides the clicked one
         int otherFaces = 0;
         Direction otherFace = null;
