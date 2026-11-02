@@ -82,7 +82,6 @@ public class StickyRedstone {
     public static void registerGenerators(){
         GeneratorRegistrationHandler handler = GeneratorRegistrationHandler.get(MODID);
         handler.addGenerator(cache -> new StickyRedstoneBlockStateGenerator(MODID, cache));
-        handler.addGenerator(cache -> new StickyRedstoneItemInfoGenerator(MODID, cache));
         handler.addGenerator(cache -> new StickyRedstoneLanguageGenerator(MODID, cache));
         handler.addGenerator(cache -> new StickyRedstoneLootTableGenerator(MODID, cache));
         handler.addGenerator(cache -> new StickyRedstoneModelGenerator(MODID, cache));
