@@ -11,8 +11,8 @@ import net.minecraft.util.TriState;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.model.DelegateBlockStateModel;
-import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,20 +57,17 @@ public class SingleStickyRedstoneDustBlockStateModel extends DelegateBlockStateM
             this.wrappedPart = null;
     }
 
-    private static @NonNull BakedQuad wrapQuad(BakedQuad quad){
+    private static @NotNull BakedQuad wrapQuad(BakedQuad quad){
         if(quad.tintIndex() != 0 || quad.direction() == null)
             return quad;
         int newTintIndex = quad.direction().getOpposite().ordinal();
         return new BakedQuad(
-            quad.position0(), quad.position1(), quad.position2(), quad.position3(),
-            quad.packedUV0(), quad.packedUV1(), quad.packedUV2(), quad.packedUV3(),
+            quad.vertices(),
             newTintIndex,
             quad.direction(),
             quad.sprite(),
             quad.shade(),
             quad.lightEmission(),
-            quad.bakedNormals(),
-            quad.bakedColors(),
             quad.hasAmbientOcclusion()
         );
     }

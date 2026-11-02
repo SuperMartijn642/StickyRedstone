@@ -14,7 +14,7 @@ import com.supermartijn642.stickyredstone.content.wire.*;
 import com.supermartijn642.stickyredstone.generators.*;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
@@ -30,8 +30,8 @@ public class StickyRedstone {
 
     public static final String MODID = "stickyredstone";
 
-    public static Identifier identifier(String path){
-        return Identifier.fromNamespaceAndPath(MODID, path);
+    public static ResourceLocation identifier(String path){
+        return ResourceLocation.fromNamespaceAndPath(MODID, path);
     }
 
     public static final CreativeItemGroup CREATIVE_GROUP = CreativeItemGroup.create(MODID, () -> StickyRedstone.stickyRedstoneTorch.asItem());
