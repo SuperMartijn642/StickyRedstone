@@ -22,6 +22,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.RegisterEvent;
 
+import java.util.function.Consumer;
+
 /**
  * Created 7/7/2020 by SuperMartijn642
  */
@@ -70,7 +72,7 @@ public class StickyRedstone {
         handler.registerItem("sticky_repeater", () -> new StickBlockItem(stickyRepeater, ItemProperties.create().group(CREATIVE_GROUP)));
         handler.registerBlock("sticky_comparator", StickyComparator::new);
         handler.registerItem("sticky_comparator", () -> new StickBlockItem(stickyComparator, ItemProperties.create().group(CREATIVE_GROUP)));
-        RegisterEvent.getBus(context.getModBusGroup()).addListener(e -> {
+        context.getModEventBus().addListener((Consumer<RegisterEvent>)e -> {
             if(e.getRegistryKey() == Registries.LOOT_NUMBER_PROVIDER_TYPE)
                 Registry.register(BuiltInRegistries.LOOT_NUMBER_PROVIDER_TYPE, identifier("dust_count"), DustCountNumberProvider.TYPE);
         });

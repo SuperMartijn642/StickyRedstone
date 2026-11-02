@@ -15,6 +15,8 @@ import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.function.Consumer;
+
 /**
  * Created 7/1/2021 by SuperMartijn642
  */
@@ -45,7 +47,7 @@ public class StickyRedstoneClient {
                 return RedStoneWireBlock.getColorForPower(power);
             }
         };
-        RegisterColorHandlersEvent.Block.getBus(context.getModBusGroup()).addListener(e ->
+        context.getModEventBus().addListener((Consumer<RegisterColorHandlersEvent.Block>)e ->
             e.register(tintSource, StickyRedstone.singleStickyRedstoneDust, StickyRedstone.denseStickyRedstoneDust)
         );
     }

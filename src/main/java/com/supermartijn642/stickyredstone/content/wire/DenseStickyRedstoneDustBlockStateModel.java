@@ -3,24 +3,23 @@ package com.supermartijn642.stickyredstone.content.wire;
 import com.supermartijn642.core.ClientUtils;
 import com.supermartijn642.core.util.Pair;
 import com.supermartijn642.stickyredstone.StickyRedstone;
-import it.unimi.dsi.fastutil.objects.ReferenceArraySet;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.BlockModelShaper;
 import net.minecraft.client.renderer.block.model.BlockModelPart;
 import net.minecraft.client.renderer.block.model.BlockStateModel;
-import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.client.ChunkRenderTypeSet;
 import net.minecraftforge.client.model.data.ModelData;
 import net.minecraftforge.client.model.data.ModelProperty;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -65,18 +64,18 @@ public class DenseStickyRedstoneDustBlockStateModel implements BlockStateModel {
     }
 
     @Override
-    public Collection<ChunkSectionLayer> getRenderTypes(@NotNull BlockState state, @NotNull RandomSource random, @NotNull ModelData modelData){
+    public ChunkRenderTypeSet getRenderTypes(@NotNull BlockState state, @NotNull RandomSource random, @NotNull ModelData modelData){
         Iterable<Pair<BlockStateModel,ModelData>> models = modelData.get(MODELS);
         if(models == null)
             return this.dummyModel.getRenderTypes(state, random, ModelData.EMPTY);
-        ReferenceArraySet<ChunkSectionLayer> layers = new ReferenceArraySet<>(1);
+        ChunkRenderTypeSet layers = ChunkRenderTypeSet.none();
         for(Pair<BlockStateModel,ModelData> model : models)
-            layers.addAll(model.left().getRenderTypes(state, random, model.right()));
+            layers = ChunkRenderTypeSet.union(layers, model.left().getRenderTypes(state, random, model.right()));
         return layers;
     }
 
     @Override
-    public void collectParts(RandomSource random, List<BlockModelPart> parts, ModelData modelData, @Nullable ChunkSectionLayer renderType){
+    public void collectParts(RandomSource random, List<BlockModelPart> parts, ModelData modelData, @Nullable RenderType renderType){
         Iterable<Pair<BlockStateModel,ModelData>> models = modelData.get(MODELS);
         if(models == null){
             this.dummyModel.collectParts(random, parts, ModelData.EMPTY, renderType);

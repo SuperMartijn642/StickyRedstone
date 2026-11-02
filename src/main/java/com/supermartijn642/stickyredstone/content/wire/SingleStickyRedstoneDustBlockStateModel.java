@@ -1,7 +1,7 @@
 package com.supermartijn642.stickyredstone.content.wire;
 
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.*;
-import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.QuadCollection;
 import net.minecraft.core.BlockPos;
@@ -9,13 +9,12 @@ import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.client.ChunkRenderTypeSet;
 import net.minecraftforge.client.model.data.ModelData;
 import org.jetbrains.annotations.NotNull;
-import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -52,15 +51,13 @@ public class SingleStickyRedstoneDustBlockStateModel implements BlockStateModel 
             this.wrappedPart = new SimpleModelWrapper(
                 newQuads.build(),
                 part.useAmbientOcclusion(),
-                part.particleIcon(),
-                part.layer(),
-                part.layerFast()
+                part.particleIcon()
             );
         }else
             this.wrappedPart = null;
     }
 
-    private static @NonNull BakedQuad wrapQuad(BakedQuad quad){
+    private static @NotNull BakedQuad wrapQuad(BakedQuad quad){
         if(quad.tintIndex() != 0 || quad.direction() == null)
             return quad;
         int newTintIndex = quad.direction().getOpposite().ordinal();
@@ -83,14 +80,12 @@ public class SingleStickyRedstoneDustBlockStateModel implements BlockStateModel 
     }
 
     @Override
-    public Collection<ChunkSectionLayer> getRenderTypes(@NotNull BlockState state, @NotNull RandomSource random, @NotNull ModelData modelData){
-        if(this.wrappedPart != null)
-            return this.wrappedPart.layer() == null ? BlockStateModel.super.getRenderTypes(state, random, modelData) : List.of(this.wrappedPart.layer());
+    public ChunkRenderTypeSet getRenderTypes(@NotNull BlockState state, @NotNull RandomSource random, @NotNull ModelData modelData){
         return this.original.getRenderTypes(state, random, modelData);
     }
 
     @Override
-    public void collectParts(RandomSource random, List<BlockModelPart> parts, ModelData modelData, @Nullable ChunkSectionLayer renderType){
+    public void collectParts(RandomSource random, List<BlockModelPart> parts, ModelData modelData, @Nullable RenderType renderType){
         if(this.wrappedPart != null){
             parts.add(this.wrappedPart);
             return;
@@ -143,16 +138,6 @@ public class SingleStickyRedstoneDustBlockStateModel implements BlockStateModel 
         @Override
         public TextureAtlasSprite particleIcon(){
             return this.original.particleIcon();
-        }
-
-        @Override
-        public ChunkSectionLayer layer(){
-            return this.original.layer();
-        }
-
-        @Override
-        public ChunkSectionLayer layerFast(){
-            return this.original.layerFast();
         }
     }
 }
