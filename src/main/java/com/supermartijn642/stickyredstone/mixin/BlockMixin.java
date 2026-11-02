@@ -29,7 +29,7 @@ public class BlockMixin {
             shift = At.Shift.BEFORE
         )
     )
-    private static void updateOrDestroyPre(BlockState oldState, BlockState newState, LevelAccessor level, BlockPos pos, @Block.UpdateFlags int updateFlags, int updateLimit, CallbackInfo ci, @Share("numFaces") LocalIntRef numFaces){
+    private static void updateOrDestroyPre(BlockState oldState, BlockState newState, LevelAccessor level, BlockPos pos, int updateFlags, int updateLimit, CallbackInfo ci, @Share("numFaces") LocalIntRef numFaces){
         if(!level.isClientSide() && (updateFlags & 32) == 0 && oldState.getBlock() instanceof StickyRedstoneDust oldBlock && newState.getBlock() instanceof StickyRedstoneDust)
             numFaces.set(oldBlock.getState(level, pos, oldState).countPresentFaces());
     }
@@ -42,7 +42,7 @@ public class BlockMixin {
             shift = At.Shift.AFTER
         )
     )
-    private static void updateOrDestroyPost(BlockState oldState, BlockState newState, LevelAccessor level, BlockPos pos, @Block.UpdateFlags int updateFlags, int updateLimit, CallbackInfo ci, @Share("numFaces") LocalIntRef numFaces){
+    private static void updateOrDestroyPost(BlockState oldState, BlockState newState, LevelAccessor level, BlockPos pos, int updateFlags, int updateLimit, CallbackInfo ci, @Share("numFaces") LocalIntRef numFaces){
         int oldFaces = numFaces.get();
         if(oldFaces > 0 && newState.getBlock() instanceof StickyRedstoneDust newBlock && level instanceof Level){
             int newFaces = newBlock.getState(level, pos, newState).countPresentFaces();

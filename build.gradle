@@ -3,6 +3,7 @@ plugins {
     id "idea"
     id "java"
     id "net.minecraftforge.gradle" version "7.0.25"
+    id "net.minecraftforge.jarjar" version "0.2.3"
     id "me.modmuss50.mod-publish-plugin" version "2.0.0"
 }
 
@@ -16,6 +17,10 @@ println("Java: " + System.getProperty("java.version") + " JVM: " + System.getPro
 
 // Keep parameter names when compiling
 compileJava.options.compilerArgs.add '-parameters'
+
+jarJar.register()
+tasks.jarJar.archiveClassifier = ""
+tasks.assemble.dependsOn tasks.jarJar
 
 repositories {
     minecraft.mavenizer(it)
@@ -35,10 +40,14 @@ dependencies {
     // Forge
     implementation minecraft.dependency("net.minecraftforge:forge:${minecraft_version}-${forge_version}")
     // Mixin Extras
-    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.4"))
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.3"))
+    implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.5.3")) {
+        jarJar.configure(it) { range = "[0.5.3,)" }
+    }
 
     // Core library
-    implementation "curse.maven:supermartijn642s-core-lib-454372:${core_library_file}"
+//    implementation "curse.maven:supermartijn642s-core-lib-454372:${core_library_file}"
+    implementation "a:supermartijn642corelib:1.1.26c-forge-mc1.21.10"
     // Config library
 //    implementation "curse.maven:supermartijn642s-config-lib-438332:${config_library_file}"
 
@@ -127,7 +136,7 @@ tasks.configureEach {
 }
 
 publishMods {
-    file = jar.archiveFile
+    file = tasks.jarJar.archiveFile
     displayName = "${mod_name} ${mod_version} for Forge ${minecraft_suffix.substring(2)}"
     version = project.version
     //noinspection UnnecessaryQualifiedReference

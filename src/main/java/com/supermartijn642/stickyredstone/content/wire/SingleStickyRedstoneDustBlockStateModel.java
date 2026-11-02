@@ -65,8 +65,7 @@ public class SingleStickyRedstoneDustBlockStateModel implements BlockStateModel 
             return quad;
         int newTintIndex = quad.direction().getOpposite().ordinal();
         return new BakedQuad(
-            quad.position0(), quad.position1(), quad.position2(), quad.position3(),
-            quad.packedUV0(), quad.packedUV1(), quad.packedUV2(), quad.packedUV3(),
+            quad.vertices(),
             newTintIndex,
             quad.direction(),
             quad.sprite(),
