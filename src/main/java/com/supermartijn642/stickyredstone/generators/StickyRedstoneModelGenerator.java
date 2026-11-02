@@ -4,7 +4,7 @@ import com.supermartijn642.core.generator.ModelGenerator;
 import com.supermartijn642.core.generator.ResourceCache;
 import com.supermartijn642.stickyredstone.StickyRedstone;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.properties.ComparatorMode;
 
 /**
@@ -20,7 +20,7 @@ public class StickyRedstoneModelGenerator extends ModelGenerator {
     public void generate(){
         // Torch
         this.model("block/sticky_redstone_torch")
-            .texture("torch", Identifier.withDefaultNamespace("block/redstone_torch"))
+            .texture("torch", ResourceLocation.withDefaultNamespace("block/redstone_torch"))
             .texture("slime", "block/sticky_redstone_torch_base")
             .particleTexture("#torch")
             .ambientOcclusion(false)
@@ -67,14 +67,14 @@ public class StickyRedstoneModelGenerator extends ModelGenerator {
             );
         this.model("block/sticky_redstone_torch_off")
             .parent("block/sticky_redstone_torch")
-            .texture("torch", Identifier.withDefaultNamespace("block/redstone_torch_off"));
+            .texture("torch", ResourceLocation.withDefaultNamespace("block/redstone_torch_off"));
         this.itemGenerated("item/sticky_redstone_torch", StickyRedstone.identifier("item/sticky_redstone_torch"));
 
         // Dust
         this.model("block/sticky_redstone_dust_dot")
-            .texture("dust", Identifier.withDefaultNamespace("block/redstone_dust_dot"))
+            .texture("dust", ResourceLocation.withDefaultNamespace("block/redstone_dust_dot"))
             .texture("slime", "block/sticky_redstone_dust_base_dot")
-            .texture("overlay", Identifier.withDefaultNamespace("block/redstone_dust_overlay")) // This is just a blank texture in vanilla, but add it anyway in case resource packs use it
+            .texture("overlay", ResourceLocation.withDefaultNamespace("block/redstone_dust_overlay")) // This is just a blank texture in vanilla, but add it anyway in case resource packs use it
             .particleTexture("#dust")
             .ambientOcclusion(false)
             .element(element ->
@@ -95,8 +95,8 @@ public class StickyRedstoneModelGenerator extends ModelGenerator {
                     .face(Direction.DOWN, face -> face.uv(0, 16, 16, 0).texture("overlay").cullface())
             );
         this.model("block/sticky_redstone_dust_side")
-            .texture("overlay", Identifier.withDefaultNamespace("block/redstone_dust_overlay")) // This is just a blank texture in vanilla, but add it anyway in case resource packs use it
-            .particleTexture(Identifier.withDefaultNamespace("block/redstone_dust_dot"))
+            .texture("overlay", ResourceLocation.withDefaultNamespace("block/redstone_dust_overlay")) // This is just a blank texture in vanilla, but add it anyway in case resource packs use it
+            .particleTexture(ResourceLocation.withDefaultNamespace("block/redstone_dust_dot"))
             .ambientOcclusion(false)
             .element(element ->
                 element.shape(0, -0.1f, 0, 16, 0.1f, 8)
@@ -116,8 +116,8 @@ public class StickyRedstoneModelGenerator extends ModelGenerator {
                     .face(Direction.DOWN, face -> face.uv(0, 8, 16, 0).texture("overlay").cullface())
             );
         this.model("block/sticky_redstone_dust_side_alt")
-            .texture("overlay", Identifier.withDefaultNamespace("block/redstone_dust_overlay")) // This is just a blank texture in vanilla, but add it anyway in case resource packs use it
-            .particleTexture(Identifier.withDefaultNamespace("block/redstone_dust_dot"))
+            .texture("overlay", ResourceLocation.withDefaultNamespace("block/redstone_dust_overlay")) // This is just a blank texture in vanilla, but add it anyway in case resource packs use it
+            .particleTexture(ResourceLocation.withDefaultNamespace("block/redstone_dust_dot"))
             .ambientOcclusion(false)
             .element(element ->
                 element.shape(0, -0.1f, 8, 16, 0.1f, 16)
@@ -138,19 +138,19 @@ public class StickyRedstoneModelGenerator extends ModelGenerator {
             );
         this.model("block/sticky_redstone_dust_side0")
             .parent("block/sticky_redstone_dust_side")
-            .texture("dust", Identifier.withDefaultNamespace("block/redstone_dust_line0"))
+            .texture("dust", ResourceLocation.withDefaultNamespace("block/redstone_dust_line0"))
             .texture("slime", "block/sticky_redstone_dust_base_line0");
         this.model("block/sticky_redstone_dust_side1")
             .parent("block/sticky_redstone_dust_side")
-            .texture("dust", Identifier.withDefaultNamespace("block/redstone_dust_line1"))
+            .texture("dust", ResourceLocation.withDefaultNamespace("block/redstone_dust_line1"))
             .texture("slime", "block/sticky_redstone_dust_base_line1");
         this.model("block/sticky_redstone_dust_side_alt0")
             .parent("block/sticky_redstone_dust_side_alt")
-            .texture("dust", Identifier.withDefaultNamespace("block/redstone_dust_line0"))
+            .texture("dust", ResourceLocation.withDefaultNamespace("block/redstone_dust_line0"))
             .texture("slime", "block/sticky_redstone_dust_base_line0");
         this.model("block/sticky_redstone_dust_side_alt1")
             .parent("block/sticky_redstone_dust_side_alt")
-            .texture("dust", Identifier.withDefaultNamespace("block/redstone_dust_line1"))
+            .texture("dust", ResourceLocation.withDefaultNamespace("block/redstone_dust_line1"))
             .texture("slime", "block/sticky_redstone_dust_base_line1");
         this.model("block/sticky_redstone_dust_invalid")
             .texture("all", "block/sticky_redstone_dust_invalid")
@@ -181,8 +181,8 @@ public class StickyRedstoneModelGenerator extends ModelGenerator {
 
     private static void createRepeater(ModelBuilder model, int delay, boolean on, boolean locked){
         // Base
-        model.texture("base", Identifier.withDefaultNamespace("block/smooth_stone"))
-            .texture("base_top", Identifier.withDefaultNamespace(on ? "block/repeater_on" : "block/repeater"))
+        model.texture("base", ResourceLocation.withDefaultNamespace("block/smooth_stone"))
+            .texture("base_top", ResourceLocation.withDefaultNamespace(on ? "block/repeater_on" : "block/repeater"))
             .texture("slime", "block/sticky_repeater_base")
             .particleTexture("#base_top")
             .ambientOcclusion(false)
@@ -204,7 +204,7 @@ public class StickyRedstoneModelGenerator extends ModelGenerator {
         // Lock
         if(locked){
             float offset = (delay - 1) * 2;
-            model.texture("lock", Identifier.withDefaultNamespace("block/bedrock"))
+            model.texture("lock", ResourceLocation.withDefaultNamespace("block/bedrock"))
                 .element(element ->
                     element.shape(2, 2, 6 + offset, 14, 4, 8 + offset)
                         .face(Direction.UP, face -> face.uv(7, 2, 9, 14).texture("lock").rotation(90))
@@ -215,7 +215,7 @@ public class StickyRedstoneModelGenerator extends ModelGenerator {
                 );
         }
         // Front torch
-        model.texture("torch", Identifier.withDefaultNamespace(on ? "block/redstone_torch" : "block/redstone_torch_off"));
+        model.texture("torch", ResourceLocation.withDefaultNamespace(on ? "block/redstone_torch" : "block/redstone_torch_off"));
         createDiodeTorch(model, 7, 2, on, "torch");
         // Back torch
         if(!locked){
@@ -226,8 +226,8 @@ public class StickyRedstoneModelGenerator extends ModelGenerator {
 
     private static void createComparator(ModelBuilder model, ComparatorMode mode, boolean on){
         // Base
-        model.texture("base", Identifier.withDefaultNamespace("block/smooth_stone"))
-            .texture("base_top", Identifier.withDefaultNamespace(on ? "block/comparator_on" : "block/comparator"))
+        model.texture("base", ResourceLocation.withDefaultNamespace("block/smooth_stone"))
+            .texture("base_top", ResourceLocation.withDefaultNamespace(on ? "block/comparator_on" : "block/comparator"))
             .texture("slime", "block/sticky_repeater_base")
             .particleTexture("#base_top")
             .ambientOcclusion(false)
@@ -247,8 +247,8 @@ public class StickyRedstoneModelGenerator extends ModelGenerator {
                     .face(Direction.WEST, face -> face.uv(0, 6, 16, 10).texture("slime").cullface())
             );
         // Front torch
-        model.texture("torch_on", Identifier.withDefaultNamespace("block/redstone_torch"))
-            .texture("torch_off", Identifier.withDefaultNamespace("block/redstone_torch_off"));
+        model.texture("torch_on", ResourceLocation.withDefaultNamespace("block/redstone_torch"))
+            .texture("torch_off", ResourceLocation.withDefaultNamespace("block/redstone_torch_off"));
         createDiodeTorch(model, 7, 2, mode == ComparatorMode.SUBTRACT, mode == ComparatorMode.SUBTRACT ? "torch_on" : "torch_off");
         // Back torches
         createDiodeTorch(model, 4, 11, on, on ? "torch_on" : "torch_off");

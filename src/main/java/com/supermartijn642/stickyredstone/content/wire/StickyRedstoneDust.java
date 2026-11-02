@@ -226,7 +226,7 @@ public abstract class StickyRedstoneDust extends BaseBlock {
     }
 
     @Override
-    protected void updateIndirectNeighbourShapes(BlockState blockState, LevelAccessor level, BlockPos pos, @UpdateFlags int updateFlags, int updateLimit){
+    protected void updateIndirectNeighbourShapes(BlockState blockState, LevelAccessor level, BlockPos pos, int updateFlags, int updateLimit){
         BlockPos.MutableBlockPos sideBelowPos = new BlockPos.MutableBlockPos();
         BlockPos.MutableBlockPos sidePos = null;
         DustState state = this.getState(level, pos, blockState);
