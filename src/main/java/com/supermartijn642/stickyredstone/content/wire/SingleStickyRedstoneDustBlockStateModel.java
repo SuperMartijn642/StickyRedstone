@@ -1,7 +1,7 @@
 package com.supermartijn642.stickyredstone.content.wire;
 
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.*;
-import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.QuadCollection;
 import net.minecraft.core.BlockPos;
@@ -117,7 +117,7 @@ public class SingleStickyRedstoneDustBlockStateModel extends DelegateBlockStateM
         }
 
         @Override
-        public ChunkSectionLayer getRenderType(BlockState state){
+        public RenderType getRenderType(BlockState state){
             return this.original.getRenderType(state);
         }
 
