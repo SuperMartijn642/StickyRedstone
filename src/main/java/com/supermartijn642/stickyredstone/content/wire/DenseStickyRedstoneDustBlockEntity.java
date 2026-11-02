@@ -4,9 +4,8 @@ import com.supermartijn642.core.block.BaseBlockEntity;
 import com.supermartijn642.stickyredstone.StickyRedstone;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.storage.ValueInput;
-import net.minecraft.world.level.storage.ValueOutput;
 
 /**
  * Created 24/07/2026 by SuperMartijn642
@@ -38,23 +37,25 @@ public class DenseStickyRedstoneDustBlockEntity extends BaseBlockEntity {
     }
 
     @Override
-    protected void writeData(ValueOutput output){
-        output.putInt("up", this.state.getFace(Direction.UP).index());
-        output.putInt("down", this.state.getFace(Direction.DOWN).index());
-        output.putInt("north", this.state.getFace(Direction.NORTH).index());
-        output.putInt("east", this.state.getFace(Direction.EAST).index());
-        output.putInt("south", this.state.getFace(Direction.SOUTH).index());
-        output.putInt("west", this.state.getFace(Direction.WEST).index());
+    protected CompoundTag writeData(){
+        CompoundTag data = new CompoundTag();
+        data.putInt("up", this.state.getFace(Direction.UP).index());
+        data.putInt("down", this.state.getFace(Direction.DOWN).index());
+        data.putInt("north", this.state.getFace(Direction.NORTH).index());
+        data.putInt("east", this.state.getFace(Direction.EAST).index());
+        data.putInt("south", this.state.getFace(Direction.SOUTH).index());
+        data.putInt("west", this.state.getFace(Direction.WEST).index());
+        return data;
     }
 
     @Override
-    protected void readData(ValueInput input){
-        FaceState up = input.getInt("up").map(FaceState::byIndex).orElse(FaceState.ABSENT);
-        FaceState down = input.getInt("down").map(FaceState::byIndex).orElse(FaceState.ABSENT);
-        FaceState north = input.getInt("north").map(FaceState::byIndex).orElse(FaceState.ABSENT);
-        FaceState east = input.getInt("east").map(FaceState::byIndex).orElse(FaceState.ABSENT);
-        FaceState south = input.getInt("south").map(FaceState::byIndex).orElse(FaceState.ABSENT);
-        FaceState west = input.getInt("west").map(FaceState::byIndex).orElse(FaceState.ABSENT);
+    protected void readData(CompoundTag data){
+        FaceState up = data.getInt("up").map(FaceState::byIndex).orElse(FaceState.ABSENT);
+        FaceState down = data.getInt("down").map(FaceState::byIndex).orElse(FaceState.ABSENT);
+        FaceState north = data.getInt("north").map(FaceState::byIndex).orElse(FaceState.ABSENT);
+        FaceState east = data.getInt("east").map(FaceState::byIndex).orElse(FaceState.ABSENT);
+        FaceState south = data.getInt("south").map(FaceState::byIndex).orElse(FaceState.ABSENT);
+        FaceState west = data.getInt("west").map(FaceState::byIndex).orElse(FaceState.ABSENT);
         this.state = DustState.of(up, down, north, east, south, west);
     }
 }
