@@ -2,7 +2,7 @@ package com.supermartijn642.stickyredstone.content.wire;
 
 import com.supermartijn642.core.ClientUtils;
 import com.supermartijn642.stickyredstone.StickyRedstone;
-import net.fabricmc.fabric.api.renderer.v1.mesh.QuadEmitter;
+import net.fabricmc.fabric.api.renderer.v1.render.RenderContext;
 import net.minecraft.client.renderer.block.BlockModelShaper;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
@@ -11,6 +11,7 @@ import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.state.BlockState;
@@ -19,7 +20,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 /**
@@ -88,14 +88,14 @@ public class DenseStickyRedstoneDustBlockStateModel implements BakedModel {
     }
 
     @Override
-    public void emitBlockQuads(QuadEmitter emitter, BlockAndTintGetter level, BlockState state, BlockPos pos, Supplier<RandomSource> randomSupplier, Predicate<@Nullable Direction> cullTest){
+    public void emitBlockQuads(BlockAndTintGetter level, BlockState state, BlockPos pos, Supplier<RandomSource> randomSupplier, RenderContext context){
         for(SubModel subModel : this.models(level, pos, state))
-            subModel.model.emitBlockQuads(emitter, level, subModel.state, pos, randomSupplier, cullTest);
+            subModel.model.emitBlockQuads(level, subModel.state, pos, randomSupplier, context);
     }
 
     @Override
-    public void emitItemQuads(QuadEmitter emitter, Supplier<RandomSource> randomSupplier){
-        this.dummyModel.emitItemQuads(emitter, randomSupplier); // This should never be relevant
+    public void emitItemQuads(ItemStack stack, Supplier<RandomSource> randomSupplier, RenderContext context){
+        this.dummyModel.emitItemQuads(stack, randomSupplier, context); // This should never be relevant
     }
 
     @Override
@@ -121,6 +121,11 @@ public class DenseStickyRedstoneDustBlockStateModel implements BakedModel {
     @Override
     public boolean usesBlockLight(){
         return this.dummyModel.usesBlockLight();
+    }
+
+    @Override
+    public boolean isCustomRenderer(){
+        return false;
     }
 
     @Override
