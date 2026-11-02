@@ -12,6 +12,7 @@ import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.RedStoneWireBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -19,7 +20,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public class StickyRedstoneClient {
 
-    public static void onInitializeClient(){
+    public static void onInitializeClient(FMLJavaModLoadingContext context){
         ClientRegistrationHandler handler = ClientRegistrationHandler.get(StickyRedstone.MODID);
         handler.registerBlockModelTranslucentRenderType(() -> StickyRedstone.stickyRedstoneTorch);
         handler.registerBlockModelTranslucentRenderType(() -> StickyRedstone.singleStickyRedstoneDust);
@@ -44,7 +45,7 @@ public class StickyRedstoneClient {
                 return RedStoneWireBlock.getColorForPower(power);
             }
         };
-        RegisterColorHandlersEvent.Block.BUS.addListener(e ->
+        RegisterColorHandlersEvent.Block.getBus(context.getModBusGroup()).addListener(e ->
             e.register(tintSource, StickyRedstone.singleStickyRedstoneDust, StickyRedstone.denseStickyRedstoneDust)
         );
     }

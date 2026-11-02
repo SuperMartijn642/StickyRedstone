@@ -4,7 +4,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.supermartijn642.stickyredstone.content.wire.StickyRedstoneDust;
 import com.supermartijn642.stickyredstone.content.wire.StickyRedstoneWireEvaluator;
-import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
@@ -15,13 +15,13 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 /**
- * Created 04/08/2026 by SuperMartijn642
+ * Created 02/11/2026 by SuperMartijn642
  */
-@Mixin(ClientLevel.class)
-public class ClientLevelMixin {
+@Mixin(ParticleEngine.class)
+public class ParticleEngineMixin {
 
     @WrapOperation(
-        method = "addDestroyBlockEffect",
+        method = "destroy",
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/world/level/block/state/BlockState;getShape(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/phys/shapes/VoxelShape;"

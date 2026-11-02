@@ -55,7 +55,7 @@ public class StickyRedstone {
         register(context);
         registerGenerators();
         if(CommonUtils.getEnvironmentSide().isClient())
-            StickyRedstoneClient.onInitializeClient();
+            StickyRedstoneClient.onInitializeClient(context);
     }
 
     private static void register(FMLJavaModLoadingContext context){

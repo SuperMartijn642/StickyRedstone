@@ -2,7 +2,7 @@ package com.supermartijn642.stickyredstone.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import com.llamalad7.mixinextras.sugar.Local;
+import com.supermartijn642.core.ClientUtils;
 import com.supermartijn642.stickyredstone.content.wire.StickyRedstoneDust;
 import com.supermartijn642.stickyredstone.content.wire.StickyRedstoneWireEvaluator;
 import net.minecraft.client.renderer.LevelRenderer;
@@ -22,14 +22,16 @@ import org.spongepowered.asm.mixin.injection.At;
 public class LevelRendererMixin {
 
     @WrapOperation(
-        method = "extractBlockOutline",
+        method = "renderHitOutline",
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/world/level/block/state/BlockState;getShape(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/phys/shapes/CollisionContext;)Lnet/minecraft/world/phys/shapes/VoxelShape;"
         )
     )
-    private VoxelShape extractBlockOutline(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context, Operation<VoxelShape> operation, @Local BlockHitResult hitResult) {
+    private VoxelShape extractBlockOutline(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context, Operation<VoxelShape> operation){
         if(!StickyRedstoneWireEvaluator.isStickyRedstoneWire(state.getBlock()))
+            return operation.call(state, level, pos, context);
+        if(!(ClientUtils.getMinecraft().hitResult instanceof BlockHitResult hitResult) || !pos.equals(hitResult.getBlockPos()))
             return operation.call(state, level, pos, context);
         return ((StickyRedstoneDust)state.getBlock()).getHighlightShape(state, level, pos, context, hitResult);
     }
