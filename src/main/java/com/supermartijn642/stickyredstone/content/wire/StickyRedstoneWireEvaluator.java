@@ -11,8 +11,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RedStoneWireBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.RedstoneSide;
-import net.minecraft.world.level.redstone.Orientation;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created 01/08/2026 by SuperMartijn642
@@ -53,7 +51,7 @@ public abstract class StickyRedstoneWireEvaluator {
         return FaceState.ABSENT;
     }
 
-    public abstract void updatePowerStrength(Level level, BlockPos pos, BlockState state, Direction face, @Nullable Orientation orientation, boolean skipShapeUpdates);
+    public abstract void updatePowerStrength(Level level, BlockPos pos, BlockState state, Direction face);
 
     protected int getBlockSignal(Level level, BlockPos pos, Direction face){
         try{
@@ -138,7 +136,7 @@ public abstract class StickyRedstoneWireEvaluator {
 
     private static class Default extends StickyRedstoneWireEvaluator {
         @Override
-        public void updatePowerStrength(Level level, BlockPos pos, BlockState state, Direction face, @Nullable Orientation orientation, boolean skipShapeUpdates){
+        public void updatePowerStrength(Level level, BlockPos pos, BlockState state, Direction face){
             if(isVanillaRedstoneWire(state.getBlock()) && face != Direction.DOWN)
                 throw new IllegalStateException();
             FaceState ownConnections = getConnections(level, pos, state, face);

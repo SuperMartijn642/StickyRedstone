@@ -6,8 +6,12 @@
     "DDD"
   ],
   "key": {
-    "S": "#c:slime_balls",
-    "D": "#c:dusts/redstone"
+    "S": {
+      "tag": "c:slime_balls"
+    },
+    "D": {
+      "tag": "c:dusts/redstone"
+    }
   },
   "result": {
     "id": "stickyredstone:sticky_redstone_dust",

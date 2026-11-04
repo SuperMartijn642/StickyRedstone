@@ -41,7 +41,7 @@ public class MultiPlayerGameModeMixin {
             shift = At.Shift.BEFORE
         )
     )
-    private void destroyBlock(BlockPos pos, CallbackInfoReturnable<Boolean> ci, @Local Level level, @Local BlockState oldState, @Share("face") LocalRef<Direction> sharedFace) {
+    private void destroyBlock(BlockPos pos, CallbackInfoReturnable<Boolean> ci, @Local Level level, @Local BlockState oldState, @Share("face") LocalRef<Direction> sharedFace){
         if(!StickyRedstoneWireEvaluator.isStickyRedstoneWire(oldState.getBlock()))
             return;
         if(!(this.minecraft.hitResult instanceof BlockHitResult hitResult))
@@ -50,7 +50,7 @@ public class MultiPlayerGameModeMixin {
         Vec3 location = hitResult.getLocation();
         Direction hitFace;
         do{
-            hitFace = Direction.getApproximateNearest(
+            hitFace = Direction.getNearest(
                 ((location.x % 1) + 1) % 1 - 0.5,
                 ((location.y % 1) + 1) % 1 - 0.5,
                 ((location.z % 1) + 1) % 1 - 0.5
@@ -89,7 +89,7 @@ public class MultiPlayerGameModeMixin {
             target = "Lnet/minecraft/world/level/Level;setBlock(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;I)Z"
         )
     )
-    private boolean destroyBlock(Level level, BlockPos pos, BlockState air, int flags, Operation<Boolean> operation, @Local BlockState oldState, @Share("face") LocalRef<Direction> sharedFace) {
+    private boolean destroyBlock(Level level, BlockPos pos, BlockState air, int flags, Operation<Boolean> operation, @Local BlockState oldState, @Share("face") LocalRef<Direction> sharedFace){
         Direction hitFace = sharedFace.get();
         if(hitFace == null)
             return operation.call(level, pos, air, flags);
@@ -112,7 +112,7 @@ public class MultiPlayerGameModeMixin {
             FaceState otherFaceConnections = StickyRedstoneWireEvaluator.getConnections(level, pos, oldState, otherFace);
             BlockState newBlockState = StickyRedstone.singleStickyRedstoneDust.getBlockStateForConnections(otherFace, otherFaceConnections);
             BlockPos supportPos = pos.relative(hitFace);
-            newBlockState = newBlockState.updateShape(level, level, pos, hitFace, supportPos, level.getBlockState(supportPos), level.getRandom());
+            newBlockState = newBlockState.updateShape(hitFace, level.getBlockState(supportPos), level, pos, supportPos);
             return operation.call(level, pos, newBlockState, flags);
         }else{
             DustState state = block.getState(level, pos, oldState);
@@ -121,7 +121,7 @@ public class MultiPlayerGameModeMixin {
             if(!level.setBlock(pos, newBlockState, 0))
                 return false;
             newBlockState = block.updateState(level, pos, oldState, state.setFace(hitFace, FaceState.ABSENT));
-            newBlockState = block.updateShape(newBlockState, level, level, pos, hitFace, supportPos, level.getBlockState(supportPos), level.getRandom());
+            newBlockState = newBlockState.updateShape(hitFace, level.getBlockState(supportPos), level, pos, supportPos);
             newBlockState = newBlockState.setValue(DenseStickyRedstoneDust.INITIALIZED, true);
             return level.setBlock(pos, newBlockState, Block.UPDATE_ALL | Block.UPDATE_IMMEDIATE);
         }
@@ -134,7 +134,7 @@ public class MultiPlayerGameModeMixin {
             @At("RETURN")
         }
     )
-    private void continueDestroyBlock(BlockPos pos, Direction direction, CallbackInfoReturnable<Boolean> ci) {
+    private void continueDestroyBlock(BlockPos pos, Direction direction, CallbackInfoReturnable<Boolean> ci){
         StickyRedstoneDust.DESTROY_FACE_OVERRIDE.remove();
     }
 }

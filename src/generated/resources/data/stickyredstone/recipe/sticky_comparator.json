@@ -6,13 +6,23 @@
     "SSS"
   ],
   "key": {
-    "Q": "#c:gems/quartz",
-    "S": "#c:stones",
+    "Q": {
+      "tag": "c:gems/quartz"
+    },
+    "S": {
+      "tag": "c:stones"
+    },
     "T": [
-      "minecraft:redstone_torch",
-      "stickyredstone:sticky_redstone_torch"
+      {
+        "item": "minecraft:redstone_torch"
+      },
+      {
+        "item": "stickyredstone:sticky_redstone_torch"
+      }
     ],
-    "Y": "stickyredstone:sticky_redstone_torch"
+    "Y": {
+      "item": "stickyredstone:sticky_redstone_torch"
+    }
   },
   "result": {
     "id": "stickyredstone:sticky_comparator"

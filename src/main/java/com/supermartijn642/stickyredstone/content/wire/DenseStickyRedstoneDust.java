@@ -4,9 +4,8 @@ import com.supermartijn642.core.block.EntityHoldingBlock;
 import com.supermartijn642.stickyredstone.StickyRedstone;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.context.ContextKey;
-import net.minecraft.util.context.ContextKeySet;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
@@ -15,8 +14,11 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParam;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 
@@ -28,15 +30,15 @@ import java.util.List;
  */
 public class DenseStickyRedstoneDust extends StickyRedstoneDust implements EntityHoldingBlock {
 
-    public static final ContextKey<Integer> DUST_COUNT = new ContextKey<>(StickyRedstone.identifier("dust_count"));
-    public static final ContextKeySet DUST_COUNT_PARAM_SET;
+    public static final LootContextParam<Integer> DUST_COUNT = new LootContextParam<>(StickyRedstone.identifier("dust_count"));
+    public static final LootContextParamSet DUST_COUNT_PARAM_SET;
 
-    static {
-        ContextKeySet.Builder builder = new ContextKeySet.Builder();
-        for(ContextKey<?> param : LootContextParamSets.BLOCK.required())
+    static{
+        LootContextParamSet.Builder builder = new LootContextParamSet.Builder();
+        for(LootContextParam<?> param : LootContextParamSets.BLOCK.getRequired())
             builder.required(param);
-        for(ContextKey<?> param : LootContextParamSets.BLOCK.allowed())
-            if(!LootContextParamSets.BLOCK.required().contains(param))
+        for(LootContextParam<?> param : LootContextParamSets.BLOCK.getAllowed())
+            if(!LootContextParamSets.BLOCK.getRequired().contains(param))
                 builder.optional(param);
         builder.required(DUST_COUNT);
         DUST_COUNT_PARAM_SET = builder.build();
@@ -116,10 +118,10 @@ public class DenseStickyRedstoneDust extends StickyRedstoneDust implements Entit
                     sidePos = new BlockPos.MutableBlockPos();
                 if(StickyRedstoneWireEvaluator.isVanillaRedstoneWire(sideBelowBlock) && face == Direction.DOWN){
                     sidePos.setWithOffset(pos, face);
-                    level.neighborShapeChanged(side.getOpposite(), sideBelowPos, sidePos, level.getBlockState(sidePos), updateFlags, updateLimit);
+                    level.neighborShapeChanged(side.getOpposite(), level.getBlockState(sidePos), sideBelowPos, sidePos, updateFlags, updateLimit);
                 }else{
                     sidePos.setWithOffset(pos, side);
-                    level.neighborShapeChanged(face.getOpposite(), sideBelowPos, sidePos, level.getBlockState(sidePos), updateFlags, updateLimit);
+                    level.neighborShapeChanged(face.getOpposite(), level.getBlockState(sidePos), sideBelowPos, sidePos, updateFlags, updateLimit);
                 }
             }
         }
@@ -127,14 +129,15 @@ public class DenseStickyRedstoneDust extends StickyRedstoneDust implements Entit
 
     @Override
     public List<ItemStack> getDrops(BlockState state, LootParams.Builder params){
-        if (this.drops.isEmpty())
+        ResourceKey<LootTable> lootTable = this.getLootTable();
+        if(lootTable == BuiltInLootTables.EMPTY)
             return Collections.emptyList();
         BlockEntity entity = params.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
         LootParams lootParams = params.withParameter(LootContextParams.BLOCK_STATE, state)
             .withParameter(DUST_COUNT, entity instanceof DenseStickyRedstoneDustBlockEntity ? ((DenseStickyRedstoneDustBlockEntity)entity).getDustCount() : 1)
             .create(DUST_COUNT_PARAM_SET);
         ServerLevel level = lootParams.getLevel();
-        LootTable table = level.getServer().reloadableRegistries().getLootTable(this.drops.get());
+        LootTable table = level.getServer().reloadableRegistries().getLootTable(lootTable);
         return table.getRandomItems(lootParams);
     }
 

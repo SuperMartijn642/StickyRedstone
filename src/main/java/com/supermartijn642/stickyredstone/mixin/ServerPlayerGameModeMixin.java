@@ -18,7 +18,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.BlockHitResult;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -41,7 +40,7 @@ public class ServerPlayerGameModeMixin {
             target = "Lnet/minecraft/server/level/ServerLevel;removeBlock(Lnet/minecraft/core/BlockPos;Z)Z"
         )
     )
-    private boolean destroyBlock(ServerLevel level, BlockPos pos, boolean movedByPiston, Operation<Boolean> operation, @Local(ordinal = 0) BlockState oldState) {
+    private boolean destroyBlock(ServerLevel level, BlockPos pos, boolean movedByPiston, Operation<Boolean> operation, @Local(ordinal = 0) BlockState oldState){
         if(!StickyRedstoneWireEvaluator.isStickyRedstoneWire(oldState.getBlock()))
             return operation.call(level, pos, movedByPiston);
         Direction hitFace = StickyRedstoneDust.DESTROY_FACE_OVERRIDE.get();
@@ -68,7 +67,7 @@ public class ServerPlayerGameModeMixin {
             FaceState otherFaceConnections = StickyRedstoneWireEvaluator.getConnections(level, pos, oldState, otherFace);
             BlockState newBlockState = StickyRedstone.singleStickyRedstoneDust.getBlockStateForConnections(otherFace, otherFaceConnections);
             BlockPos supportPos = pos.relative(hitFace);
-            newBlockState = newBlockState.updateShape(level, level, pos, hitFace, supportPos, level.getBlockState(supportPos), level.getRandom());
+            newBlockState = newBlockState.updateShape(hitFace, level.getBlockState(supportPos), level, pos, supportPos);
             return level.setBlock(pos, newBlockState, Block.UPDATE_ALL | Block.UPDATE_IMMEDIATE);
         }else{
             DustState state = block.getState(level, pos, oldState);
@@ -77,7 +76,7 @@ public class ServerPlayerGameModeMixin {
             if(!level.setBlock(pos, newBlockState, 0))
                 return false;
             newBlockState = block.updateState(level, pos, oldState, state.setFace(hitFace, FaceState.ABSENT));
-            newBlockState = block.updateShape(newBlockState, level, level, pos, hitFace, supportPos, level.getBlockState(supportPos), level.getRandom());
+            newBlockState = newBlockState.updateShape(hitFace, level.getBlockState(supportPos), level, pos, supportPos);
             newBlockState = newBlockState.setValue(DenseStickyRedstoneDust.INITIALIZED, true);
             return level.setBlock(pos, newBlockState, Block.UPDATE_ALL | Block.UPDATE_IMMEDIATE);
         }
@@ -90,7 +89,7 @@ public class ServerPlayerGameModeMixin {
             target = "Lnet/minecraft/world/level/block/Block;playerDestroy(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/block/entity/BlockEntity;Lnet/minecraft/world/item/ItemStack;)V"
         )
     )
-    private boolean destroyBlock(Block block, Level level, Player player, BlockPos pos, BlockState state, BlockEntity entity, ItemStack stack) {
+    private boolean destroyBlock(Block block, Level level, Player player, BlockPos pos, BlockState state, BlockEntity entity, ItemStack stack){
         if(!StickyRedstoneWireEvaluator.isStickyRedstoneWire(block))
             return true;
         player.awardStat(Stats.BLOCK_MINED.get(block));

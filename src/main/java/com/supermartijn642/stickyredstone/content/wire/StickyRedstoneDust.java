@@ -11,20 +11,20 @@ import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.*;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ObserverBlock;
 import net.minecraft.world.level.block.RedStoneWireBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.PushReaction;
-import net.minecraft.world.level.redstone.ExperimentalRedstoneUtils;
-import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3i;
 
 /**
@@ -124,7 +124,7 @@ public abstract class StickyRedstoneDust extends BaseBlock {
         Direction face;
         FaceState connections;
         do{
-            face = Direction.getApproximateNearest(
+            face = Direction.getNearest(
                 ((location.x % 1) + 1) % 1 - 0.5,
                 ((location.y % 1) + 1) % 1 - 0.5,
                 ((location.z % 1) + 1) % 1 - 0.5
@@ -195,7 +195,7 @@ public abstract class StickyRedstoneDust extends BaseBlock {
     }
 
     @Override
-    public BlockState updateShape(BlockState blockState, LevelReader level, ScheduledTickAccess ticks, BlockPos pos, Direction side, BlockPos sidePos, BlockState sideBlockState, RandomSource random){
+    protected BlockState updateShape(BlockState blockState, Direction side, BlockState sideBlockState, LevelAccessor level, BlockPos pos, BlockPos sidePos){
         boolean hasChanged = false;
         DustState state;
         if(this.getConnections(level, pos, blockState, side).isPresent() && !canSurviveOn(level, sidePos, sideBlockState, side.getOpposite())){
@@ -249,10 +249,10 @@ public abstract class StickyRedstoneDust extends BaseBlock {
                     sidePos = new BlockPos.MutableBlockPos();
                 if(StickyRedstoneWireEvaluator.isVanillaRedstoneWire(sideBelowBlock) && face == Direction.DOWN){
                     sidePos.setWithOffset(pos, face);
-                    level.neighborShapeChanged(side.getOpposite(), sideBelowPos, sidePos, level.getBlockState(sidePos), updateFlags, updateLimit);
+                    level.neighborShapeChanged(side.getOpposite(), level.getBlockState(sidePos), sideBelowPos, sidePos, updateFlags, updateLimit);
                 }else{
                     sidePos.setWithOffset(pos, side);
-                    level.neighborShapeChanged(face.getOpposite(), sideBelowPos, sidePos, level.getBlockState(sidePos), updateFlags, updateLimit);
+                    level.neighborShapeChanged(face.getOpposite(), level.getBlockState(sidePos), sideBelowPos, sidePos, updateFlags, updateLimit);
                 }
             }
         }
@@ -303,25 +303,27 @@ public abstract class StickyRedstoneDust extends BaseBlock {
     protected void onPlace(BlockState blockState, Level level, BlockPos pos, BlockState oldBlockState, boolean movedByPiston){
         if(oldBlockState.getBlock() instanceof StickyRedstoneDust || level.isClientSide())
             return;
-        for(Direction face : Direction.values()){
-            if(this.getConnections(level, pos, blockState, face).isPresent())
-                this.updatePowerStrength(level, pos, blockState, face, null, true);
-        }
         DustState state = this.getState(level, pos, blockState);
+        for(Direction face : Direction.values()){
+            if(state.getFace(face).isPresent())
+                this.updatePowerStrength(level, pos, blockState, face);
+        }
         BlockPos.MutableBlockPos sidePos = new BlockPos.MutableBlockPos();
         for(Direction.Axis axis : Direction.Axis.values()){
-            if(state.getFace(axis.getPositive()).isPresent() || state.getFace(axis.getNegative()).isPresent()){
-                sidePos.setWithOffset(pos, axis.getNegative());
+            Direction positiveDirection = Direction.get(Direction.AxisDirection.POSITIVE, axis);
+            Direction negativeDirection = Direction.get(Direction.AxisDirection.NEGATIVE, axis);
+            if(state.getFace(positiveDirection).isPresent() || state.getFace(negativeDirection).isPresent()){
+                sidePos.setWithOffset(pos, negativeDirection);
                 level.updateNeighborsAt(sidePos, this);
-                sidePos.setWithOffset(pos, axis.getPositive());
+                sidePos.setWithOffset(pos, positiveDirection);
                 level.updateNeighborsAt(sidePos, this);
             }
         }
         this.updateNeighborsOfNeighboringWires(level, pos);
     }
 
-    public void updatePowerStrength(Level level, BlockPos pos, BlockState state, Direction face, @Nullable Orientation orientation, boolean shapeUpdateWiresAroundInitialPosition){
-        StickyRedstoneWireEvaluator.DEFAULT.updatePowerStrength(level, pos, state, face, orientation, shapeUpdateWiresAroundInitialPosition);
+    public void updatePowerStrength(Level level, BlockPos pos, BlockState state, Direction face){
+        StickyRedstoneWireEvaluator.DEFAULT.updatePowerStrength(level, pos, state, face);
     }
 
     private void updateNeighborsOfNeighboringWires(Level level, BlockPos pos){
@@ -360,12 +362,12 @@ public abstract class StickyRedstoneDust extends BaseBlock {
         for(Direction side : Direction.values())
             level.updateNeighborsAt(sidePos.setWithOffset(pos, side), this);
         for(Direction face : Direction.values())
-            this.updatePowerStrength(level, pos, Blocks.AIR.defaultBlockState(), face, null, false);
+            this.updatePowerStrength(level, pos, Blocks.AIR.defaultBlockState(), face);
         this.updateNeighborsOfNeighboringWires(level, pos);
     }
 
     @Override
-    protected void neighborChanged(BlockState blockState, Level level, BlockPos pos, Block block, @Nullable Orientation orientation, boolean movedByPiston){
+    protected void neighborChanged(BlockState blockState, Level level, BlockPos pos, Block block, BlockPos neighborPos, boolean movedByPiston){
         if(level.isClientSide())
             return;
         BlockPos.MutableBlockPos sidePos = new BlockPos.MutableBlockPos();
@@ -375,7 +377,7 @@ public abstract class StickyRedstoneDust extends BaseBlock {
                 continue;
             sidePos.setWithOffset(pos, face);
             if(canSurviveOn(level, sidePos, level.getBlockState(sidePos), face.getOpposite()))
-                this.updatePowerStrength(level, pos, blockState, face, orientation, false);
+                this.updatePowerStrength(level, pos, blockState, face);
         }
     }
 
@@ -414,7 +416,7 @@ public abstract class StickyRedstoneDust extends BaseBlock {
         if(!player.getAbilities().mayBuild)
             return InteractionFeedback.PASS;
 
-        Direction face = Direction.getApproximateNearest(hitLocation.x - pos.getX() - 0.5, hitLocation.y - pos.getY() - 0.5, hitLocation.z - pos.getZ() - 0.5);
+        Direction face = Direction.getNearest(hitLocation.x - pos.getX() - 0.5, hitLocation.y - pos.getY() - 0.5, hitLocation.z - pos.getZ() - 0.5);
         FaceState connections = this.getConnections(level, pos, blockState, face);
         if(isCross(connections) || isDot(connections)){
             FaceState newConnections = isCross(connections) ? FaceState.get(false, false, false, false, 0) : FaceState.get(true, true, true, true, 0);
@@ -433,7 +435,6 @@ public abstract class StickyRedstoneDust extends BaseBlock {
     }
 
     public void updatesOnShapeChange(Level level, BlockPos pos, Direction face, FaceState oldState, FaceState newState){
-        Orientation orientation = ExperimentalRedstoneUtils.initialOrientation(level, null, Direction.UP);
         BlockPos.MutableBlockPos sidePos = new BlockPos.MutableBlockPos();
         for(Direction side : Direction.values()){
             if(side.getAxis() == face.getAxis())
@@ -441,7 +442,7 @@ public abstract class StickyRedstoneDust extends BaseBlock {
             sidePos.setWithOffset(pos, side);
             if(oldState.get(face, side) == newState.get(face, side) || level.getBlockState(sidePos).isRedstoneConductor(level, sidePos))
                 continue;
-            level.updateNeighborsAtExceptFromFacing(sidePos, this, side.getOpposite(), ExperimentalRedstoneUtils.withFront(orientation, side));
+            level.updateNeighborsAtExceptFromFacing(sidePos, this, side.getOpposite());
         }
     }
 
@@ -463,7 +464,7 @@ public abstract class StickyRedstoneDust extends BaseBlock {
                 double y = 0.5 + 0.4375f * face.getStepY() + offset * side.getStepY();
                 double z = 0.5 + 0.4375f * face.getStepZ() + offset * side.getStepZ();
                 level.addParticle(
-                    new DustParticleOptions(RedStoneWireBlock.COLORS[power], 1),
+                    new DustParticleOptions(RedStoneWireBlock.COLORS[power].toVector3f(), 1),
                     pos.getX() + x, pos.getY() + y, pos.getZ() + z,
                     0, 0, 0
                 );

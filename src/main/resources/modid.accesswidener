@@ -7,6 +7,6 @@ accessible field net/minecraft/world/level/storage/loot/parameters/LootContextPa
 # RedstoneTorchBlock
 accessible field net/minecraft/world/level/block/RedstoneTorchBlock TOGGLE_DELAY I
 # RedStoneWireBlock
-accessible field net/minecraft/world/level/block/RedStoneWireBlock COLORS [I
+accessible field net/minecraft/world/level/block/RedStoneWireBlock COLORS [Lnet/minecraft/world/phys/Vec3;
 accessible field net/minecraft/world/level/block/RedStoneWireBlock shouldSignal Z
 accessible method net/minecraft/world/level/block/RedStoneWireBlock shouldConnectTo (Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/Direction;)Z

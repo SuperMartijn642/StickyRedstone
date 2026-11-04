@@ -11,8 +11,8 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -20,8 +20,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.PushReaction;
-import net.minecraft.world.level.redstone.ExperimentalRedstoneUtils;
-import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
@@ -102,7 +100,7 @@ public class StickyRedstoneTorchBlock extends BaseBlock {
     }
 
     @Override
-    protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess ticks, BlockPos pos, Direction directionToNeighbour, BlockPos neighbourPos, BlockState neighbourState, RandomSource random){
+    protected BlockState updateShape(BlockState state, Direction directionToNeighbour, BlockState neighbourState, LevelAccessor level, BlockPos pos, BlockPos neighbourPos){
         return directionToNeighbour == state.getValue(FACE) && !state.canSurvive(level, pos) ? Blocks.AIR.defaultBlockState() : state;
     }
 
@@ -117,9 +115,8 @@ public class StickyRedstoneTorchBlock extends BaseBlock {
     }
 
     private void notifyNeighbors(Level level, BlockPos pos, BlockState state){
-        Orientation orientation = ExperimentalRedstoneUtils.initialOrientation(level, null, Direction.UP);
         for(Direction side : Direction.values())
-            level.updateNeighborsAt(pos.relative(side), this, ExperimentalRedstoneUtils.withFront(orientation, side));
+            level.updateNeighborsAt(pos.relative(side), this);
     }
 
     @Override
@@ -146,7 +143,7 @@ public class StickyRedstoneTorchBlock extends BaseBlock {
     }
 
     @Override
-    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, @Nullable Orientation orientation, boolean movedByPiston){
+    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos neighborPos, boolean movedByPiston){
         if(state.getValue(LIT) == this.isSupportBlockPowered(level, pos, state) && !level.getBlockTicks().willTickThisTick(pos, this))
             level.scheduleTick(pos, this, RedstoneTorchBlock.TOGGLE_DELAY);
     }

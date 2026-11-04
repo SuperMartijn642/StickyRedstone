@@ -1,8 +1,8 @@
 package com.supermartijn642.stickyredstone.content.wire;
 
+import net.fabricmc.fabric.api.renderer.v1.model.ForwardingBakedModel;
 import net.fabricmc.fabric.api.renderer.v1.render.RenderContext;
 import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.client.resources.model.DelegateBakedModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -15,7 +15,7 @@ import java.util.function.Supplier;
 /**
  * Created 03/08/2026 by SuperMartijn642
  */
-public class SingleStickyRedstoneDustBlockStateModel extends DelegateBakedModel {
+public class SingleStickyRedstoneDustBlockStateModel extends ForwardingBakedModel {
 
     public SingleStickyRedstoneDustBlockStateModel(BakedModel wrapped){
         super(wrapped);
