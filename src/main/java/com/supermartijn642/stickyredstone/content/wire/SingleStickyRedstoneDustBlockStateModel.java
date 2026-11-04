@@ -3,7 +3,6 @@ package com.supermartijn642.stickyredstone.content.wire;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.client.resources.model.DelegateBakedModel;
 import net.minecraft.client.resources.model.SimpleBakedModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -11,6 +10,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.client.model.BakedModelWrapper;
 import net.neoforged.neoforge.client.model.data.ModelData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -23,7 +23,7 @@ import java.util.Map;
 /**
  * Created 03/08/2026 by SuperMartijn642
  */
-public class SingleStickyRedstoneDustBlockStateModel extends DelegateBakedModel {
+public class SingleStickyRedstoneDustBlockStateModel extends BakedModelWrapper<BakedModel> {
 
     private final List<BakedQuad> unculledQuads;
     private final Map<Direction,List<BakedQuad>> culledQuads;
@@ -59,7 +59,6 @@ public class SingleStickyRedstoneDustBlockStateModel extends DelegateBakedModel 
             quad.getDirection(),
             quad.getSprite(),
             quad.isShade(),
-            quad.getLightEmission(),
             quad.hasAmbientOcclusion()
         );
     }

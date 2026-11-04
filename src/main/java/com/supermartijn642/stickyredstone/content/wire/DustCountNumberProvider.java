@@ -19,7 +19,7 @@ public class DustCountNumberProvider implements NumberProvider {
 
     @Override
     public float getFloat(LootContext context){
-        Integer count = context.getOptionalParameter(DenseStickyRedstoneDust.DUST_COUNT);
+        Integer count = context.getParamOrNull(DenseStickyRedstoneDust.DUST_COUNT);
         return count == null ? 1 : count;
     }
 

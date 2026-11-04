@@ -67,7 +67,7 @@ public class ServerPlayerGameModeMixin {
             FaceState otherFaceConnections = StickyRedstoneWireEvaluator.getConnections(this.level, pos, oldState, otherFace);
             BlockState newBlockState = StickyRedstone.singleStickyRedstoneDust.getBlockStateForConnections(otherFace, otherFaceConnections);
             BlockPos supportPos = pos.relative(hitFace);
-            newBlockState = newBlockState.updateShape(this.level, this.level, pos, hitFace, supportPos, this.level.getBlockState(supportPos), this.level.getRandom());
+            newBlockState = newBlockState.updateShape(hitFace, level.getBlockState(supportPos), level, pos, supportPos);
             return this.level.setBlock(pos, newBlockState, Block.UPDATE_ALL | Block.UPDATE_IMMEDIATE);
         }else{
             DustState state = block.getState(this.level, pos, oldState);
@@ -76,7 +76,7 @@ public class ServerPlayerGameModeMixin {
             if(!this.level.setBlock(pos, newBlockState, 0))
                 return false;
             newBlockState = block.updateState(this.level, pos, oldState, state.setFace(hitFace, FaceState.ABSENT));
-            newBlockState = block.updateShape(newBlockState, this.level, this.level, pos, hitFace, supportPos, this.level.getBlockState(supportPos), this.level.getRandom());
+            newBlockState = newBlockState.updateShape(hitFace, this.level.getBlockState(supportPos), this.level, pos, supportPos);
             newBlockState = newBlockState.setValue(DenseStickyRedstoneDust.INITIALIZED, true);
             return this.level.setBlock(pos, newBlockState, Block.UPDATE_ALL | Block.UPDATE_IMMEDIATE);
         }

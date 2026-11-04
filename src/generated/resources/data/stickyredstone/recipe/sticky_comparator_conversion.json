@@ -1,8 +1,12 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    "minecraft:comparator",
-    "#c:slime_balls"
+    {
+      "item": "minecraft:comparator"
+    },
+    {
+      "tag": "c:slime_balls"
+    }
   ],
   "result": {
     "id": "stickyredstone:sticky_comparator"

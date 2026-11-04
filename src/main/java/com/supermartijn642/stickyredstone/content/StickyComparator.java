@@ -22,8 +22,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.material.PushReaction;
-import net.minecraft.world.level.redstone.ExperimentalRedstoneUtils;
-import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -156,7 +154,7 @@ public class StickyComparator extends BaseBlock {
     }
 
     @Override
-    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, @Nullable Orientation orientation, boolean movedByPiston){
+    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos neighborPos, boolean movedByPiston){
         if(!state.canSurvive(level, pos)){
             BlockEntity entity = state.hasBlockEntity() ? level.getBlockEntity(pos) : null;
             dropResources(state, level, pos, entity);
@@ -278,9 +276,8 @@ public class StickyComparator extends BaseBlock {
         Direction face = state.getValue(FACE);
         Direction front = StickyRepeater.fromOrientation(face, state.getValue(ORIENTATION));
         BlockPos frontPos = pos.relative(front);
-        Orientation orientation = ExperimentalRedstoneUtils.initialOrientation(level, front, face.getOpposite());
-        level.neighborChanged(frontPos, this, orientation);
-        level.updateNeighborsAtExceptFromFacing(frontPos, this, front.getOpposite(), orientation);
+        level.neighborChanged(frontPos, this, pos);
+        level.updateNeighborsAtExceptFromFacing(frontPos, this, front.getOpposite());
     }
 
     private boolean shouldPrioritize(BlockGetter level, BlockPos pos, BlockState state){
@@ -291,9 +288,9 @@ public class StickyComparator extends BaseBlock {
     }
 
     @Override
-    protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess ticks, BlockPos pos, Direction directionToNeighbour, BlockPos neighbourPos, BlockState neighbourState, RandomSource random){
+    protected BlockState updateShape(BlockState state, Direction directionToNeighbour, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos){
         Direction face = state.getValue(FACE);
-        if(directionToNeighbour == face && !StickyRepeater.canSurviveOn(level.getBlockState(neighbourPos), level, neighbourPos, face.getOpposite()))
+        if(directionToNeighbour == face && !StickyRepeater.canSurviveOn(neighborState, level, neighborPos, face.getOpposite()))
             return Blocks.AIR.defaultBlockState();
         return state;
     }

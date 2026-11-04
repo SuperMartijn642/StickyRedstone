@@ -1,6 +1,5 @@
 package com.supermartijn642.stickyredstone.content.wire;
 
-import com.supermartijn642.core.item.BaseBlockItem;
 import com.supermartijn642.core.item.ItemProperties;
 import com.supermartijn642.stickyredstone.StickyRedstone;
 import com.supermartijn642.stickyredstone.content.StickBlockItem;
@@ -53,10 +52,10 @@ public class StickyRedstoneDustItem extends StickBlockItem {
             return InteractionResult.FAIL;
         FaceState connections = block.getProperConnections(state, level, pos, face);
         BlockState newBlockState = block.updateState(level, pos, blockState, state.setFace(face, connections));
-        newBlockState = block.updateShape(newBlockState, level, level, pos, face, supportPos, supportState, level.getRandom());
+        newBlockState = block.updateShape(newBlockState, face, supportState, level, pos, supportPos);
         newBlockState = newBlockState.setValue(DenseStickyRedstoneDust.INITIALIZED, true); // Need this dumb property just for the game to let me update everything
         level.setBlock(pos, newBlockState, Block.UPDATE_ALL | Block.UPDATE_IMMEDIATE);
-        block.updatePowerStrength(level, pos, newBlockState, face, null, true);
+        block.updatePowerStrength(level, pos, newBlockState, face);
         // Updates post placement
         ItemStack stack = context.getItemInHand();
         Player player = context.getPlayer();

@@ -2,6 +2,7 @@ package com.supermartijn642.stickyredstone.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
+import com.supermartijn642.stickyredstone.content.wire.FaceState;
 import com.supermartijn642.stickyredstone.content.wire.StickyRedstoneWireEvaluator;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -12,23 +13,12 @@ import net.minecraft.world.level.block.RedStoneWireBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
  * Created 03/08/2026 by SuperMartijn642
  */
 @Mixin(RedStoneWireBlock.class)
 public class RedstoneWireBlockMixin {
-
-    @Inject(
-        method = "useExperimentalEvaluator",
-        at = @At("HEAD"),
-        cancellable = true
-    )
-    private static void useExperimentalEvaluator(Level level, CallbackInfoReturnable<Boolean> ci){
-        ci.setReturnValue(false);
-    }
 
     @ModifyExpressionValue(
         method = "updateIndirectNeighbourShapes",
@@ -98,5 +88,60 @@ public class RedstoneWireBlockMixin {
         if(!StickyRedstoneWireEvaluator.isStickyRedstoneWire(neighborState.getBlock()))
             return false;
         return StickyRedstoneWireEvaluator.getConnections(level, neighborPos, neighborState, Direction.DOWN).isPresent();
+    }
+
+    @ModifyExpressionValue(
+        method = "calculateTargetStrength",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/world/level/block/RedStoneWireBlock;getWireSignal(Lnet/minecraft/world/level/block/state/BlockState;)I",
+            ordinal = 0
+        )
+    )
+    private int checkDirectNeighbor(int original, @Local(ordinal = 1) BlockPos neighborPos, @Local BlockState neighborState, @Local Level level, @Local Direction neighborDirection){
+        if(!StickyRedstoneWireEvaluator.isStickyRedstoneWire(neighborState.getBlock()))
+            return original;
+        FaceState neighborConnections = StickyRedstoneWireEvaluator.getConnections(level, neighborPos, neighborState, Direction.DOWN);
+        if(neighborConnections.isPresent())
+            return neighborConnections.power();
+        return 0;
+    }
+
+    @ModifyExpressionValue(
+        method = "calculateTargetStrength",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/world/level/block/RedStoneWireBlock;getWireSignal(Lnet/minecraft/world/level/block/state/BlockState;)I",
+            ordinal = 1
+        )
+    )
+    private int checkDiagonallyAboveNeighbor(int original, @Local(ordinal = 1) BlockPos neighborPos, @Local Level level, @Local Direction neighborDirection){
+        neighborPos = neighborPos.above();
+        BlockState neighborState = level.getBlockState(neighborPos);
+        if(!StickyRedstoneWireEvaluator.isStickyRedstoneWire(neighborState.getBlock()))
+            return original;
+        FaceState neighborConnections = StickyRedstoneWireEvaluator.getConnections(level, neighborPos, neighborState, Direction.DOWN);
+        if(neighborConnections.isPresent())
+            return neighborConnections.power();
+        return 0;
+    }
+
+    @ModifyExpressionValue(
+        method = "calculateTargetStrength",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/world/level/block/RedStoneWireBlock;getWireSignal(Lnet/minecraft/world/level/block/state/BlockState;)I",
+            ordinal = 2
+        )
+    )
+    private int checkDiagonallyBelowNeighbor(int original, @Local(ordinal = 1) BlockPos neighborPos, @Local Level level, @Local Direction neighborDirection){
+        neighborPos = neighborPos.below();
+        BlockState neighborState = level.getBlockState(neighborPos);
+        if(!StickyRedstoneWireEvaluator.isStickyRedstoneWire(neighborState.getBlock()))
+            return original;
+        FaceState neighborConnections = StickyRedstoneWireEvaluator.getConnections(level, neighborPos, neighborState, neighborDirection.getOpposite());
+        if(neighborConnections.isPresent())
+            return neighborConnections.power();
+        return 0;
     }
 }
