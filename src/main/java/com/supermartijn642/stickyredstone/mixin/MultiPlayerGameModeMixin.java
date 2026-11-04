@@ -2,9 +2,6 @@ package com.supermartijn642.stickyredstone.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import com.llamalad7.mixinextras.sugar.Local;
-import com.llamalad7.mixinextras.sugar.Share;
-import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import com.supermartijn642.stickyredstone.StickyRedstone;
 import com.supermartijn642.stickyredstone.content.wire.*;
 import net.minecraft.client.Minecraft;
@@ -12,7 +9,6 @@ import net.minecraft.client.multiplayer.MultiPlayerGameMode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -43,7 +39,7 @@ public class MultiPlayerGameModeMixin {
             target = "Lnet/minecraft/world/level/block/state/BlockState;onDestroyedByPlayer(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/player/Player;ZLnet/minecraft/world/level/material/FluidState;)Z"
         )
     )
-    private boolean destroyBlock(BlockState oldState, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid, Operation<Boolean> operation) {
+    private boolean destroyBlock(BlockState oldState, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid, Operation<Boolean> operation){
         if(!StickyRedstoneWireEvaluator.isStickyRedstoneWire(oldState.getBlock()))
             return operation.call(oldState, level, pos, player, willHarvest, fluid);
         if(!(this.minecraft.hitResult instanceof BlockHitResult hitResult))
@@ -52,7 +48,7 @@ public class MultiPlayerGameModeMixin {
         Vec3 location = hitResult.getLocation();
         Direction hitFace;
         do{
-            hitFace = Direction.getApproximateNearest(
+            hitFace = Direction.getNearest(
                 ((location.x % 1) + 1) % 1 - 0.5,
                 ((location.y % 1) + 1) % 1 - 0.5,
                 ((location.z % 1) + 1) % 1 - 0.5
@@ -87,7 +83,7 @@ public class MultiPlayerGameModeMixin {
             FaceState otherFaceConnections = StickyRedstoneWireEvaluator.getConnections(level, pos, oldState, otherFace);
             BlockState newBlockState = StickyRedstone.singleStickyRedstoneDust.getBlockStateForConnections(otherFace, otherFaceConnections);
             BlockPos supportPos = pos.relative(hitFace);
-            newBlockState = newBlockState.updateShape(level, level, pos, hitFace, supportPos, level.getBlockState(supportPos), level.getRandom());
+            newBlockState = newBlockState.updateShape(hitFace, level.getBlockState(supportPos), level, pos, supportPos);
             return level.setBlock(pos, newBlockState, Block.UPDATE_ALL | Block.UPDATE_IMMEDIATE);
         }else{
             DustState state = block.getState(level, pos, oldState);
@@ -96,7 +92,7 @@ public class MultiPlayerGameModeMixin {
             if(!level.setBlock(pos, newBlockState, 0))
                 return false;
             newBlockState = block.updateState(level, pos, oldState, state.setFace(hitFace, FaceState.ABSENT));
-            newBlockState = block.updateShape(newBlockState, level, level, pos, hitFace, supportPos, level.getBlockState(supportPos), level.getRandom());
+            newBlockState = newBlockState.updateShape(hitFace, level.getBlockState(supportPos), level, pos, supportPos);
             newBlockState = newBlockState.setValue(DenseStickyRedstoneDust.INITIALIZED, true);
             return level.setBlock(pos, newBlockState, Block.UPDATE_ALL | Block.UPDATE_IMMEDIATE);
         }
@@ -109,7 +105,7 @@ public class MultiPlayerGameModeMixin {
             @At("RETURN")
         }
     )
-    private void continueDestroyBlock(BlockPos pos, Direction direction, CallbackInfoReturnable<Boolean> ci) {
+    private void continueDestroyBlock(BlockPos pos, Direction direction, CallbackInfoReturnable<Boolean> ci){
         StickyRedstoneDust.DESTROY_FACE_OVERRIDE.remove();
     }
 }

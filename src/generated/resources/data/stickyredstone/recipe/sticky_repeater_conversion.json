@@ -1,8 +1,12 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    "minecraft:repeater",
-    "#c:slime_balls"
+    {
+      "item": "minecraft:repeater"
+    },
+    {
+      "tag": "c:slime_balls"
+    }
   ],
   "result": {
     "id": "stickyredstone:sticky_repeater"

@@ -5,8 +5,12 @@
     "S"
   ],
   "key": {
-    "S": "#c:rods/wooden",
-    "D": "stickyredstone:sticky_redstone_dust"
+    "S": {
+      "tag": "c:rods/wooden"
+    },
+    "D": {
+      "item": "stickyredstone:sticky_redstone_dust"
+    }
   },
   "result": {
     "id": "stickyredstone:sticky_redstone_torch"
