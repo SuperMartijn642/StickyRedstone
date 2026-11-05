@@ -1,3 +1,6 @@
+### Sticky Redstone 1.0.2
+- Fixed dust not connecting to sticky comparators on walls
+
 ### Sticky Redstone 1.0.1
 - Fixed Sticky Redstone Dust sometimes not dropping at all and sometimes dropping too much
 
