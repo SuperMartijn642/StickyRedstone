@@ -1,3 +1,6 @@
+### Sticky Redstone 1.0.2
+- Fixed dust not connecting to sticky comparators on walls
+
 ## Update to Minecraft 26.3
 
 ### Sticky Redstone 1.0.1
