@@ -96,7 +96,7 @@ public class StickyRedstoneTorchBlock extends BaseBlock {
     @Override
     protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos){
         Direction face = state.getValue(FACE);
-        return level.getBlockState(pos.relative(face)).isFaceSturdy(level, pos.relative(face.getOpposite()), face, SupportType.RIGID);
+        return level.getBlockState(pos.relative(face)).isFaceSturdy(level, pos.relative(face), face.getOpposite(), SupportType.RIGID);
     }
 
     @Override
