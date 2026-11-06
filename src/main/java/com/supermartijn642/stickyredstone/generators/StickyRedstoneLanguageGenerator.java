@@ -18,6 +18,7 @@ public class StickyRedstoneLanguageGenerator extends LanguageGenerator {
         this.itemGroup(StickyRedstone.CREATIVE_GROUP, "Sticky Redstone");
         this.block(StickyRedstone.stickyRedstoneTorch, "Sticky Redstone Torch");
         this.block(StickyRedstone.singleStickyRedstoneDust, "Sticky Redstone Dust");
+        this.block(StickyRedstone.denseStickyRedstoneDust, "Sticky Redstone Dust");
         this.block(StickyRedstone.stickyRepeater, "Sticky Repeater");
         this.block(StickyRedstone.stickyComparator, "Sticky Comparator");
         this.translation("stickyredstone.item_hint", "Can be placed on any face");
