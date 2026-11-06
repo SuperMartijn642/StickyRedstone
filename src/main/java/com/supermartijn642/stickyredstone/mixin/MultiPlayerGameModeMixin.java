@@ -11,6 +11,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.MultiPlayerGameMode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.protocol.game.ServerboundPlayerActionPacket;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -21,6 +22,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
@@ -41,7 +43,7 @@ public class MultiPlayerGameModeMixin {
             shift = At.Shift.BEFORE
         )
     )
-    private void destroyBlock(BlockPos pos, CallbackInfoReturnable<Boolean> ci, @Local Level level, @Local BlockState oldState, @Share("face") LocalRef<Direction> sharedFace) {
+    private void destroyBlock(BlockPos pos, CallbackInfoReturnable<Boolean> ci, @Local Level level, @Local BlockState oldState, @Share("face") LocalRef<Direction> sharedFace){
         if(!StickyRedstoneWireEvaluator.isStickyRedstoneWire(oldState.getBlock()))
             return;
         if(!(this.minecraft.hitResult instanceof BlockHitResult hitResult))
@@ -89,7 +91,7 @@ public class MultiPlayerGameModeMixin {
             target = "Lnet/minecraft/world/level/Level;setBlock(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;I)Z"
         )
     )
-    private boolean destroyBlock(Level level, BlockPos pos, BlockState air, int flags, Operation<Boolean> operation, @Local BlockState oldState, @Share("face") LocalRef<Direction> sharedFace) {
+    private boolean destroyBlock(Level level, BlockPos pos, BlockState air, int flags, Operation<Boolean> operation, @Local BlockState oldState, @Share("face") LocalRef<Direction> sharedFace){
         Direction hitFace = sharedFace.get();
         if(hitFace == null)
             return operation.call(level, pos, air, flags);
@@ -128,13 +130,21 @@ public class MultiPlayerGameModeMixin {
     }
 
     @Inject(
-        method = "continueDestroyBlock",
+        method = {"startDestroyBlock", "continueDestroyBlock"},
         at = {
             @At("HEAD"),
             @At("RETURN")
         }
     )
-    private void continueDestroyBlock(BlockPos pos, Direction direction, CallbackInfoReturnable<Boolean> ci) {
+    private void continueDestroyBlock(BlockPos pos, Direction direction, CallbackInfoReturnable<Boolean> ci){
+        StickyRedstoneDust.DESTROY_FACE_OVERRIDE.remove();
+    }
+
+    @Inject(
+        method = "handleBlockBreakAction",
+        at = @At("RETURN")
+    )
+    private void handleBlockBreakActionReturn(BlockPos pos, ServerboundPlayerActionPacket.Action action, Direction direction, int maxY, int sequence, CallbackInfo ci){
         StickyRedstoneDust.DESTROY_FACE_OVERRIDE.remove();
     }
 }
