@@ -17,6 +17,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.event.RegisterLootContextParamsEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
 
 import java.util.function.Consumer;
@@ -67,6 +68,7 @@ public class StickyRedstone {
         handler.registerItem("sticky_repeater", () -> new StickBlockItem(stickyRepeater, ItemProperties.create().group(CREATIVE_GROUP)));
         handler.registerBlock("sticky_comparator", StickyComparator::new);
         handler.registerItem("sticky_comparator", () -> new StickBlockItem(stickyComparator, ItemProperties.create().group(CREATIVE_GROUP)));
+        eventBus.addListener((Consumer<RegisterLootContextParamsEvent>)e -> e.register(DenseStickyRedstoneDust.DUST_COUNT));
         eventBus.addListener((Consumer<RegisterEvent>)e -> {
             if(e.getRegistry() == BuiltInRegistries.CONTEXT_INT_PROVIDER_TYPE)
                 Registry.register(BuiltInRegistries.CONTEXT_INT_PROVIDER_TYPE, identifier("dust_count"), DustCountNumberProvider.CODEC);
