@@ -58,10 +58,10 @@ public class RedstoneWireEvaluatorMixin {
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/world/level/redstone/RedstoneWireEvaluator;getWireSignal(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)I",
-            ordinal = 1
+            ordinal = 2
         )
     )
-    private int checkDiagonallyBelowNeighbor(int original, @Local(ordinal = 3) BlockPos neighborPos, @Local Level level, @Local Direction neighborDirection){
+    private int checkDiagonallyBelowNeighbor(int original, @Local(ordinal = 1) BlockPos neighborPos, @Local Level level, @Local Direction neighborDirection){
         BlockState neighborState = level.getBlockState(neighborPos);
         if(!StickyRedstoneWireEvaluator.isStickyRedstoneWire(neighborState.getBlock()))
             return original;
