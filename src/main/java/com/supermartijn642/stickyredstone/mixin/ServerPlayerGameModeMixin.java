@@ -93,6 +93,9 @@ public class ServerPlayerGameModeMixin {
     private boolean destroyBlock(Block block, Level level, Player player, BlockPos pos, BlockState state, BlockEntity entity, ItemStack stack) {
         if(!StickyRedstoneWireEvaluator.isStickyRedstoneWire(block))
             return true;
+        // When the entire block was removed, use its own drops, which include the dust of every face
+        if(!StickyRedstoneWireEvaluator.isStickyRedstoneWire(level.getBlockState(pos).getBlock()))
+            return true;
         player.awardStat(Stats.BLOCK_MINED.get(block));
         player.causeFoodExhaustion(0.005f);
         Block.dropResources(StickyRedstone.singleStickyRedstoneDust.defaultBlockState(), level, pos, entity, player, stack);
