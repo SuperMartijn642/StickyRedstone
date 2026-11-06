@@ -41,6 +41,7 @@ public interface NeighborUpdaterMixin {
                 if(oldFaces > newFaces)
                     Block.popResource((Level)level, pos, new ItemStack(StickyRedstone.singleStickyRedstoneDust, oldFaces - newFaces));
             }
+            return newState;
         }
         return operation.call(currentState, level, tickAccess, pos, direction, neighborPos, neighborState, randomSource);
     }
