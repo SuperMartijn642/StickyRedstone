@@ -10,6 +10,7 @@ import net.minecraft.util.context.ContextKeySet;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -31,7 +32,7 @@ public class DenseStickyRedstoneDust extends StickyRedstoneDust implements Entit
     public static final ContextKey<Integer> DUST_COUNT = new ContextKey<>(StickyRedstone.identifier("dust_count"));
     public static final ContextKeySet DUST_COUNT_PARAM_SET;
 
-    static {
+    static{
         ContextKeySet.Builder builder = new ContextKeySet.Builder();
         for(ContextKey<?> param : LootContextParamSets.BLOCK.required())
             builder.required(param);
@@ -123,6 +124,11 @@ public class DenseStickyRedstoneDust extends StickyRedstoneDust implements Entit
                 }
             }
         }
+    }
+
+    @Override
+    public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state){
+        return new ItemStack(StickyRedstone.stickyRedstoneDust);
     }
 
     @Override
