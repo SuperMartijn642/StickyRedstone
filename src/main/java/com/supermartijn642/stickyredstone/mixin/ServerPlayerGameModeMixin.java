@@ -113,4 +113,12 @@ public class ServerPlayerGameModeMixin {
         if(StickyRedstoneWireEvaluator.isRedstoneWire(this.level.getBlockState(pos).getBlock()))
             StickyRedstoneDust.DESTROY_FACE_OVERRIDE.set(direction);
     }
+
+    @Inject(
+        method = "handleBlockBreakAction",
+        at = @At("RETURN")
+    )
+    private void handleBlockBreakActionReturn(BlockPos pos, ServerboundPlayerActionPacket.Action action, Direction direction, int maxY, int sequence, CallbackInfo ci){
+        StickyRedstoneDust.DESTROY_FACE_OVERRIDE.remove();
+    }
 }
