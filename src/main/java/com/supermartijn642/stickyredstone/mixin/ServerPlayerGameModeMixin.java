@@ -18,7 +18,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.BlockHitResult;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -114,5 +113,13 @@ public class ServerPlayerGameModeMixin {
             return;
         if(StickyRedstoneWireEvaluator.isRedstoneWire(this.level.getBlockState(pos).getBlock()))
             StickyRedstoneDust.DESTROY_FACE_OVERRIDE.set(direction);
+    }
+
+    @Inject(
+        method = "handleBlockBreakAction",
+        at = @At("RETURN")
+    )
+    private void handleBlockBreakActionReturn(BlockPos pos, ServerboundPlayerActionPacket.Action action, Direction direction, int maxY, int sequence, CallbackInfo ci){
+        StickyRedstoneDust.DESTROY_FACE_OVERRIDE.remove();
     }
 }
