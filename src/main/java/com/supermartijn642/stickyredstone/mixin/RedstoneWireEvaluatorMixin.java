@@ -62,6 +62,7 @@ public class RedstoneWireEvaluatorMixin {
         )
     )
     private int checkDiagonallyBelowNeighbor(int original, @Local(ordinal = 1) BlockPos neighborPos, @Local Level level, @Local Direction neighborDirection){
+        neighborPos = neighborPos.below();
         BlockState neighborState = level.getBlockState(neighborPos);
         if(!StickyRedstoneWireEvaluator.isStickyRedstoneWire(neighborState.getBlock()))
             return original;
