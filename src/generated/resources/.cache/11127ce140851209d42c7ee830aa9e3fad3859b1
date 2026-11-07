@@ -1,4 +1,4 @@
-// 1.21.11	2026-11-01T17:45:56.9503424	Core Lib Generators
+// 1.21.11	2026-11-07T02:16:42.6192909	Core Lib Generators
 d9e8d0dc72cc922d3dcb8dfb5e05d074da9feca0 assets/minecraft/atlases/blocks.json
 95fcc7e1a39ff18417135c0803fb94c69705002c assets/stickyredstone/blockstates/dense_sticky_redstone_dust.json
 0ef70598fd3de24274354542c9d63dbd3586e5df assets/stickyredstone/blockstates/single_sticky_redstone_dust.json
@@ -9,7 +9,7 @@ a43b316b884908c2df8335871db1705c9a4301a1 assets/stickyredstone/blockstates/stick
 fc81e888d7d9446a3ca2a3c3761f23710fd2465b assets/stickyredstone/items/sticky_redstone_dust.json
 0b02757f3f99495756b128f3a37979495896e2cd assets/stickyredstone/items/sticky_redstone_torch.json
 31cb5be9ecce87e31edbff274aa8e767b80187c6 assets/stickyredstone/items/sticky_repeater.json
-9466d3ac9cb40eba16db5608f574eac7fa6fb4ca assets/stickyredstone/lang/en_us.json
+3da4b7aa678f6020ce4babe929decc5d22c7d953 assets/stickyredstone/lang/en_us.json
 132a8ddff486c07b8e4e2d767a4a0b40b16354cc assets/stickyredstone/models/block/sticky_comparator_compare_off.json
 39aac869746c723225afb127d82ab03b7b530d61 assets/stickyredstone/models/block/sticky_comparator_compare_on.json
 ed16be24d4979ee846625e31f0a977d3f80a9ae6 assets/stickyredstone/models/block/sticky_comparator_subtract_off.json
