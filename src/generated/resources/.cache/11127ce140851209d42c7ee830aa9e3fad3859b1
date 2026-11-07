@@ -1,4 +1,4 @@
-// this.cache.versionId	2026-11-04T11:05:17.3966913	Core Lib Generators
+// this.cache.versionId	2026-11-07T02:18:39.6427101	Core Lib Generators
 404022457317ae0d93e09999cadb269bedf9dae7 data\stickyredstone\loot_table\blocks\sticky_redstone_torch.json
 a076542ab1afa07cd93803d2179f29cb63d4e62e assets\stickyredstone\models\block\sticky_repeater2_on_locked.json
 39aac869746c723225afb127d82ab03b7b530d61 assets\stickyredstone\models\block\sticky_comparator_compare_on.json
@@ -39,7 +39,7 @@ d87483601954dce5a6b5f48a830a6bb3a26e3ab9 assets\stickyredstone\models\block\stic
 d57f50e42fd011db2c9b707f2e3159418eb0b7aa assets\stickyredstone\models\item\sticky_redstone_torch.json
 416aeac30b97990f65c1dd28e2e2e695c4095906 data\stickyredstone\recipe\sticky_redstone_torch_conversion.json
 fffc11be519d3256d91dd706ac36e1c3d807ffc2 assets\stickyredstone\models\block\sticky_redstone_dust_side1.json
-9466d3ac9cb40eba16db5608f574eac7fa6fb4ca assets\stickyredstone\lang\en_us.json
+3da4b7aa678f6020ce4babe929decc5d22c7d953 assets\stickyredstone\lang\en_us.json
 77401822a49f1536072ece15e7871bf802948f18 data\stickyredstone\recipe\sticky_redstone_dust.json
 717de9152f5827b2d4ed251013217c487c0d43f9 assets\stickyredstone\models\block\sticky_repeater1_on.json
 5eb5b34ac9bcceb272c96e0fbe5ac0c3e34fed0b assets\stickyredstone\models\block\sticky_comparator_subtract_on.json
